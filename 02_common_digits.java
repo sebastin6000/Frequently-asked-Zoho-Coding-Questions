@@ -44,7 +44,7 @@ Explanation:
 */
 
 /* 
-Constraints explanation:
+Constraints explanation: 
 
 1 <= N <= 10^5 (N is the number of elements in the array, meaning we could have up to 100,000 numbers)
 1 <= nums[i] <= 10^9 (Each number can be as large as 1 billion)
@@ -53,16 +53,24 @@ This means we need an approach that works efficiently even for large arrays with
 */
 
 /* 
-Relatable analogy or real-world scenario:
+Relatable analogy or real-world scenario: Collecting Unique Digits from Tickets
 
-Imagine you're hosting a party and there are multiple guests. Each guest brings a collection of numbered tickets (think of them as the numbers in the array). You want to know which digits appear on these tickets across all guests.
+Imagine you're hosting a party and there are multiple guests.
+Each guest brings a collection of numbered tickets (think of them as the numbers in the array).
+You want to know which digits appear on these tickets across all guests.
 
 For example:
 - One guest might bring a ticket with the number 131.
 - Another might bring a ticket with the number 11.
 - Another might bring 48.
 
-To solve this, you need to gather all unique digits from all the tickets, but you only care about each distinct digit, no duplicates. So from the numbers 131, 11, and 48, you collect the digits: 1, 3, 4, and 8. You don’t need to count how many times each digit appears; just knowing that these digits appear is enough. Finally, you want to list the digits in order from smallest to largest.
+To solve this,
+- you need to gather all unique digits from all the tickets,
+- but you only care about each distinct digit, 
+- no duplicates. So from the numbers 131, 11, and 48, you collect the digits: 1, 3, 4, and 8.
+- You don’t need to count how many times each digit appears; 
+- just knowing that these digits appear is enough. Finally,
+- you want to list the digits in order from smallest to largest.
 
 Steps:
 1. Look at each guest’s ticket (each number).
@@ -74,7 +82,7 @@ This approach ensures you don’t repeat any digits and gives you an efficient w
 */
 
 /* 
-Relatable analogy Java code step by step:
+Relatable analogy Java code step by step: 
 
 Step 1: We’ll first create a set to hold the distinct digits. A set is perfect because it automatically ensures uniqueness.
 Step 2: Loop through each number in the array.
