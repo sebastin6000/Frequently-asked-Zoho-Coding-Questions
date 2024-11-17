@@ -105,6 +105,7 @@ public class common_digits {
             }
 
             /* 
+            int[] nums = {131, 11, 48}; -- input array
             For each number, the code extracts its digits one by one:
 
             For 131:
