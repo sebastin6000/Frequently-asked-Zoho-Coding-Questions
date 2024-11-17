@@ -103,6 +103,30 @@ public class common_digits {
                 digits.add(num % 10);  // Add the last digit to the set.
                 num /= 10;  // Remove the last digit from the number.
             }
+
+            /* 
+            For each number, the code extracts its digits one by one:
+
+            For 131:
+            131 % 10 = 1 → Adds 1 to the set.
+            131 / 10 = 13
+            13 % 10 = 3 → Adds 3 to the set.
+            13 / 10 = 1
+            1 % 10 = 1 → 1 is already in the set, so nothing changes.
+            The set after processing 131 is {1, 3}.
+            
+            For 11:
+            11 % 10 = 1 → 1 is already in the set.
+            11 / 10 = 1
+            1 % 10 = 1 → 1 is already in the set.
+            The set remains {1, 3} after processing 11.
+            
+            For 48:
+            48 % 10 = 8 → Adds 8 to the set.
+            48 / 10 = 4
+            4 % 10 = 4 → Adds 4 to the set.
+            The set after processing 48 is {1, 3, 4, 8}.
+            */
         }
 
         // Step 5: Convert the set of digits to a sorted list.
