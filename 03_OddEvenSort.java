@@ -101,6 +101,75 @@ public class OddEvenSort {
         
         // Step 3: Sort the oddList in descending order
         oddList.sort((a, b) -> Long.compare(b, a));  // Sort by descending order
+        /* 
+            Let's break down the code `oddList.sort((a, b) -> Long.compare(b, a));`
+            in detail, using the provided sample input.
+
+            The `sort()` method is being applied to an `ArrayList<Long>` called `oddList`.
+            The sorting uses a **lambda expression** `(a, b) -> Long.compare(b, a)` which is acting as a **custom comparator**. 
+            
+            The purpose of this line is to sort the `oddList` in descending order**. 
+            
+            Here’s how it works step by step:
+            1. Lambda Expression: `(a, b) -> Long.compare(b, a)`
+               - `a` and `b`: These are two elements from the `oddList` that will be compared against each other.
+               - `Long.compare(b, a)`: This is a method that compares two `long` values.
+                 - It compares `b` to `a` (in reverse order compared to the default ascending order), which will result in a descending sort (larger values first).
+                 - `Long.compare(b, a)` returns:
+                   - Negative value if `b < a` (meaning `b` should appear before `a`).
+                   - Positive value if `b > a` (meaning `b` should appear after `a`).
+                   - Zero if both are equal (no change in order).
+                 
+               So, this line is saying "compare `b` to `a` in reverse order," which results in a descending sort.
+            
+            Let's use the sample input `arr[] = {1, 2, 3, 5, 4, 7, 10}`.
+            
+            - We will first separate the odd and even numbers. 
+            - **Odd numbers** from the array are: `[1, 3, 5, 7]`.
+            - **Even numbers** from the array are: `[2, 4, 10]`.
+            
+            oddList = [1, 3, 5, 7]
+            Step-by-step sorting using `Long.compare(b, a)`:
+            
+            1. **Initial List**: `[1, 3, 5, 7]`.
+            
+            2. **Comparison (Step 1)**: First, the algorithm compares `1` and `3`:
+               - Compare `b = 3` and `a = 1`: Since `3 > 1`, the result is positive, so `3` should come before `1`.
+            
+            3. **Comparison (Step 2)**: Next, the algorithm compares `1` and `5`:
+               - Compare `b = 5` and `a = 1`: Since `5 > 1`, the result is positive, so `5` should come before `1`.
+            
+            4. **Comparison (Step 3)**: Next, the algorithm compares `1` and `7`:
+               - Compare `b = 7` and `a = 1`: Since `7 > 1`, the result is positive, so `7` should come before `1`.
+            
+               So far, the result list is `[7, 5, 3, 1]`.
+            
+            At this point, the sorting algorithm has completed sorting the `oddList` in descending order. The final `oddList` after sorting is:
+            
+            oddList = [7, 5, 3, 1]
+            
+            ### Summary of the Sorting Mechanism:
+            - The comparator `Long.compare(b, a)` compares each pair of elements in reverse order, resulting in a descending order sort.
+            - The odd numbers are sorted from highest to lowest: `[7, 5, 3, 1]`.
+            
+            ### Full Code Context:
+            
+            The final sorted `oddList` (after the above sorting) will be:
+            
+            ```
+            oddList = [7, 5, 3, 1]
+            ```
+            
+            And, when combined with the even numbers (`[2, 4, 10]` sorted in ascending order), the final result will be:
+            
+            ```
+            final result = [7, 5, 3, 1, 2, 4, 10]
+            ```
+            
+            ### Recap:
+            - The `oddList.sort((a, b) -> Long.compare(b, a));` sorts the odd numbers in **descending order** by reversing the usual order of comparison.
+            - It ensures the largest odd number comes first, followed by the next largest, and so on.
+            */
         
         // Step 4: Sort the evenList in ascending order
         evenList.sort(Long::compareTo);  // Sort by ascending order
