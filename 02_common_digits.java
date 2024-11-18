@@ -198,3 +198,34 @@ public class common_digits {
         System.out.println(result);  // Output: [1, 3, 4, 8]
     }
 }
+/* 
+THIS CODE IS WITH THE INTERGER ARRAY RETURN TYPE 
+   // created a function with correct name, return type and arguments 
+    public int[] common_digits(int[] nums) {
+        Set<Integer> uniqueNumberSet = new HashSet<>(); // Set to store unique digits
+        
+        // Loop through each number in the array
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            
+            // Extract digits from the number and add them to the set
+            while (num > 0) {
+                uniqueNumberSet.add(num % 10); // Add the last digit to the set
+                num /= 10; // Remove the last digit from the number
+            }
+        }
+        
+        // Convert the set of digits to an array
+        List<Integer> sortedList = new ArrayList<>(uniqueNumberSet); // Convert to List
+        Collections.sort(sortedList); // Sort the list in ascending order
+        
+        // Convert List back to int[]
+        int[] result = new int[sortedList.size()];
+        for (int i = 0; i < sortedList.size(); i++) {
+            result[i] = sortedList.get(i); // Fill the result array
+        }
+        
+        return result; // Return the sorted array of unique digits
+    }
+
+*/
