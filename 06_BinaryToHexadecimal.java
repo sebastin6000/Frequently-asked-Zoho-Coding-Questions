@@ -67,7 +67,8 @@ public class BinaryToHexadecimal {
         
         /*
         In Java, the `static` keyword has specific meanings depending on where it is applied. 
-        When used in a static block, it indicates that the block belongs to the class itself rather than any particular instance of the class.
+        When used in a static block, it indicates that the block belongs to the class itself
+        rather than any particular instance of the class.
         Here’s why using `static` is beneficial in this context:
         
         ### Reasons for Using `static`
