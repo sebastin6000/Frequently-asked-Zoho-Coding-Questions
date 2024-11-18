@@ -68,19 +68,29 @@ Here’s the Java code that implements this approach:
 
 */
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OddEvenSort {
+
     public static void main(String[] args) {
         // Example input
         long[] arr = {1, 2, 3, 5, 4, 7, 10};
         
+        // Call the sorting method and get the result
+        List<Long> sortedArray = sortOddEven(arr);
+        
+        // Print the result as the final sorted array
+        System.out.println(sortedArray);  // Output: [7, 5, 3, 1, 2, 4, 10]
+    }
+
+    // Method that sorts the array with odd numbers in descending order and even numbers in ascending order
+    public static List<Long> sortOddEven(long[] arr) {
         // Step 1: Create two separate lists for odd and even numbers
         ArrayList<Long> oddList = new ArrayList<>();
         ArrayList<Long> evenList = new ArrayList<>();
         
-        // Step 2: Traverse the array and classify numbers as odd or even
+        // Step 2: Traverse the array using a normal for loop and classify numbers as odd or even
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] % 2 != 0) {
                 oddList.add(arr[i]);  // Odd numbers go into oddList
@@ -100,10 +110,11 @@ public class OddEvenSort {
         result.addAll(oddList);
         result.addAll(evenList);
         
-        // Step 6: Print the result as the final sorted array
-        System.out.println(result);
+        // Return the combined result
+        return result;
     }
 }
+
 
 /* 
 TIME AND SPACE COMPLEXITY EXPLANATION:
