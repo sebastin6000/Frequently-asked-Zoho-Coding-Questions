@@ -104,6 +104,7 @@ public class CurrencyCount {
     // Function to calculate the minimum number of notes
     public static void getCurrencyCount(int amount) {
         // Denominations available (sorted from largest to smallest)
+        // types of notes you are having as a accountant
         int[] denominations = {
             2000, 500, 200, 100, 50, 20, 10, 5, 1
         };
@@ -111,7 +112,7 @@ public class CurrencyCount {
         // Create a map to store the count of each denomination used
         Map<Integer, Integer> currencyMap = new LinkedHashMap<>();
 
-        // Iterate over each denomination using a normal for loop
+        // Iterate over each denomination
         for (int i = 0; i < denominations.length; i++) {
             int denomination = denominations[i];
             // If the amount is greater than or equal to the denomination
