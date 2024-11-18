@@ -173,6 +173,61 @@ public class OddEvenSort {
         
         // Step 4: Sort the evenList in ascending order
         evenList.sort(Long::compareTo);  // Sort by ascending order
+        /* 
+         Sure! Let's break down the code `evenList.sort(Long::compareTo);` step-by-step with the given input.
+        
+         Code Explanation:
+        - `evenList` is an `ArrayList<Long>` that contains even numbers from the input array.
+        - `sort(Long::compareTo)` is a method call that sorts `evenList` in ascending order. 
+        
+        Let's look at how this works:
+        1. `Long::compareTo`:
+           - `Long::compareTo` is a method reference that refers to the `compareTo` method of the `Long` class.
+           - The `compareTo` method is used to compare two `Long` values.
+             
+           - The method returns:
+             - Negative value if the current `Long` is less than the argument.
+             - Zero if both `Long` values are equal.
+             - Positive value if the current `Long` is greater than the argument.
+        
+        2. `sort(Long::compareTo)`:
+           - This uses the `compareTo` method to compare the elements in `evenList`.
+           - The default behaviour of `compareTo` sorts numbers in ascending order (smallest to largest).
+           
+        So, `evenList.sort(Long::compareTo)` sorts the list in ascending order using `compareTo` for the comparison of `Long` values.
+        Let’s use the provided sample input : arr[] = {1, 2, 3, 5, 4, 7, 10}
+        - We first separate the even numbers from the array: `[2, 4, 10]`.
+        
+        So, initially : evenList = [2, 4, 10]
+        Step-by-Step Sorting:
+        Now, let's apply the `sort(Long::compareTo)` on the `evenList`.
+        
+        1. Initial List: evenList = [2, 4, 10]
+        2. Comparison of 2 and 4:
+           - `compareTo(4)` compares `2` and `4`.
+           - Since `2 < 4`, the result will be negative (i.e., `2` should come before `4`).
+        
+        3. Comparison of 4 and 10:
+           - `compareTo(10)` compares `4` and `10`.
+           - Since `4 < 10`, the result will be negative (i.e., `4` should come before `10`).
+        
+        So, after sorting, the list `evenList` becomes: evenList = [2, 4, 10]
+        
+        Final Result:
+        The `evenList` is now sorted in ascending order
+        (which, in this case, is the same as the original order because the numbers were already in ascending order).
+        
+        The final sorted `evenList` is : evenList = [2, 4, 10]
+        
+        Full Code Context:
+        After sorting the odd numbers in descending order and the even numbers in ascending order,
+         the final result is:
+        - Sorted odd numbers: `[7, 5, 3, 1]`
+        - Sorted even numbers: `[2, 4, 10]`
+        
+        Now, when you combine the two lists (odd numbers first, followed by even numbers), the final result will be:
+        result = [7, 5, 3, 1, 2, 4, 10].
+        */
         
         // Step 5: Combine both lists (oddList first, then evenList)
         ArrayList<Long> result = new ArrayList<>();
