@@ -122,7 +122,8 @@ public class BinaryToHexadecimal {
         String fractionalPart = parts.length > 1 ? parts[1] : "";
         /* 
     
-        The line of code you provided is used to handle the fractional part of a binary number when converting it to hexadecimal. 
+        The line of code you provided is used to handle the fractional part of a binary number
+        when converting it to hexadecimal. 
         Let's break it down step by step:
 
         ### Explanation of the Code
@@ -137,16 +138,20 @@ public class BinaryToHexadecimal {
         2. **Array Length Check**:
            - The `parts.length > 1` check determines if there is a fractional part present. 
            - If the input string contains a decimal point,
-            `parts` will have at least two elements: `parts[0]` will be the integral part, and `parts[1]` will be the fractional part.
+            `parts` will have at least two elements: `parts[0]` will be the integral part, 
+            and `parts[1]` will be the fractional part.
         
         3. **Ternary Operator**:
            - The line uses the ternary operator `? :` to assign a value to `fractionalPart`.
-           - If `parts.length` is greater than 1, it means there is a fractional part, and `parts[1]` is assigned to `fractionalPart`.
-           - If there is no fractional part (i.e., `parts.length` is 1), an empty string `""` is assigned to `fractionalPart`.
+           - If `parts.length` is greater than 1, it means there is a fractional part,
+           and `parts[1]` is assigned to `fractionalPart`.
+           - If there is no fractional part (i.e., `parts.length` is 1),
+           an empty string `""` is assigned to `fractionalPart`.
         
         ### Purpose of This Line
         
-        - **Robust Handling**: This line ensures that the code can handle both cases: binary inputs with and without a fractional part.
+        - **Robust Handling**: This line ensures that the code can handle both cases: 
+            binary inputs with and without a fractional part.
         - **Prevention of Null Pointer Exceptions**: By checking the length of the `parts` array, 
             the code avoids potential errors when trying to access an index that doesn’t exist.
         
