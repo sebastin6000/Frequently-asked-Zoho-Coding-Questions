@@ -75,7 +75,50 @@ move to the next character in A (increment pointer `i`).
 indicating that A is a subsequence of B.
 6. If you reach the end of B and haven't matched all characters of A, return false.
 */
+------------------------------------------------------------------------------------------------------------------------------------------
+// WITHOUT EXPLANATION
 
+public class Solution {
+    public int isSubSequence(String A, String B) {
+        // Step 1: Initialize two pointers for A and B
+        int i = 0, j = 0;
+        
+        // Step 2: Traverse B and try to match characters of A in order
+        while (i < A.length() && j < B.length()) {
+            if (A.charAt(i) == B.charAt(j)) {
+                i++; // Move pointer in A
+            }
+            j++; // Move pointer in B
+            
+            // Step 3: If all characters of A are matched, return true
+            if (i == A.length()) {
+                return 1; // A is a subsequence of B
+            }
+        }
+        
+        // Step 4: If we haven't matched all characters of A, return false
+        return 0; // A is NOT a subsequence of B
+    }
+
+    // Main function for testing the solution
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        // Test case 1
+        String A1 = "AXY";
+        String B1 = "YADXCP";
+        System.out.println(sol.isSubSequence(A1, B1)); // Expected output: 0
+        
+        // Test case 2
+        String A2 = "gksrek";
+        String B2 = "geeksforgeeks";
+        System.out.println(sol.isSubSequence(A2, B2)); // Expected output: 1
+    }
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+  // WITH EXPLANATION 
 public class Solution {
     public int isSubSequence(String A, String B) {
         // Step 1: Initialize two pointers for A and B
