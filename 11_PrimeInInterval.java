@@ -71,7 +71,7 @@ Relatable analogy Java code step by step:
 6. Once the loop finishes, we print all the prime numbers.
 
 */
-// WITHOUT EXP
+// WITHOUT EXPLANATION:
 public class PrimeInInterval {
   
     // Function to check if a number is prime
@@ -105,7 +105,192 @@ public class PrimeInInterval {
         findPrimesInRange(a, b);  // Call the function to find and print primes
     }
 }
+----------------------------------
+// WITH EXPLANATION
+  public class PrimeInInterval {
+  
+    // Function to check if a number is prime
+    public static boolean isPrime(int n) {
+        if (n <= 1) return false;  // 0 and 1 are not prime
+        for (int i = 2; i * i <= n; i++) {  // Check divisibility up to the square root of n
+            if (n % i == 0) return false;  // If divisible by any number, not prime
+        }
+        return true;  // If no divisors found, number is prime
+    }
 
+    // Function to find all prime numbers in the given range [a, b]
+    public static void findPrimesInRange(int a, int b) {
+        // Loop through the numbers in the interval [a, b]
+        for (int i = a; i <= b; i++) {
+            if (isPrime(i)) {  // If the number is prime, print it
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();  // Print a new line after the list of primes
+    }
+
+    // Main function to test the logic
+    public static void main(String[] args) {
+        int a = 1, b = 10;  // Example input
+        /* Let's explain how the `for` loop will look in both functions 
+        (`isPrime` and `findPrimesInRange`) with each iteration for the given input, `a = 1` and `b = 10`.
+        ---
+         Function 1: `isPrime(n)`
+        
+        The function `isPrime(n)` checks whether a number `n` is prime by checking 
+        if it can be divided by any number between `2` and `sqrt(n)`. 
+        Here is the breakdown of how the `for` loop inside the `isPrime(n)` function works during each iteration:
+        
+         Input: `n = 1 to 10` (we will call `isPrime(n)` for each number in the range)
+        
+        1. Iteration 1: `n = 1`
+           - The `isPrime(1)` function is called.
+           - Check: The first condition `if (n <= 1)` is true, so the function immediately returns `false`.
+           - No further iterations inside the loop, as the function returns early.
+           
+        2. Iteration 2: `n = 2`
+           - The `isPrime(2)` function is called.
+           - Check: The first condition `if (n <= 1)` is false.
+           - The `for` loop will check divisibility for values of `i` starting from 2 up to `sqrt(2) ≈ 1.41`.
+             - For `i = 2`: The condition `i * i <= n` (`2 * 2 <= 2`) is false, so the loop doesn't run.
+             - Since no divisors are found, the function returns `true`, indicating 2 is prime.
+        
+        3. Iteration 3: `n = 3`
+           - The `isPrime(3)` function is called.
+           - Check: The first condition `if (n <= 1)` is false.
+           - The `for` loop will check divisibility for values of `i` starting from 2 up to `sqrt(3) ≈ 1.73`.
+             - For `i = 2`: The condition `i * i <= n` (`2 * 2 <= 3`) is true, so the loop executes.
+             - The loop checks if `3 % 2 == 0`. Since `3 % 2 = 1`, it's not divisible by 2.
+             - Since no divisors are found, the function returns `true`, indicating 3 is prime.
+        
+        4. Iteration 4: `n = 4`
+           - The `isPrime(4)` function is called.
+           - Check: The first condition `if (n <= 1)` is false.
+           - The `for` loop will check divisibility for values of `i` starting from 2 up to `sqrt(4) = 2`.
+             - For `i = 2`: The condition `i * i <= n` (`2 * 2 <= 4`) is true, so the loop executes.
+             - The loop checks if `4 % 2 == 0`. Since `4 % 2 = 0`, it is divisible by 2.
+             - The function immediately returns `false`, indicating 4 is not prime.
+        
+        5. Iteration 5: `n = 5`
+           - The `isPrime(5)` function is called.
+           - Check: The first condition `if (n <= 1)` is false.
+           - The `for` loop will check divisibility for values of `i` starting from 2 up to `sqrt(5) ≈ 2.23`.
+             - For `i = 2`: The condition `i * i <= n` (`2 * 2 <= 5`) is true, so the loop executes.
+             - The loop checks if `5 % 2 == 0`. Since `5 % 2 = 1`, it's not divisible by 2.
+             - For `i = 3`: The condition `i * i <= n` (`3 * 3 <= 5`) is false, so the loop terminates.
+             - Since no divisors are found, the function returns `true`, indicating 5 is prime.
+        
+        6. Iteration 6: `n = 6`
+           - The `isPrime(6)` function is called.
+           - Check: The first condition `if (n <= 1)` is false.
+           - The `for` loop will check divisibility for values of `i` starting from 2 up to `sqrt(6) ≈ 2.45`.
+             - For `i = 2`: The condition `i * i <= n` (`2 * 2 <= 6`) is true, so the loop executes.
+             - The loop checks if `6 % 2 == 0`. Since `6 % 2 = 0`, it's divisible by 2.
+             - The function immediately returns `false`, indicating 6 is not prime.
+        
+        7. Iteration 7: `n = 7`
+           - The `isPrime(7)` function is called.
+           - Check: The first condition `if (n <= 1)` is false.
+           - The `for` loop will check divisibility for values of `i` starting from 2 up to `sqrt(7) ≈ 2.65`.
+             - For `i = 2`: The condition `i * i <= n` (`2 * 2 <= 7`) is true, so the loop executes.
+             - The loop checks if `7 % 2 == 0`. Since `7 % 2 = 1`, it's not divisible by 2.
+             - For `i = 3`: The condition `i * i <= n` (`3 * 3 <= 7`) is false, so the loop terminates.
+             - Since no divisors are found, the function returns `true`, indicating 7 is prime.
+        
+        8. Iteration 8: `n = 8`
+           - The `isPrime(8)` function is called.
+           - Check: The first condition `if (n <= 1)` is false.
+           - The `for` loop will check divisibility for values of `i` starting from 2 up to `sqrt(8) ≈ 2.83`.
+             - For `i = 2`: The condition `i * i <= n` (`2 * 2 <= 8`) is true, so the loop executes.
+             - The loop checks if `8 % 2 == 0`. Since `8 % 2 = 0`, it's divisible by 2.
+             - The function immediately returns `false`, indicating 8 is not prime.
+        
+        9. Iteration 9: `n = 9`
+           - The `isPrime(9)` function is called.
+           - Check: The first condition `if (n <= 1)` is false.
+           - The `for` loop will check divisibility for values of `i` starting from 2 up to `sqrt(9) = 3`.
+             - For `i = 2`: The condition `i * i <= n` (`2 * 2 <= 9`) is true, so the loop executes.
+             - The loop checks if `9 % 2 == 0`. Since `9 % 2 = 1`, it's not divisible by 2.
+             - For `i = 3`: The condition `i * i <= n` (`3 * 3 <= 9`) is true, so the loop executes.
+             - The loop checks if `9 % 3 == 0`. Since `9 % 3 = 0`, it's divisible by 3.
+             - The function immediately returns `false`, indicating 9 is not prime.
+        
+        10. Iteration 10: `n = 10`
+            - The `isPrime(10)` function is called.
+            - Check: The first condition `if (n <= 1)` is false.
+            - The `for` loop will check divisibility for values of `i` starting from 2 up to `sqrt(10) ≈ 3.16`.
+              - For `i = 2`: The condition `i * i <= n` (`2 * 2 <= 10`) is true, so the loop executes.
+              - The loop checks if `10 % 2 == 0`. Since `10 % 2 = 0`, it's divisible by 2.
+              - The function immediately returns `false`, indicating 10 is not prime.
+        
+        ---
+        
+         Function 2: `findPrimesInRange(a, b)`
+        
+        The `findPrimesInRange(a, b)` function iterates over the range `[a, b]` and calls the `isPrime(n)` function
+        to check if each number is prime. If the number is prime, it prints it.
+        
+        Input: `a = 1` and `b = 10`
+        
+        1. Iteration 1: `i = 1`
+           - `isPrime(1)` is called (as explained earlier, 1 is not prime).
+           - Output: Nothing is printed.
+        
+        2. Iteration 2: `i = 2`
+           - `isPrime(2)` is called (as explained earlier, 2 is prime).
+           - Output: `2` is printed.
+        
+        3. Iteration 3: `
+        
+        i = 3`
+           - `isPrime(3)` is called (as explained earlier, 3 is prime).
+           - Output: `3` is printed.
+        
+        4. Iteration 4: `i = 4`
+           - `isPrime(4)` is called (as explained earlier, 4 is not prime).
+           - Output: Nothing is printed.
+        
+        5. Iteration 5: `i = 5`
+           - `isPrime(5)` is called (as explained earlier, 5 is prime).
+           - Output: `5` is printed.
+        
+        6. Iteration 6: `i = 6`
+           - `isPrime(6)` is called (as explained earlier, 6 is not prime).
+           - Output: Nothing is printed.
+        
+        7. Iteration 7: `i = 7`
+           - `isPrime(7)` is called (as explained earlier, 7 is prime).
+           - Output: `7` is printed.
+        
+        8. Iteration 8: `i = 8`
+           - `isPrime(8)` is called (as explained earlier, 8 is not prime).
+           - Output: Nothing is printed.
+        
+        9. Iteration 9: `i = 9`
+           - `isPrime(9)` is called (as explained earlier, 9 is not prime).
+           - Output: Nothing is printed.
+        
+        10. Iteration 10: `i = 10`
+            - `isPrime(10)` is called (as explained earlier, 10 is not prime).
+            - Output: Nothing is printed.
+        
+        ---
+        
+         Summary:
+        The `for` loop in both functions iterates through the numbers in the range `[a, b]` 
+        and checks for primality using the logic described above. 
+        The prime numbers printed by `findPrimesInRange(a, b)` for the input `a = 1` and `b = 10` are: `2, 3, 5, 7`.
+        
+        
+ */
+        System.out.print("Prime numbers between " + a + " and " + b + ": ");
+        findPrimesInRange(a, b);  // Call the function to find and print primes
+
+        a = 10; b = 20;  // Example input
+        System.out.print("Prime numbers between " + a + " and " + b + ": ");
+        findPrimesInRange(a, b);  // Call the function to find and print primes
+    }
+}
 /* 
 Time and Space Complexity Explanation:
 
