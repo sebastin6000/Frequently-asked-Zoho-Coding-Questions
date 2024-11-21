@@ -142,7 +142,8 @@ public class SingleElementInSortedArray
             // Calculate the mid index
             int mid = left + (right - left) / 2;
             
-            // Check if the mid element is correctly paired
+            // Check if the mid element is odd or even 
+            // if its odd means we will goes into this condition
             if (mid % 2 == 1) 
             {
                 mid--; // Ensure mid is even
@@ -197,7 +198,8 @@ public class SingleElementInSortedArray
             // Calculate the mid index
             int mid = left + (right - left) / 2;
 
-           // Checking wheather mid even index is odd or even
+            // Check if the mid element is odd or even 
+            // if its odd means we will goes into this condition
             if (mid % 2 == 1) 
             {
                 mid--; 
