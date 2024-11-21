@@ -16,7 +16,7 @@ Output: [0, 0]
 Explanation: No change in array as there are all 0s.
 */
 
- /* 
+/* 
 Input-Output Explanation:
 
 Input 1: [1, 2, 0, 4, 3, 0, 5, 0]
@@ -33,7 +33,7 @@ Input 3: [0, 0]
 
 */
 
- /* 
+/* 
 Constraints Explanation:
 
 1 ≤ arr.size() ≤ 10^5
@@ -44,7 +44,7 @@ Constraints Explanation:
 We need to ensure that we move the zeros without changing the order of non-zero elements and do this in an efficient way.
 */
 
- /* 
+/* 
 Relatable Analogy or Real-World Scenario:
 
 Think of the task as cleaning up a row of chairs in a classroom.
@@ -65,7 +65,7 @@ Now, let's go step by step:
 
 */
 
- /* 
+/* 
 Relatable Analogy Java Code Step by Step:
 
 1. Declare a variable `lastNonZeroIndex` to track the position of the last non-zero element.
@@ -79,7 +79,7 @@ Now let's look at how this works with the code:
 
 */
 
- /* 
+/* 
 Time and Space Complexity Explanation:
 
 Time Complexity:
@@ -89,7 +89,7 @@ Space Complexity:
 - We don't use any extra space for storing elements. The operations are done in-place, so the space complexity is O(1) (constant space).
 */
 
- /* 
+/* 
 FOR Loop Walkthrough with Every Iteration for Input [1, 2, 0, 4, 3, 0, 5, 0]:
 
 Array: [1, 2, 0, 4, 3, 0, 5, 0]
@@ -122,28 +122,43 @@ Finally, all non-zero elements are at the front, and the remaining zeros are at 
 
 // WUTHOUT EXPLANATION IN DETAIL
 
-public class PushZerosToEnd {
+public class PushZerosToEnd
+{
     // Step 1: Function to push zeros to the end
-    public static void pushZerosToEnd(int[] arr) {
-        int lastNonZeroIndex = 0;  // Variable to track where the next non-zero element should go
+    public static void pushZerosToEnd(int[] arr)
+    {
+        int lastNonZeroIndex = 0; // Variable to track where the next non-zero element should go
 
         // Step 2: Loop through the array to move non-zero elements
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] != 0) {
-                arr[lastNonZeroIndex] = arr[i];  // Move non-zero element to the lastNonZeroIndex
-                lastNonZeroIndex++;  // Increment the position for the next non-zero element
+        for (int i = 0; i < arr.length; i++)
+        {
+            if (arr[i] != 0)
+            {
+                arr[lastNonZeroIndex] = arr[i]; // Move non-zero element to the lastNonZeroIndex
+                lastNonZeroIndex++; // Increment the position for the next non-zero element
             }
         }
 
         // Step 3: Fill the remaining positions with zeros
-        for (int i = lastNonZeroIndex; i < arr.length; i++) {
-            arr[i] = 0;  // Fill remaining positions with zeros
+        for (int i = lastNonZeroIndex; i < arr.length; i++)
+        {
+            arr[i] = 0; // Fill remaining positions with zeros
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         // Input array for testing
-        int[] arr = {1, 2, 0, 4, 3, 0, 5, 0};
+        int[] arr = {
+            1,
+            2,
+            0,
+            4,
+            3,
+            0,
+            5,
+            0
+        };
 
         // Step 4: Call the function to modify the array
         pushZerosToEnd(arr);
@@ -153,7 +168,7 @@ public class PushZerosToEnd {
     }
 }
 
- /* 
+/* 
 Code Walkthrough:
 
 1. The `pushZerosToEnd` method performs the core task. 
@@ -164,38 +179,168 @@ Code Walkthrough:
 
 */
 
- /* 
+/* 
 Final Explanation:
 - We move all non-zero elements to the front, ensuring that we maintain the order of the elements.
 - Zeros are pushed to the end, and this is done in-place without using extra space.
 
 */
 
- 
+
 // WITH EXPLANATION IN DETAIL
 
-public class PushZerosToEnd {
+public class PushZerosToEnd
+{
     // Step 1: Function to push zeros to the end
-    public static void pushZerosToEnd(int[] arr) {
-        int lastNonZeroIndex = 0;  // Variable to track where the next non-zero element should go
+    public static void pushZerosToEnd(int[] arr)
+    {
+        int lastNonZeroIndex = 0; // Variable to track where the next non-zero element should go
 
         // Step 2: Loop through the array to move non-zero elements
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] != 0) {
-                arr[lastNonZeroIndex] = arr[i];  // Move non-zero element to the lastNonZeroIndex
-                lastNonZeroIndex++;  // Increment the position for the next non-zero element
+        for (int i = 0; i < arr.length; i++)
+        {
+            if (arr[i] != 0)
+            {
+                arr[lastNonZeroIndex] = arr[i]; // Move non-zero element to the lastNonZeroIndex
+                lastNonZeroIndex++; // Increment the position for the next non-zero element
             }
+            /* Sure! Let's go through each step of the code and break down how it works for the input `arr = [1, 2, 0, 4, 3, 0, 5, 0]`. 
+        We will focus on each iteration of the loop to explain how the elements are processed and moved.
+        
+         Input:
+        ```
+        arr = [1, 2, 0, 4, 3, 0, 5, 0]
+        ```
+        
+         Step-by-Step Explanation:
+        
+        # Initial Setup:
+        We start with the input array and initialize the `lastNonZeroIndex` to `0`.
+        
+        ```
+        int lastNonZeroIndex = 0;  // Variable to track where the next non-zero element should go
+        ```
+        
+         Step 1: Loop through the array to move non-zero elements
+        The first `for` loop iterates through each element of the array (`arr[i]`) to check if it is non-zero.
+        If it is non-zero, we move it to the `lastNonZeroIndex` and increment `lastNonZeroIndex`.
+        
+         Iteration-by-Iteration Breakdown:
+        
+        # Iteration 1 (i = 0):
+        - Current element: `arr[0] = 1`
+        - Since `arr[0]` is non-zero, we move it to the `lastNonZeroIndex` (which is `0` initially):
+          - `arr[lastNonZeroIndex] = arr[i]` → `arr[0] = 1` (no change, `1` stays in place).
+        - We then increment `lastNonZeroIndex` to `1`.
+        - Array after this iteration: `[1, 2, 0, 4, 3, 0, 5, 0]`
+        - `lastNonZeroIndex = 1`
+        
+        # Iteration 2 (i = 1):
+        - Current element: `arr[1] = 2`
+        - Since `arr[1]` is non-zero, we move it to the `lastNonZeroIndex` (which is `1`):
+          - `arr[lastNonZeroIndex] = arr[i]` → `arr[1] = 2` (no change, `2` stays in place).
+        - We then increment `lastNonZeroIndex` to `2`.
+        - Array after this iteration: `[1, 2, 0, 4, 3, 0, 5, 0]`
+        - `lastNonZeroIndex = 2`
+        
+        # Iteration 3 (i = 2):
+        - Current element: `arr[2] = 0`
+        - Since `arr[2]` is zero, we do nothing and move to the next element.
+        - Array remains unchanged: `[1, 2, 0, 4, 3, 0, 5, 0]`
+        - `lastNonZeroIndex = 2`
+        
+        # Iteration 4 (i = 3):
+        - Current element: `arr[3] = 4`
+        - Since `arr[3]` is non-zero, we move it to the `lastNonZeroIndex` (which is `2`):
+          - `arr[lastNonZeroIndex] = arr[i]` → `arr[2] = 4`.
+        - We then increment `lastNonZeroIndex` to `3`.
+        - Array after this iteration: `[1, 2, 4, 4, 3, 0, 5, 0]`
+        - `lastNonZeroIndex = 3`
+        
+        # Iteration 5 (i = 4):
+        - Current element: `arr[4] = 3`
+        - Since `arr[4]` is non-zero, we move it to the `lastNonZeroIndex` (which is `3`):
+          - `arr[lastNonZeroIndex] = arr[i]` → `arr[3] = 3`.
+        - We then increment `lastNonZeroIndex` to `4`.
+        - Array after this iteration: `[1, 2, 4, 3, 3, 0, 5, 0]`
+        - `lastNonZeroIndex = 4`
+        
+        # Iteration 6 (i = 5):
+        - Current element: `arr[5] = 0`
+        - Since `arr[5]` is zero, we do nothing and move to the next element.
+        - Array remains unchanged: `[1, 2, 4, 3, 3, 0, 5, 0]`
+        - `lastNonZeroIndex = 4`
+        
+        # Iteration 7 (i = 6):
+        - Current element: `arr[6] = 5`
+        - Since `arr[6]` is non-zero, we move it to the `lastNonZeroIndex` (which is `4`):
+          - `arr[lastNonZeroIndex] = arr[i]` → `arr[4] = 5`.
+        - We then increment `lastNonZeroIndex` to `5`.
+        - Array after this iteration: `[1, 2, 4, 3, 5, 0, 5, 0]`
+        - `lastNonZeroIndex = 5`
+        
+        # Iteration 8 (i = 7):
+        - Current element: `arr[7] = 0`
+        - Since `arr[7]` is zero, we do nothing and finish the loop.
+        - Array remains unchanged: `[1, 2, 4, 3, 5, 0, 5, 0]`
+        - `lastNonZeroIndex = 5`
+        */
         }
 
         // Step 3: Fill the remaining positions with zeros
-        for (int i = lastNonZeroIndex; i < arr.length; i++) {
-            arr[i] = 0;  // Fill remaining positions with zeros
+        for (int i = lastNonZeroIndex; i < arr.length; i++)
+        {
+            arr[i] = 0; // Fill remaining positions with zeros
         }
+        /*        
+        Fill the remaining positions with zeros
+        After the first loop, the non-zero elements are at the beginning of the array, and `lastNonZeroIndex` is now `5`.
+        The next step is to fill the remaining positions (from `lastNonZeroIndex` to the end of the array) with zeros.
+        
+        - Start from `lastNonZeroIndex = 5` and fill the array with zeros.
+        
+        # Filling the remaining zeros:
+        - Set `arr[5] = 0`
+        - Set `arr[6] = 0`
+        - Set `arr[7] = 0`
+        
+        Array after filling zeros: `[1, 2, 4, 3, 5, 0, 0, 0]`
+        
+        ---
+        
+         Final Output:
+        After the loop finishes, the array is transformed as expected:
+        ```
+        arr = [1, 2, 4, 3, 5, 0, 0, 0]
+        ```
+        
+         Summary of What Happened:
+        - In the first loop, we moved all non-zero elements to the front, keeping their original order.
+        - In the second loop, we filled the remaining positions with zeros, starting from where the last non-zero element was moved.
+        
+         Key Points:
+        - Non-zero elements (`1, 2, 4, 3, 5`) were moved to the front in their original order.
+        - Zero elements (`0, 0, 0`) were pushed to the back.
+        
+        
+        
+*/
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         // Input array for testing
-        int[] arr = {1, 2, 0, 4, 3, 0, 5, 0};
+        int[] arr = 
+        {
+            1,
+            2,
+            0,
+            4,
+            3,
+            0,
+            5,
+            0
+        };
 
         // Step 4: Call the function to modify the array
         pushZerosToEnd(arr);
