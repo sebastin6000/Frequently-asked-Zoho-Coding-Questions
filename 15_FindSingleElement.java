@@ -55,6 +55,7 @@ You must figure out who the "lonely" person is without writing down each name an
 Instead, you must use a clever trick to identify the lonely person by looking at everyone's name only once and using a minimal amount of space. 
 
 To do this, you'll keep track of some numbers using a clever "bit manipulation" trick.
+BITWISE OPERATOR : https://www.scaler.com/topics/java/bitwise-operators-in-java/
 Instead of counting how many times each name appears,
 you'll track the bits (the "individual characters") in the names and find the one that doesn't match the others.
 
@@ -76,24 +77,19 @@ The general idea is:
 Let's now break down the solution with code.
 
 */
-
+// WITHOUT EXPLANATION
 public class FindSingleElement 
 {
-    /*
-    We're using bitwise operators to keep track of bits that appeared once and twice.
-    */
+    /*We're using bitwise operators to keep track of bits that appeared once and twice.*/
     public int singleNumber(int[] nums) 
-     {
+    {
         int ones = 0, twos = 0;
-        
-        // Normal for loop to loop through all numbers in the array
+        // loop through all numbers in the array
         for (int i = 0; i < nums.length; i++) 
         {
             int num = nums[i];
-            
             // Update twos to keep track of bits that appeared twice
-            twos |= ones & num;
-            
+            twos |= ones & num; 
             // Update ones to keep track of bits that appeared once
             ones ^= num;
             
@@ -115,7 +111,113 @@ public class FindSingleElement
         System.out.println(solution.singleNumber(nums)); // Output: 3
     }
 }
-
+------------------------------------------------------------
+// WITH EXPLANATION
+public class FindSingleElement 
+{
+    /*We're using bitwise operators to keep track of bits that appeared once and twice.*/
+    public int singleNumber(int[] nums) 
+    {
+        int ones = 0, twos = 0;
+        // loop through all numbers in the array
+        for (int i = 0; i < nums.length; i++) 
+        {
+           // getting the current element 
+           int num = nums[i];
+            // Update twos to keep track of bits that appeared twice
+            twos |= ones & num; 
+           /* 
+               The line `twos |= ones & num;` is an important part of the bitwise manipulation technique used to solve this problem. 
+               Let’s break down exactly what this line does, step by step.
+               
+               Understanding Bitwise Operators:
+               Before diving into the specific line of code, it's important to understand the bitwise operators being used here:
+               - `&` (bitwise AND): 
+                   This operator compares the bits of two numbers and results in `1` only when both corresponding bits are `1`.
+                   Otherwise, the result is `0`.
+               - `|` (bitwise OR): 
+                   This operator compares the bits of two numbers and results in `1` if at least one of the corresponding bits is `1`. 
+                   Otherwise, the result is `0`.
+               - `^` (bitwise XOR): 
+                   This operator compares the bits of two numbers and results in `1` if the corresponding bits are different. 
+                    If they are the same, the result is `0`.
+               - `~` (bitwise NOT): 
+                   This operator inverts all bits of a number, turning `1` to `0` and `0` to `1`.
+               
+               Breaking Down `twos |= ones & num;`:
+               Let’s understand this line by going through it step by step. 
+               This operation is done inside a loop for every number in the array, 
+               so it happens repeatedly for each element.
+               
+               1. `ones & num`: 
+                  - This operation performs a bitwise AND between the `ones` variable 
+                     (which keeps track of the bits that have appeared exactly once so far) and the current number `num`.
+                  - If a bit is set in both `ones` and `num` 
+                    (i.e., both have a `1` at the same bit position), that bit will remain `1`. If not, it will be `0`.
+               
+               2. `twos |= ones & num`:
+                  - This operation performs a bitwise OR between the `twos` variable 
+                    (which keeps track of the bits that have appeared exactly twice so far) and the result of `one's & num`.
+                  - The result of `ones & num` captures the bits that have appeared both once and the current number. 
+                     So, these bits will be added (set to `1`) in `twos`.
+                  - The `|=` operator means that we are updating `twos` with the new bits that we calculated. 
+                     This operation ensures that we maintain all the bits that have appeared exactly twice.
+               
+               What this line is doing in context:
+               - The goal of this algorithm is to track the bits of the numbers that appear exactly once and exactly twice, 
+                  using the `ones` and `twos` variables.
+               - After processing a number `num`, we update `twos` to keep track of the bits that have been encountered exactly twice so far. 
+                  This is done by setting the corresponding bits in `two's` when those bits are present in both `ones` and `num`.
+               - In other words, this line ensures that the `twos` variable reflects all the bits that have appeared twice up to that point.
+               
+               Example Walkthrough:
+               Let's walk through this with a simple example to illustrate what happens at each step.
+               Assume the `ones = 2` (which is `0010` in binary) and the current `num = 3` (which is `0011` in binary).
+               
+               1. `ones & num` will be `0010 & 0011 = 0010`. This means that the second bit (from the right) is set in both `ones` and `num`.
+               2. Now, `twos |= ones & num` will perform:
+                  - `twos |= 0010`, which means the second bit of `twos` will be set to `1` (if it wasn’t already).
+                  - If `twos` was initially `0000`, it will now become `0010`.
+               
+               Why it Works:
+               - The key idea is that:
+                 - `ones` stores the bits that have appeared exactly once.
+                 - `twos` stores the bits that have appeared exactly twice.
+                 - By updating `twos` with `ones & num`, we keep track of the bits that are appearing for the second time. 
+                  This is important for eliminating numbers that have appeared three times.
+               
+               After we’ve processed all the numbers in the array, 
+               any bits that have appeared three times will be removed from both `ones` and `twos`. 
+               The remaining bits in `ones` will represent the number that appeared only once.
+               
+               Final Thought:
+               In the context of the entire solution, the operation `twos |= ones & num;`
+               is a critical step that helps keep track of the bits that have been seen twice. 
+               This allows us to eventually isolate the single element that appears only once, 
+               using bitwise operations efficiently without extra space or complex counting.
+                */
+           
+            // Update ones to keep track of bits that appeared once
+            ones ^= num;
+            
+            // Remove bits that appeared three times
+            int threes = ones & twos;
+            ones &= ~threes;
+            twos &= ~threes;
+        }
+        
+        // The result will be stored in the variable 'ones'
+        return ones;
+    }    
+    public static void main(String[] args) 
+  {
+        FindSingleElement solution = new FindSingleElement();
+        
+        // Test the function with an example
+        int[] nums = {2, 2, 3, 2};
+        System.out.println(solution.singleNumber(nums)); // Output: 3
+    }
+} 
     /* 
     Code walkthrough:
     1. We initialize two variables `ones` and `twos` to keep track of bits that appeared once and twice.
@@ -144,7 +246,8 @@ Space Complexity:
 */
 
 /* 
-FOR loop walkthrough with every iteration with given input, Complete code walkthrough with applying the given input in code and explanation:
+FOR loop walkthrough with every iteration with given input, 
+Complete code walkthrough with applying the given input in code and explanation:
 Let's go through the loop with the example [2, 2, 3, 2]:
 
 1. Initial values:
