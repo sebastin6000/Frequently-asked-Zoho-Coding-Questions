@@ -125,9 +125,70 @@ public class FindSingleElement
            // getting the current element 
            int num = nums[i];
             // Update twos to keep track of bits that appeared twice
+            // shorthand version of twos = twos | (ones & num);
             twos |= ones & num; 
            /* 
-               The line `twos |= ones & num;` is an important part of the bitwise manipulation technique used to solve this problem. 
+             
+              Yes, you're correct! The expression `twos |= ones & num;` is shorthand for:  
+               ```
+               twos = twos | (ones & num);
+               ```      
+                Explanation:
+               
+               Let's break down this expression:
+               
+               1. `ones & num`:
+                  - The `&` operator is a bitwise AND operator. It compares each bit of `ones` and `num`, 
+                     and the result is a number where a bit is `1` only if both corresponding bits in `ones` and `num` are `1`.
+                  - In other words, `ones & num` gives us a number with bits that are `1` in both `ones` and `num`.
+               
+               2. `twos | (ones & num)`:
+                  - The `|` operator is a bitwise OR operator. It compares each bit of `twos` and `(ones & num)`. 
+                     The result is a number where a bit is `1` if either of the bits in `twos` or `(ones & num)` is `1`.
+                  - Essentially, this operation updates `twos` by adding the bits that are `1` in both `ones` and `num`.
+               
+               3. `twos |= ones & num;`:
+                  - This is shorthand for updating `twos`. The `|=` operator means "bitwise OR and assign.
+                     " It performs the bitwise OR operation between `twos` and `(ones & num)` and then assigns the result back to `twos`.
+                  - So, this line updates `twos` to reflect the bits that have appeared exactly twice in the array so far.
+               
+                Why Is This Important?
+                 In the context of the problem, `ones` and `twos` are used to track the bits of numbers that have appeared once and twice:
+               - `ones` holds the bits that have appeared exactly once.
+               - `twos` holds the bits that have appeared exactly twice.
+               
+               When we encounter a number (`num`), we update `twos` using `twos |= ones & num;`
+               because this step helps track bits that are appearing for the second time in the array.
+               
+                Example Walkthrough:
+               
+               Let’s assume the following:
+               - `ones = 0b0101` (which is `5` in decimal)
+               - `num = 0b0011` (which is `3` in decimal)
+               - `twos = 0b0001` (which is `1` in decimal)
+               
+               Now, let’s perform the operation `twos |= ones & num`:
+               - `ones & num`: 
+                 - `0b0101 & 0b0011 = 0b0001`
+                 - This means that both `ones` and `num` have a `1` at the rightmost bit position, so the result is `0b0001`.
+               
+               - `twos |= 0b0001`: 
+                 - `0b0001 | 0b0001 = 0b0001`
+                 - Since both `twos` and the result of `ones & num` have a `1` in the same position, the result of the OR operation is still `0b0001`.
+               
+               - Final `twos`: `0b0001` (which is `1` in decimal).
+               
+               Thus, `twos` is updated to `1`, which tracks the bit that has appeared twice.
+               
+                Conclusion:
+               
+               In short, the `|=` operator combines the current value of `twos` with the new information from `ones & num`. 
+               This is how we keep track of the bits that have appeared exactly twice while processing the array.
+               
+*/
+           /* 
+               The line `twos |= ones & num;` 
+               is an important part of the bitwise manipulation technique used to solve this problem. 
                Let’s break down exactly what this line does, step by step.
                
                Understanding Bitwise Operators:
@@ -198,11 +259,14 @@ public class FindSingleElement
                 */
            
             // Update ones to keep track of bits that appeared once
+           // shorthand version of ones = ones ^ num;
             ones ^= num;
             
             // Remove bits that appeared three times
             int threes = ones & twos;
+            // shorthand version of ones = ones & (~threes);
             ones &= ~threes;
+            // shorthand version of twos = twos & (~threes);
             twos &= ~threes;
         }
         
