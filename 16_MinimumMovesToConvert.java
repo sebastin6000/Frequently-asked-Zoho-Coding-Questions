@@ -84,7 +84,7 @@ We will write a function `minMovesToConvert` to solve this problem.
 Java code for this approach:
 
 */
-
+// WITHOUT EXPLANATION
 import java.util.*;
 
 public class MinimumMovesToConvert {
@@ -103,7 +103,205 @@ public class MinimumMovesToConvert {
                 i += 2;   // Skip the next two characters as they are already 'O'
             }
         }
+        return moves; 
+    }
+
+    public static void main(String[] args) {
+        MinimumMovesToConvert obj = new MinimumMovesToConvert();
+        
+        // Test Case 1: XXX -> OOO, 1 move
+        System.out.println(obj.minMovesToConvert("XXX")); // Output: 1
+
+        // Test Case 2: XXOX -> OOOX -> OOOO, 2 moves
+        System.out.println(obj.minMovesToConvert("XXOX")); // Output: 2
+
+        // Test Case 3: OOOO -> No moves needed
+        System.out.println(obj.minMovesToConvert("OOOO")); // Output: 0
+    }
+}
+
+--------------------------------------------------------------------------------------------------
+// WITH EXPLANATION
+import java.util.*;
+
+public class MinimumMovesToConvert {
+
+    // Function to find the minimum moves required
+    public int minMovesToConvert(String s) {
+        int moves = 0;
+        char[] arr = s.toCharArray();
+        
+        for (int i = 0; i <= arr.length - 3; i++) 
+        {
+          /* Great question! 
+          The condition i <= arr.length - 3 is used in the for loop to ensure that we only check valid groups of three consecutive characters in the array.
+          Let me explain it step by step:
+          Length of Array:
+          
+          
+          Suppose the length of the array arr is n.
+          When we are looking for three consecutive characters to check, we need at least 3 elements left starting from the current index i.
+          Reason for i <= arr.length - 3:
+          
+          
+          If we start from index i, we need to ensure that the next two indices (i+1 and i+2) are still valid indices in the array.
+          If i is the last possible index where we can form a group of three consecutive characters, that would be i = arr.length - 3. 
+          This is the last valid index where we can check three consecutive elements without going out of bounds.
+          Example:
+          
+          
+          Suppose the array has 4 elements (arr.length = 4):
+           arr = ['X', 'X', 'O', 'X']
+          
+          
+          The last valid index i where we can check three consecutive elements is i = 1 because:
+          arr[1], arr[2], arr[3] is a valid triplet.
+          If we try i = 2, the triplet would be arr[2], arr[3], arr[4], but arr[4] is out of bounds, so it is invalid.
+          Hence, i <= arr.length - 3 ensures that we stop the loop at index arr.length - 3 to prevent accessing invalid indices.
+          Why not i < arr.length - 2?
+          
+          
+          If you used i < arr.length - 2, the loop would attempt to check i = arr.length - 2, which would only have two elements left, not three. 
+          So, you'd be trying to access invalid indices beyond the array bounds.
+          Let's go through a few examples with different string lengths to understand this better:
+          
+          Example 1: Input string "XXX" (Length = 3)
+          arr.length = 3
+          arr.length - 3 = 0
+          The loop runs from i = 0 to i = 0 (only one iteration).
+          In this case, i <= arr.length - 3 works fine because we are allowed to check the entire array (3 consecutive 'X's).
+          
+          Example 2: Input string "XXOX" (Length = 4)
+          arr.length = 4
+          arr.length - 3 = 1
+          The loop runs from i = 0 to i = 1.
+          Iteration 1 (i = 0):
+          We check the substring arr[0], arr[1], arr[2], which is 'X', 'X', 'O' (valid).
+          Iteration 2 (i = 1):
+          We check the substring arr[1], arr[2], arr[3], which is 'X', 'O', 'X' (valid).
+          
+          Example 3: Input string "XOX" (Length = 3)
+          arr.length = 3
+          arr.length - 3 = 0
+          The loop runs from i = 0 to i = 0 (only one iteration).
+          In this case, we are still checking the only valid triplet of 'X', 'O', 'X'.
+          
+          Example 4: Input string "XXXXX" (Length = 5)
+          arr.length = 5
+          arr.length - 3 = 2
+          The loop runs from i = 0 to i = 2.
+          Iteration 1 (i = 0):
+          We check the substring arr[0], arr[1], arr[2], which is 'X', 'X', 'X' (valid).
+          Iteration 2 (i = 1):
+          We check the substring arr[1], arr[2], arr[3], which is 'X', 'X', 'X' (valid).
+          Iteration 3 (i = 2):
+          We check the substring arr[2], arr[3], arr[4], which is 'X', 'X', 'X' (valid).
+          
+          To Summarize:
+          i <= arr.length - 3 ensures that we do not attempt to access indices beyond the end of the array when looking for three consecutive characters.
+          We need at least 3 characters left starting from index i to form a valid triplet. If i goes beyond arr.length - 3, we cannot form a triplet anymore.
+          Let me know if you need any further clarification!
+          
+
+*/
+            // Check if we find a sequence of three consecutive 'X's
+            if (arr[i] == 'X' && arr[i+1] == 'X' && arr[i+2] == 'X') {
+                // Perform a move: convert these three 'X's into 'O's
+                arr[i] = arr[i+1] = arr[i+2] = 'O';
+                moves++;  // Increment the number of moves
+                i += 2;   // Skip the next two characters as they are already 'O'
+            }
+        }
         return moves;
+            /* 
+      Ah, I understand now! You want a step-by-step breakdown for all the inputs provided in the example, 
+      and we’ll go through each loop iteration.
+      
+        Let’s go through the process for all three examples:
+        1. Input: "XXX"
+        The string "XXX" has all characters as 'X'.
+        Array Initialization:
+        arr = ['X', 'X', 'X']
+        moves = 0
+        
+        Loop:
+        The loop runs from i = 0 to i <= arr.length - 3. In this case, arr.length - 3 = 0. So, we only have one iteration.
+        First Iteration: i = 0
+        The substring being checked is arr[0], arr[1], arr[2], which is 'X', 'X', 'X'.
+        The condition in the if statement is:
+         arr[0] == 'X' && arr[1] == 'X' && arr[2] == 'X'
+         This evaluates to true because all three characters are 'X'.
+        Therefore, we change the first three 'X's to 'O's:
+         arr[0] = arr[1] = arr[2] = 'O';
+        moves++;
+        
+        
+        The moves counter increases to 1, and the updated array becomes:
+         arr = ['O', 'O', 'O']
+        
+        
+        Output:
+        After one move, the string is all 'O's, so the output is 1.
+        
+        2. Input: "XXOX"
+        The string "XXOX" has some 'O's mixed in. We need to process it carefully.
+        Array Initialization:
+        arr = ['X', 'X', 'O', 'X']
+        moves = 0
+        
+        Loop:
+        The loop runs from i = 0 to i <= arr.length - 3. In this case, arr.length - 3 = 1, so the loop will run twice (i = 0 and i = 1).
+        First Iteration: i = 0
+        The substring being checked is arr[0], arr[1], arr[2], which is 'X', 'X', 'O'.
+        The condition in the if statement is:
+         arr[0] == 'X' && arr[1] == 'X' && arr[2] == 'X'
+         This evaluates to false because arr[2] is 'O', not 'X'.
+        No changes are made, and the moves counter remains 0.
+        Second Iteration: i = 1
+        The substring being checked is arr[1], arr[2], arr[3], which is 'X', 'O', 'X'.
+        The condition in the if statement is:
+         arr[1] == 'X' && arr[2] == 'X' && arr[3] == 'X'
+         This evaluates to false because arr[2] is 'O', not 'X'.
+        No changes are made, and the moves counter remains 0.
+        Output:
+        Since there are no valid sequences of three consecutive 'X's to change, the output is 0.
+        
+        3. Input: "OOOO"
+        This string has no 'X's at all, so no moves are needed.
+        Array Initialization:
+        arr = ['O', 'O', 'O', 'O']
+        moves = 0
+        
+        Loop:
+        The loop runs from i = 0 to i <= arr.length - 3. In this case, arr.length - 3 = 1, so the loop will run twice (i = 0 and i = 1).
+        First Iteration: i = 0
+        The substring being checked is arr[0], arr[1], arr[2], which is 'O', 'O', 'O'.
+        The condition in the if statement is:
+         arr[0] == 'X' && arr[1] == 'X' && arr[2] == 'X'
+         This evaluates to false because all characters are 'O', not 'X'.
+        No changes are made, and the moves counter remains 0.
+        Second Iteration: i = 1
+        The substring being checked is arr[1], arr[2], arr[3], which is 'O', 'O', 'O'.
+        The condition in the if statement is:
+         arr[1] == 'X' && arr[2] == 'X' && arr[3] == 'X'
+         This evaluates to false because all characters are 'O', not 'X'.
+        No changes are made, and the moves counter remains 0.
+        Output:
+        Since there are no 'X's in the string, no moves are needed, and the output is 0.
+        
+        Summary of Outputs:
+        Input: "XXX" → Output: 1
+        Input: "XXOX" → Output: 0
+        Input: "OOOO" → Output: 0
+        
+        Time Complexity:
+        Time Complexity: O(n), where n is the length of the string. We go through the string once and check consecutive triples of characters.
+        Space Complexity: O(n), because we convert the string to a character array, which requires space proportional to the input size.
+        Final Observations:
+        The loop works by checking groups of three consecutive characters in the string.
+        The condition to perform the conversion is met only when three consecutive 'X's are found.
+        The solution is efficient with a time complexity of O(n), and the space complexity is O(n) because we use a character array to modify the string.
+       */
     }
 
     public static void main(String[] args) {
@@ -124,9 +322,11 @@ public class MinimumMovesToConvert {
 Time and Space Complexity Explanation:
 - **Time Complexity:** O(n), where n is the length of the string. We traverse the string once, and at each step, 
     we may perform some constant-time operations like checking the characters and changing them. So the overall time complexity is linear.
-- **Space Complexity:** O(n), because we convert the string into a character array to modify it in place. The space complexity is proportional to the size of the input string.
+- **Space Complexity:** O(n), because we convert the string into a character array to modify it in place. 
+     The space complexity is proportional to the size of the input string.
 
-The time complexity is efficient for the given constraints, as we only loop through the string once. The space complexity is also manageable since we are using a character array that is at most the size of the input string.
+The time complexity is efficient for the given constraints, as we only loop through the string once. 
+The space complexity is also manageable since we are using a character array that is at most the size of the input string.
 
 */
 
