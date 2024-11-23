@@ -106,14 +106,16 @@ Now, let's see the complete code implementation.
 public class PrimeNumbers
 {
     // Step 1: Create a function to print prime numbers up to N
-    public static void printPrimes(int N) {
+    public static void printPrimes(int N) 
+   {
         // Step 2: Loop through numbers from 2 to N
         for (int i = 2; i <= N; i++)
         {
             boolean isPrime = true; // Assume the number is prime
-
-            // Step 3: Check if the current number i is divisible by any number from 2 to sqrt(i)
-            for (int j = 2; j * j <= i; j++)
+            // Step 3: Check if the current number i is divisible by 
+           // any number(the input given number is 10 so we have to check from 2 to the input number) i am right?
+            // from 2 to sqrt(i)
+            for (int j = 2; j * j <= i; j++)    
             {
                 if (i % j == 0)
                 {
@@ -183,6 +185,7 @@ public class PrimeNumbers
                ### Breakdown of Each Iteration for `N = 10`:
                
                Let's walk through the outer loop (`i = 2` to `10`) and the inner loop (`j = 2` to `√i`) for each value of `i`.
+               
                ### Iteration 1: `i = 2`
                - Outer Loop: `i = 2`
                - Initial value of `isPrime`: `true`
@@ -191,6 +194,7 @@ public class PrimeNumbers
                    - `2 * 2 = 4`, and `4 <= 2` is false, so the inner loop doesn't run.
                  - Result: No divisors found, so `isPrime` remains `true`, and `2` is printed.
                Output: `2`
+               
                ---
                ### Iteration 2: `i = 3`
                - Outer Loop: `i = 3`
@@ -200,6 +204,7 @@ public class PrimeNumbers
                    - `2 * 2 = 4`, and `4 <= 3` is false, so the inner loop doesn't run.
                  - Result: No divisors found, so `isPrime` remains `true`, and `3` is printed.
                Output: `3`
+               
                ---
                ### Iteration 3: `i = 4`
                - Outer Loop: `i = 4`
@@ -210,6 +215,7 @@ public class PrimeNumbers
                    - `4 % 2 == 0`, so `isPrime = false`, and we break the inner loop.
                  - Result: Since `isPrime` is `false`, `4` is not printed.
                Output: (No output for `i = 4`)
+               
                ---
                ### Iteration 4: `i = 5`
                - Outer Loop: `i = 5`
@@ -222,6 +228,7 @@ public class PrimeNumbers
                    - `3 * 3 = 9`, and `9 <= 5` is false, so the inner loop stops.
                  - Result: No divisors found, so `isPrime` remains `true`, and `5` is printed.
                Output: `5`
+               
                ---
                ### Iteration 5: `i = 6`
                - Outer Loop: `i = 6`
@@ -232,6 +239,7 @@ public class PrimeNumbers
                    - `6 % 2 == 0`, so `isPrime = false`, and we break the inner loop.
                  - Result: Since `isPrime` is `false`, `6` is not printed.
                Output: (No output for `i = 6`)
+               
                ---
                ### Iteration 6: `i = 7`
                - Outer Loop: `i = 7`
@@ -244,6 +252,7 @@ public class PrimeNumbers
                    - `3 * 3 = 9`, and `9 <= 7` is false, so the inner loop stops.
                  - Result: No divisors found, so `isPrime` remains `true`, and `7` is printed.
                Output: `7`
+               
                ---
                ### Iteration 7: `i = 8`
                - Outer Loop: `i = 8`
@@ -254,6 +263,7 @@ public class PrimeNumbers
                    - `8 % 2 == 0`, so `isPrime = false`, and we break the inner loop.
                  - Result: Since `isPrime` is `false`, `8` is not printed.
                Output: (No output for `i = 8`)
+               
                ---
                ### Iteration 8: `i = 9`
                - Outer Loop: `i = 9`
@@ -269,6 +279,7 @@ public class PrimeNumbers
                    - `9 % 3 == 0`, so `isPrime = false`, and we break the inner loop.
                  - Result: Since `isPrime` is `false`, `9` is not printed.
                Output: (No output for `i = 9`)
+               
                ---
                ### Iteration 9: `i = 10`
                - Outer Loop: `i = 10`
@@ -279,13 +290,15 @@ public class PrimeNumbers
                    - `10 % 2 == 0`, so `isPrime = false`, and we break the inner loop.
                  - Result: Since `isPrime` is `false`, `10` is not printed.
                Output: (No output for `i = 10`)
+               
                ---
                ### Final Output:
                
                Prime numbers from 1 to 10: 2 3 5 7
                
                ### Summary:
-               - In each iteration, the inner loop checks divisibility of `i` by numbers `j` starting from `2` up to `√i`. If a divisor is found, `isPrime` is set to `false`, and we break out of the loop.
+               - In each iteration, the inner loop checks divisibility of `i` by numbers `j` starting from `2` up to `√i`. 
+                 If a divisor is found, `isPrime` is set to `false`, and we break out of the loop.
                - If no divisors are found (i.e., `isPrime` remains `true`), the number `i` is printed as a prime number.
                */
             }
@@ -296,7 +309,17 @@ public class PrimeNumbers
                 System.out.print(i + " ");
             }
         }
-        System.out.println(); // To move to the next line after printing all primes
+        System.out.println();
+        /* 
+        The line System.out.println(); 
+        is used to print a newline after all the prime numbers are printed. Without this line, 
+        after printing all the prime numbers on the same line, the cursor would stay at the end of the line, 
+        and if you print anything later, it would continue from the same line.
+
+        The System.out.println(); ensures that the output is formatted properly. For example, 
+        if you run this program multiple times or have other print statements afterward, 
+        the newline guarantees the output stays clean and properly formatted.
+        */
     }
     
     public static void main(String[] args)
