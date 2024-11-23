@@ -3,8 +3,6 @@
 [Complete Data Structures and Algorithm Masterclass](https://youtu.be/cD2pbCulF74?si=J2Q-hzkSmGHR4lCU)<br/>  
 [Java Collections Framework](https://youtu.be/GdAon80-0KA?si=uoIcIUEpzoSTF6Y8)<br/>  
 
-Certainly! Here's a sample README template for your GitHub repository that deals with frequently asked coding questions for Zoho. You can adjust it as needed:
-
 ---
 
 # Zoho Coding Interview Questions
