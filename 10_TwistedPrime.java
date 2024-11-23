@@ -324,6 +324,8 @@ public class TwistedPrime
     /* Function to reverse the number */
     public static int reverseNumber(int N) 
     {
+        // this variable will hold the reversed of the given input number 
+        // that's why we created this variable
         int reversed = 0;
         while (N > 0) 
         {
