@@ -70,7 +70,8 @@ Given these constraints, the matrix could be at most 100x100, which is manageabl
 The goal is to efficiently sort each diagonal in a matrix of this size without running into performance issues. */
  
  /* Relatable analogy or real-world scenario:
-Imagine you're organizing a collection of books arranged on a shelf. Some books are aligned diagonally, starting from the top-left corner of the shelf. You need to rearrange these books diagonally in ascending order so that each diagonal sequence of books (starting from different positions along the shelf's top or left edge) is ordered from smallest to largest. You can think of the matrix as a shelf, and each diagonal as a line of books in a particular diagonal direction.
+Imagine you're organizing a collection of books arranged on a shelf. Some books are aligned diagonally, 
+starting from the top-left corner of the shelf. You need to rearrange these books diagonally in ascending order so that each diagonal sequence of books (starting from different positions along the shelf's top or left edge) is ordered from smallest to largest. You can think of the matrix as a shelf, and each diagonal as a line of books in a particular diagonal direction.
 
 To solve this, you need to:
 1. Identify each diagonal.
