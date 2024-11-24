@@ -1,6 +1,9 @@
+--------------------------UNFINISHED----------------------
+
 /* 
 Question: 
-Given an unsorted integer array arr[], find the number of triangles that can be formed with three different array elements as lengths of three sides of triangles.
+Given an unsorted integer array arr[], 
+find the number of triangles that can be formed with three different array elements as lengths of three sides of triangles.
 A triangle with three given sides is only possible if sum of any two sides is always greater than the third side.
 
 Example 1:
@@ -18,7 +21,6 @@ Constraints:
 1 <= arr[i] <= 103
 */
 
-import java.util.Arrays; // Importing Arrays class to use the sort method
 
 /* 
 Input-output explanation:
