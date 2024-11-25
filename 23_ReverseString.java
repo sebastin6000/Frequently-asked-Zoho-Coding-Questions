@@ -2,7 +2,9 @@
 -------------------------------
 Question Section:
 -------------------------------
-Given a string `S` containing special characters and all the alphabets, the task is to reverse the string without affecting the positions of the special characters. We need to swap only the alphabets and ignore the special characters during the reversal process.
+Given a string `S` containing special characters and all the alphabets, 
+the task is to reverse the string without affecting the positions of the special characters. 
+We need to swap only the alphabets and ignore the special characters during the reversal process.
 
 For example:
 Example 1:
@@ -24,7 +26,8 @@ Your task is to implement the function `reverse()` that takes the string `S` as 
 -------------------------------
 Understanding the Problem Statement Section:
 -------------------------------
-The problem asks us to reverse a string such that only the alphabetic characters are reversed while keeping the special characters in their original positions. 
+The problem asks us to reverse a string such that only the alphabetic characters are reversed 
+while keeping the special characters in their original positions. 
 For example:
 - In "A&B", we reverse the alphabetic characters 'A' and 'B', but the special character '&' stays in place.
 - In "A&x#", we swap 'A' and 'x', but '&' and '#' remain unchanged.
@@ -44,7 +47,8 @@ Extracting Information from the Problem Statement Section:
 - Input: A string `S` which contains alphabetic characters and special characters.
 - Output: A string where the alphabetic characters are reversed, and the special characters remain at their original positions.
 - Constraints: The length of the string |S| is between 1 and 100,000.
-- Time Complexity: O(|S|), where |S| is the length of the input string, since we must traverse the string to separate the characters and then reconstruct it.
+- Time Complexity: O(|S|), where |S| is the length of the input string, 
+  since we must traverse the string to separate the characters and then reconstruct it.
 - Space Complexity: O(|S|), since we are storing the reversed characters and the original string in auxiliary space.
 
 -------------------------------
@@ -72,7 +76,8 @@ The solution can be broken down into the following subtasks:
 
 Subtask 1: Identify and separate the alphabetic characters.
 Subtask 2: Store the alphabetic characters in a stack or list so that they can be reversed.
-Subtask 3: Traverse the string again and reconstruct the string by placing the reversed alphabetic characters and leaving the special characters untouched.
+Subtask 3: Traverse the string again and reconstruct the string by placing the reversed alphabetic characters 
+           and leaving the special characters untouched.
 Subtask 4: Return the reconstructed string.
 
 -------------------------------
@@ -149,14 +154,13 @@ Time Complexity:
   Thus, we make two passes over the string, each of which takes O(|S|) time.
 
 Space Complexity:
-- The space complexity is O(|S|) because we are storing the alphabetic characters separately in a `StringBuilder` and constructing the final result in another `StringBuilder`.
+- The space complexity is O(|S|) because we are storing the alphabetic characters separately in a `StringBuilder` 
+  and constructing the final result in another `StringBuilder`.
 
 -------------------------------
 */
 
 /* 
--------------------------------
-If used any “for” loop or “while” loop you have walkthrough all the “for” loop or “while” loop used in the code with every iteration with given input and this section has to be inside this structure of comments:
 -------------------------------
 For loop walkthrough:
 
@@ -178,13 +182,15 @@ Thus, the final output is "B&A".
 
 /* 
 -------------------------------
-Complete code walkthrough with applying the given input in code and explanation has to be in simple English because I have to explain the question and approach my friends and this section has to be inside this structure of comments:
+Complete code walkthrough 
 -------------------------------
 The input string "A&B" is processed in two main steps:
 1. First, we extract the alphabetic characters 'A' and 'B' into a separate string or stack.
-2. Then, we reconstruct the string while keeping special characters in their original positions. The alphabetic characters are placed in reverse order.
+2. Then, we reconstruct the string while keeping special characters in their original positions. 
+   The alphabetic characters are placed in reverse order.
 
-For input "A&B", the alphabetic characters are reversed to "B&A", while the special character '&' remains in its original place. The final output is "B&A".
+For input "A&B", the alphabetic characters are reversed to "B&A", while the special character '&' remains in its original place. 
+The final output is "B&A".
 
 This approach ensures that we only reverse the alphabetic characters while preserving the positions of the special characters.
 
