@@ -1,3 +1,189 @@
+--------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
+/* 
+Question Section:
+You are given a sorted array consisting of only integers where every element appears exactly twice, except for one element which appears exactly once.
+
+Return the single element that appears only once.
+
+Your solution must run in O(log n) time and O(1) space.
+
+Examples:
+
+Input: nums = [1,1,2,3,3,4,4,8,8]
+Output: 2
+
+Input: nums = [3,3,7,7,10,11,11]
+Output: 10
+
+Constraints:
+1 <= nums.length <= 10^5
+0 <= nums[i] <= 10^5
+*/
+
+/* 
+Understanding the Problem Statement:
+- We are given a sorted array where all elements except one appear exactly twice. Our task is to identify the element that appears only once.
+- The array is sorted, which is a crucial detail that allows us to optimize our solution.
+- We must solve this in O(log n) time complexity, which suggests that a binary search approach could be an appropriate solution.
+- We are also required to use O(1) space, meaning no extra space should be used beyond a few variables.
+
+What is being asked?
+- We need to find the element that appears only once in a sorted array of integers, where all other elements appear exactly twice.
+- We need to do this in O(log n) time and O(1) space.
+*/
+
+ /* 
+Extracting Information from the Problem Statement:
+1. Input data type:
+   - A sorted array of integers `nums[]`.
+2. Expected Output:
+   - A single integer, the one element that appears only once in the array.
+3. Output return type:
+   - An integer that represents the element that appears exactly once.
+4. Explanation of Time complexity expectations:
+   - The solution must run in O(log n) time, which typically suggests using a binary search approach.
+5. Explanation of given Constraints:
+   - The size of the array can be as large as 10^5, so the solution must be efficient, 
+     especially considering the time complexity constraint of O(log n).
+*/
+
+ /* 
+Thinking Solution for the Problem Statement:
+1. Identification:
+   - The array is sorted, and all elements except one appear exactly twice.
+   - The property of the sorted array allows us to apply binary search to solve this problem in O(log n) time.
+   
+2. Destructuring:
+   - We need to identify a pattern where, when the array is divided into two halves, 
+     the element that appears only once will disrupt the paired pattern.
+   - If the number of elements in the left half is even, then the single element must be in the right half (or vice versa). 
+     This is the key observation that allows us to use binary search.
+
+3. Conversional solution into smaller subtask:
+   - Subtask 1: Use binary search to divide the array into two halves.
+   - Subtask 2: Check the pattern of the elements to determine which half contains the single element.
+   - Subtask 3: Continue the binary search on the half where the single element is located, until the result is found.
+
+*/
+
+ /* 
+Conversional Solution into Subtasks:
+1. Start by performing a binary search on the sorted array.
+2. For each mid-point, check if the element at the mid-point forms a pair with its neighbor.
+3. If the mid element forms a pair with the next or previous element, 
+   adjust the search range to the half where the anomaly (the single element) is located.
+4. Continue halving the search space until the single element is found.
+
+*/
+
+ /* 
+Subtasks of Conversional Solution into Code:
+1. Initialize two pointers: `low` at the start of the array and `high` at the end.
+2. Perform a binary search: Find the middle element and check the pairing with its neighbors.
+3. If the pair is correct, move the search range accordingly.
+4. If the pair is broken, the single element is in that part of the array.
+5. Repeat until the single element is identified.
+
+*/
+
+public class SingleElementInSortedArray {
+
+    /* 
+    Function to find the single element in a sorted array where every element appears twice except one.
+    We use binary search to find the element in O(log n) time.
+    */
+    public static int singleNonDuplicate(int[] nums) {
+        int low = 0;
+        int high = nums.length - 1;
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            
+            // Ensure mid is always pointing to the first element in the pair
+            if (mid % 2 == 1) {
+                mid--;  // Make mid even, so that mid and mid+1 are a pair
+            }
+            
+            // Compare pairs: if mid and mid+1 are equal, the single element is in the right half
+            if (nums[mid] == nums[mid + 1]) {
+                low = mid + 2;  // Discard left half
+            } else {
+                high = mid;  // The single element is in the left half
+            }
+        }
+        
+        // When the loop ends, low == high and points to the single element
+        return nums[low];
+    }
+    public static void main(String[] args) {
+        // Test case 1
+        int[] nums1 = {1, 1, 2, 3, 3, 4, 4, 8, 8};
+        System.out.println("Single element: " + singleNonDuplicate(nums1)); // Expected output: 2
+        
+        // Test case 2
+        int[] nums2 = {3, 3, 7, 7, 10, 11, 11};
+        System.out.println("Single element: " + singleNonDuplicate(nums2)); // Expected output: 10
+        
+        // Test case 3
+        int[] nums3 = {1, 2, 2};
+        System.out.println("Single element: " + singleNonDuplicate(nums3)); // Expected output: 1
+    }
+}
+
+    /* 
+    Time and Space Complexity Explanation:
+    Time Complexity:
+    - O(log n), where n is the size of the array. This is because we are performing a binary search, which halves the search space at each step.
+    
+    Space Complexity:
+    - O(1), because we are using only a constant amount of space (no additional arrays or data structures are used).
+    */
+
+    /* 
+    Code Walkthrough:
+    Let's walk through the example `nums = [1,1,2,3,3,4,4,8,8]`:
+
+    - Initial pointers: `low = 0`, `high = 8`.
+    - First iteration:
+      - `mid = (0 + 8) / 2 = 4`.
+      - Since `mid` is even, we check if `nums[4] == nums[5]` (i.e., `3 == 3`).
+      - Since they are equal, we move `low = mid + 2 = 6`.
+    
+    - Second iteration:
+      - `low = 6`, `high = 8`, so `mid = 7`.
+      - Since `mid` is odd, we adjust `mid = 6`.
+      - Now, we check if `nums[6] == nums[7]` (i.e., `4 == 8`), which is false.
+      - Since they are not equal, we move `high = mid = 6`.
+    
+    - The loop ends with `low == high == 2`, so the single element is `nums[2] = 2`.
+
+    Output: `2`
+    */
+/*
+
+### Explanation:
+
+1. **`singleNonDuplicate(int[] nums)`**:
+   - This function uses binary search to find the single element. 
+     The idea is to exploit the fact that the array is sorted and that all elements except one are paired. 
+     By checking whether the middle element is paired with the next or previous element, 
+     we can decide whether the single element lies in the left half or the right half of the array.
+   
+2. **Binary Search**:
+   - In each iteration of the binary search, we check whether the middle element is paired with its neighbor. 
+     If the pair is valid, we discard the left half of the array; otherwise, we discard the right half. 
+     This continues until we narrow down the search to a single element.
+   
+3. **Time and Space Complexity**:
+   - **Time Complexity**: O(log n) due to the binary search, which reduces the problem size by half at each step.
+   - **Space Complexity**: O(1), as we only use a constant amount of space for the variables `low`, `high`, and `mid`.
+
+4. **Code Walkthrough**:
+   - The example `nums = [1,1,2,3,3,4,4,8,8]` 
+     illustrates how the binary search works by progressively halving the search space based on whether the middle element is paired or not.
+
+*/
+--------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
 /* 
 Question: 
 
