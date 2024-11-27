@@ -1,3 +1,150 @@
+--------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
+/* 
+Question:
+Given a Hexadecimal number as input, the task is to convert that number to its Binary equivalent.
+
+Examples:
+Input: Hexadecimal = 1AC5
+Output: Binary = 0001101011000101
+Explanation:
+    Equivalent binary value of 1: 0001
+    Equivalent binary value of A: 1010
+    Equivalent binary value of C: 1100
+    Equivalent binary value of 5: 0101
+
+Input: Hexadecimal = 5D1F
+Output: Binary = 0101110100011111
+
+Your Task:
+Complete the function `hexToBinary()` that converts a hexadecimal number to binary.
+
+Expected Time Complexity: O(n), where n is the number of characters in the hexadecimal number.
+Expected Space Complexity: O(1), as no additional space is used except for the binary output.
+
+Constraints:
+1 ≤ length of the hexadecimal number ≤ 15.
+Hexadecimal digits are from '0'-'9' and 'A'-'F'.
+*/
+
+/* 
+Understanding the Problem Statement:
+We are given a hexadecimal number and need to convert it into its binary equivalent.
+- Hexadecimal (base 16) uses digits from 0 to 9 and letters A to F.
+- Each hexadecimal digit corresponds to a 4-bit binary value.
+
+The task requires converting each hexadecimal digit into a 4-bit binary string and concatenating them together.
+
+Extracting Information from the Problem Statement:
+- Input: A hexadecimal string, consisting of characters '0'-'9' and 'A'-'F'.
+- Expected Output: A binary string, where each hexadecimal digit is converted to a 4-bit binary number.
+- Time Complexity: O(n), where n is the number of hexadecimal digits. We process each digit in constant time.
+- Space Complexity: O(1), except for the space required to store the binary output.
+
+Constraints:
+- Hexadecimal numbers are strings of up to 15 characters.
+- The input will always be a valid hexadecimal number.
+  
+Thinking Solution for the Problem Statement:
+1. For each hexadecimal digit:
+    - Convert it to its 4-bit binary equivalent.
+    - Pad the binary representation with leading zeros if necessary to make it exactly 4 bits.
+2. Concatenate these 4-bit strings for all digits to get the final binary string.
+3. Return or print the concatenated binary string.
+
+Subtasks:
+1. Loop through each character of the hexadecimal string.
+2. For each character, convert it to its corresponding 4-bit binary equivalent.
+3. Concatenate all the binary strings.
+4. Return the concatenated result as the final binary number.
+
+Subtasks of Conversional Solution into Code:
+- **Step 1**: Parse each hexadecimal character.
+- **Step 2**: Convert the hexadecimal character into a 4-bit binary string.
+- **Step 3**: Concatenate these 4-bit binary strings.
+- **Step 4**: Return or print the final binary number.
+
+Java Code according to Conversational Subtasks:
+*/
+
+import java.util.*;
+
+public class HexToBinary {
+
+    // Function to convert a hexadecimal number to its binary equivalent
+    public static String hexToBinary(String hex) {
+        // StringBuilder to accumulate the final binary result
+        StringBuilder binary = new StringBuilder();
+        
+        // Loop through each character of the hexadecimal string
+        for (int i = 0; i < hex.length(); i++) {
+            // Convert the hexadecimal character to its decimal equivalent
+            char hexChar = hex.charAt(i);
+            int decimalValue = Integer.parseInt(String.valueOf(hexChar), 16);
+            
+            // Convert the decimal value to a 4-bit binary string
+            String binaryString = String.format("%4s", Integer.toBinaryString(decimalValue)).replace(' ', '0');
+            
+            // Append the binary string to the result
+            binary.append(binaryString);
+        }
+        
+        // Return the final concatenated binary string
+        return binary.toString();
+    }
+
+    // Main method to test the hexToBinary function
+    public static void main(String[] args) {
+        // Test Case 1
+        String hex1 = "1AC5";
+        System.out.println("Hexadecimal: " + hex1);
+        System.out.println("Binary: " + hexToBinary(hex1)); // Expected Output: 0001101011000101
+
+        // Test Case 2
+        String hex2 = "5D1F";
+        System.out.println("Hexadecimal: " + hex2);
+        System.out.println("Binary: " + hexToBinary(hex2)); // Expected Output: 0101110100011111
+    }
+}
+
+/*
+Time and Space Complexity Explanation:
+- **Time Complexity**: O(n), where n is the number of characters in the hexadecimal string. 
+                       We iterate over each hexadecimal digit once, and for each digit, converting it to binary takes constant time.
+- **Space Complexity**: O(1), as we only store a fixed-size binary result. 
+                        The space used for the StringBuilder grows with the size of the output, 
+                        but this is determined by the length of the input, and no extra space is used except for the output.
+
+Complete Code Walkthrough:
+- We define the `hexToBinary()` function which takes a hexadecimal string as input.
+- Inside the function, we use a loop to process each character in the hexadecimal string.
+    - For each character, we parse it to get its decimal equivalent using `Integer.parseInt(String.valueOf(hexChar), 16)`.
+    - Then, we convert the decimal value to a 4-bit binary string using `Integer.toBinaryString()`. 
+       We pad the result to 4 bits using `String.format("%4s", ...)`, ensuring that the result is always 4 bits long (even for single-digit hex values).
+    - We append the 4-bit binary string to a `StringBuilder` to accumulate the final result.
+- Finally, the binary string is returned.
+- In the `main()` method, we test the function with two examples: "1AC5" and "5D1F".
+
+Test Case 1:
+- Input: "1AC5"
+- Breakdown:
+    - '1' → 0001
+    - 'A' → 1010
+    - 'C' → 1100
+    - '5' → 0101
+- Output: 0001101011000101
+
+Test Case 2:
+- Input: "5D1F"
+- Breakdown:
+    - '5' → 0101
+    - 'D' → 1101
+    - '1' → 0001
+    - 'F' → 1111
+- Output: 0101110100011111
+*/
+
+    
+--------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
 /* 
 Question:
 Given a Hexadecimal number as input, the task is to convert that number to a Binary number.
