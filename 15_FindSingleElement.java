@@ -1,3 +1,195 @@
+--------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
+/* 
+Question Section:
+You are given an integer array nums where every element appears three times except for one, which appears exactly once. 
+Find the single element and return it.
+
+You must implement a solution with a linear runtime complexity and use only constant extra space.
+
+Examples:
+
+Input: nums = [2,2,3,2]
+Output: 3
+
+Input: nums = [0,1,0,1,0,1,99]
+Output: 99
+
+Constraints:
+1 <= nums.length <= 3 * 10^4
+-2^31 <= nums[i] <= 2^31 - 1
+Each element in nums appears exactly three times except for one element which appears once.
+*/
+
+/* 
+Understanding the Problem Statement:
+- We are given an array where every number appears exactly 3 times, except for one number which appears exactly once.
+- The goal is to find the number that appears only once in the array.
+- We are required to implement a solution with a linear runtime complexity (O(n)) and constant extra space (O(1)).
+
+What is being asked?
+- Given an array of integers where all elements except one appear exactly three times, we need to find and return the one element that appears only once.
+- The constraints imply that we need to implement an efficient solution, both in terms of time (O(n)) and space (O(1)).
+
+*/
+
+ /* 
+Extracting Information from the Problem Statement:
+1. Input data type:
+   - An integer array `nums[]` containing numbers.
+   
+2. Expected Output:
+   - The single element that appears only once in the array.
+   
+3. Output return type:
+   - An integer representing the element that appears only once.
+
+4. Explanation of Time complexity expectations:
+   - The solution should run in O(n) time, which means that we must process the array in a single pass.
+   - We must also ensure the solution uses constant space, O(1), implying we cannot use extra space like hashmaps or arrays.
+
+5. Explanation of given Constraints:
+   - The length of the array is between 1 and 30,000.
+   - The values of the elements can be as large as ±2^31 - 1.
+   - All elements appear exactly 3 times except for one, which appears once.
+*/
+
+ /* 
+Thinking Solution for the Problem Statement:
+1. Identification:
+   - Since all elements appear exactly 3 times except one, we need a way to isolate the element that appears once.
+   - A brute force solution (using hashmaps or sorting) could take O(n) time but would require additional space. 
+     However, we are constrained to use constant space.
+
+2. Destructuring:
+   - A bitwise solution can be used to solve this efficiently. 
+     The idea is to track the bits that form the numbers. 
+     By using bitwise operations, we can track the bits that contribute to numbers appearing three times and identify the unique element.
+   
+3. Conversional solution into smaller subtask:
+   - Subtask 1: Iterate over the array and process each element bit by bit.
+   - Subtask 2: Maintain two variables to track the bits that appear in multiples of three.
+   - Subtask 3: Identify the number that doesn't follow the "three-times" rule and return it.
+
+*/
+
+ /* 
+Conversional Solution into Subtasks:
+1. Use two variables, `ones` and `twos`, to store the bitwise representations of the numbers appearing once and twice.
+2. Process each element in the array:
+   - Update `ones` to store the bits that have appeared once.
+   - Update `twos` to store the bits that have appeared twice.
+   - Use bitwise operations to ensure that when a bit has appeared three times, it is reset from `ones` and `twos`.
+3. The value remaining in `ones` will be the number that appears only once.
+
+*/
+
+ /* 
+Subtasks of Conversional Solution into Code:
+1. Initialize two variables: `ones` and `twos` to track the bits of elements.
+2. Iterate over the array and update `ones` and `twos` using bitwise operations.
+3. Return the value of `ones` which contains the single element that appears only once.
+
+*/
+
+public class SingleElementInArray {
+
+    /* 
+    Function to find the single element in the array where every element appears three times except for one.
+    This function uses bitwise operations to solve the problem in O(n) time and O(1) space.
+    */
+    public static int singleNumber(int[] nums) {
+        int ones = 0, twos = 0;
+        
+        // Process each number in the array
+        for (int num : nums) {
+            // Update twos with the bits that have appeared twice
+            twos |= ones & num;
+            
+            // Update ones with the bits that have appeared once
+            ones ^= num;
+            
+            // Remove the bits that have appeared three times (in both ones and twos)
+            int threes = ones & twos;
+            ones &= ~threes;
+            twos &= ~threes;
+        }
+        
+        // The result will be in ones since it holds the bits that appear exactly once
+        return ones;
+    }
+
+   
+
+    public static void main(String[] args) {
+        // Test case 1
+        int[] nums1 = {2, 2, 3, 2};
+        System.out.println("Single element: " + singleNumber(nums1)); // Expected output: 3
+        
+        // Test case 2
+        int[] nums2 = {0, 1, 0, 1, 0, 1, 99};
+        System.out.println("Single element: " + singleNumber(nums2)); // Expected output: 99
+    }
+}
+
+ /* 
+    Time and Space Complexity Explanation:
+    Time Complexity:
+    - O(n), where n is the size of the array. We iterate over the array once and perform constant time operations on each element.
+    
+    Space Complexity:
+    - O(1), because we only use a fixed amount of space (two integer variables `ones` and `twos`), regardless of the input size.
+    */
+
+    /* 
+    Code Walkthrough:
+    Let's walk through the example `nums = [2,2,3,2]`:
+
+    - Initial values: `ones = 0`, `twos = 0`
+    
+    - First iteration (num = 2):
+      - `twos |= ones & num` → `twos = 0`
+      - `ones ^= num` → `ones = 2`
+      - No bits have appeared three times, so `threes = 0`, and the values of `ones` and `twos` remain unchanged.
+
+    - Second iteration (num = 2):
+      - `twos |= ones & num` → `twos = 2`
+      - `ones ^= num` → `ones = 0`
+      - No bits have appeared three times, so `threes = 2`, and `ones = 0`, `twos = 0`.
+
+    - Third iteration (num = 3):
+      - `twos |= ones & num` → `twos = 0`
+      - `ones ^= num` → `ones = 3`
+      - No bits have appeared three times, so `threes = 0`, and the final values are `ones = 3`, `twos = 0`.
+
+    - The single element is 3, so the result is returned as `ones = 3`.
+
+    Output: `3`
+    */
+/*
+
+### Explanation:
+
+1. **`singleNumber(int[] nums)`**:
+   - This function processes each element of the array using bitwise operations to track the bits that appear once, twice, and three times.
+   - **`ones`** keeps track of bits that have appeared exactly once.
+   - **`twos`** keeps track of bits that have appeared exactly twice.
+   - After processing all elements, **`ones`** holds the single element that appears only once.
+
+2. **Bitwise Operations**:
+   - `ones ^= num`: This updates `ones` by flipping the bits corresponding to the current number.
+   - `twos |= ones & num`: This updates `twos` by including bits that have appeared twice.
+   - The three-time occurrences are reset with the operation: `ones &= ~threes` and `twos &= ~threes`.
+
+3. **Time Complexity**:
+   - The solution runs in O(n) because we iterate through the array once and perform constant-time operations for each element.
+   
+4. **Space Complexity**:
+   - The space complexity is O(1) because we only use a constant amount of space to store the variables `ones` and `twos`.
+
+This approach efficiently solves the problem while satisfying the constraints of linear time complexity and constant space complexity.
+*/
+
+--------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
 /* 
 Question: 
 Given an integer array nums where every element appears three times except for one, 
