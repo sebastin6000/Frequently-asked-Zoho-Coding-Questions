@@ -1,3 +1,161 @@
+--------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
+/* 
+Question:
+Given a Binary Number, the task is to convert the given binary number to its equivalent hexadecimal number. 
+The input could be very large and may not fit even into an unsigned long long int.
+
+Examples: 
+Input: 110001110
+Output: 18E
+
+Input: 1111001010010100001.010110110011011
+Output: 794A1.5B36 794A1D9B
+*/
+
+/* 
+Understanding the Problem Statement:
+We are given a binary number as input, and the task is to convert it into its hexadecimal equivalent.
+- Binary numbers use base 2, consisting of only 0s and 1s.
+- Hexadecimal numbers use base 16, consisting of digits from 0-9 and letters A-F.
+
+Each group of four binary digits corresponds to one hexadecimal digit. For instance:
+- `0000` in binary = `0` in hexadecimal
+- `1111` in binary = `F` in hexadecimal
+
+The problem requires that we:
+1. Take the binary input, which may be very large (could be a floating-point number as well, like `1.1011`).
+2. Split the number into integer and fractional parts.
+3. Convert both parts to hexadecimal.
+4. Return the final hexadecimal number as a string.
+
+Extracting Information from the Problem Statement:
+- Input: A binary number as a string.
+- Expected Output: The equivalent hexadecimal number as a string.
+- Output Return Type: String.
+- Time Complexity: O(n), where n is the number of bits in the binary string.
+- Space Complexity: O(n), where n is the space required for storing the final result.
+
+Constraints:
+- The input binary number can be very large, and may contain both integer and fractional parts.
+  
+Thinking Solution for the Problem Statement:
+1. The binary number can have two parts: the integer part and the fractional part. We need to process both parts separately.
+2. For the integer part, we can group the binary digits into chunks of four, convert each chunk to hexadecimal, and concatenate them.
+3. For the fractional part, we can group the digits into chunks of four and convert them to hexadecimal in the same way.
+4. If the fractional part does not contain a full group of four digits, we can add leading zeros to make a complete group.
+5. Combine both parts (integer and fractional) and return the final result.
+
+Subtasks:
+1. Split the binary number into integer and fractional parts.
+2. Convert the integer part from binary to hexadecimal.
+3. Convert the fractional part from binary to hexadecimal.
+4. Combine both parts and return the hexadecimal number as a string.
+
+Subtasks of Conversional Solution into Code:
+- **Step 1**: Split the input binary number into integer and fractional parts.
+- **Step 2**: Convert the integer part from binary to hexadecimal.
+- **Step 3**: Convert the fractional part from binary to hexadecimal.
+- **Step 4**: Combine both parts into a single hexadecimal result.
+- **Step 5**: Return the result.
+
+Java Code according to Conversational Subtasks:
+*/
+
+import java.util.*;
+
+public class BinaryToHexadecimal {
+
+    // Helper function to convert the binary string to hexadecimal
+    private static String binaryToHex(String binary) {
+        // Result string
+        StringBuilder hex = new StringBuilder();
+        
+        // Ensure the binary string length is a multiple of 4 by adding leading zeros if necessary
+        int length = binary.length();
+        int remainder = length % 4;
+        if (remainder != 0) {
+            int padding = 4 - remainder;
+            for (int i = 0; i < padding; i++) {
+                binary = "0" + binary;
+            }
+        }
+        
+        // Process the binary string in chunks of 4
+        for (int i = 0; i < binary.length(); i += 4) {
+            String chunk = binary.substring(i, i + 4);
+            int decimalValue = Integer.parseInt(chunk, 2);  // Convert binary chunk to decimal
+            hex.append(Integer.toHexString(decimalValue).toUpperCase());  // Convert decimal to hex and append
+        }
+        
+        return hex.toString();
+    }
+
+    // Function to convert binary to hexadecimal with integer and fractional parts
+    public static String convertBinaryToHex(String binary) {
+        // Split binary number into integer and fractional parts
+        String[] parts = binary.split("\\.");
+        String integerPart = parts[0];
+        String fractionalPart = (parts.length > 1) ? parts[1] : "";
+        
+        // Convert integer part to hexadecimal
+        String integerHex = binaryToHex(integerPart);
+        
+        // Convert fractional part to hexadecimal
+        String fractionalHex = "";
+        if (!fractionalPart.isEmpty()) {
+            // Ensure the fractional part has 4 bits per chunk
+            fractionalHex = binaryToHex(fractionalPart);
+        }
+        
+        // Combine integer part and fractional part
+        if (!fractionalHex.isEmpty()) {
+            return integerHex + "." + fractionalHex;
+        } else {
+            return integerHex;
+        }
+    }
+
+    // Main method to test the function
+    public static void main(String[] args) {
+        // Test Case 1
+        String binary1 = "110001110";
+        System.out.println("Binary: " + binary1);
+        System.out.println("Hexadecimal: " + convertBinaryToHex(binary1)); // Expected Output: 18E
+
+        // Test Case 2
+        String binary2 = "1111001010010100001.010110110011011";
+        System.out.println("Binary: " + binary2);
+        System.out.println("Hexadecimal: " + convertBinaryToHex(binary2)); // Expected Output: 794A1.5B36
+    }
+}
+
+/* 
+Time and Space Complexity Explanation:
+- **Time Complexity**: O(n), where n is the number of bits in the binary string. 
+                       We iterate over each binary digit a constant number of times to process it and convert to hexadecimal.
+- **Space Complexity**: O(n), where n is the space used to store the binary-to-hexadecimal conversion result. 
+                        The space complexity depends on the length of the binary string and its corresponding hexadecimal output.
+
+Complete Code Walkthrough:
+- We define the helper function `binaryToHex()`, which takes a binary string, ensures it is padded to a multiple of 4, 
+  and then processes it in chunks of 4 to convert to hexadecimal.
+- The main function `convertBinaryToHex()` splits the binary number into integer and fractional parts.
+  It then uses `binaryToHex()` to convert both parts separately and combines them.
+- In the `main()` method, we test the function with two binary numbers, one simple and one with both integer and fractional parts.
+- For example, with the binary input "110001110", the output is "18E". Similarly, for "1111001010010100001.010110110011011", the output is "794A1.5B36".
+
+Test Case 1:
+- Input: "110001110"
+- Conversion: "110001110" → "18E"
+- Output: 18E
+
+Test Case 2:
+- Input: "1111001010010100001.010110110011011"
+- Conversion: "1111001010010100001" → "794A1" and "010110110011011" → "5B36"
+- Output: 794A1.5B36
+*/
+
+--------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
 /* 
 Question: Given a Binary Number, the task is to convert the given binary number to its equivalent hexadecimal number. 
 The input could be very large and may not fit even into an unsigned long long int.
