@@ -1,3 +1,203 @@
+--------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
+/* 
+Question Section:
+You are given a string `s` consisting of `n` characters which are either 'X' or 'O'.
+A move is defined as selecting three consecutive characters of `s` and converting them to 'O'. 
+Note that if a move is applied to the character 'O', it will stay the same.
+
+Return the minimum number of moves required so that all the characters of `s` are converted to 'O'.
+
+Examples:
+
+Input: s = "XXX"
+Output: 1
+Explanation: XXX -> OOO
+We select all the 3 characters and convert them in one move.
+
+Input: s = "XXOX"
+Output: 2
+Explanation: XXOX -> OOOX -> OOOO
+We select the first 3 characters in the first move, and convert them to 'O'.
+Then we select the last 3 characters and convert them so that the final string contains all 'O's.
+
+Input: s = "OOOO"
+Output: 0
+Explanation: There are no 'X's in s to convert.
+
+Constraints:
+3 <= s.length <= 1000
+s[i] is either 'X' or 'O'.
+*/
+
+/* 
+Understanding the Problem Statement:
+- We are given a string `s` of length `n` where each character is either 'X' or 'O'.
+- The goal is to transform all the 'X' characters to 'O' by selecting three consecutive 'X' characters at a time and changing them to 'O'.
+- We need to find the minimum number of such moves to convert all characters of the string `s` to 'O'.
+
+What is being asked?
+- Given a string `s`, we need to determine how many moves are required to change all 'X' characters to 'O'.
+- The string will contain between 3 and 1000 characters, and only characters 'X' and 'O' are allowed.
+- The number of moves is minimized by selecting three consecutive 'X' characters in each move, turning them into 'O'.
+
+*/
+
+ /* 
+Extracting Information from the Problem Statement:
+1. Input data type:
+   - A string `s` consisting of only the characters 'X' and 'O'.
+   
+2. Expected Output:
+   - An integer representing the minimum number of moves required to turn all 'X' characters into 'O'.
+
+3. Output return type:
+   - An integer value.
+
+4. Explanation of Time complexity expectations:
+   - The solution should ideally run in O(n) time, where `n` is the length of the string `s`, since the string can be as long as 1000 characters.
+
+5. Explanation of given Constraints:
+   - The length of the string is between 3 and 1000.
+   - Each character in the string is either 'X' or 'O'.
+*/
+
+ /* 
+Thinking Solution for the Problem Statement:
+1. Identification:
+   - The key challenge is to minimize the number of moves, which means converting as many 'X' characters as possible in each move.
+   - A move affects exactly 3 consecutive characters, 
+     so the optimal approach would be to always select a set of 3 consecutive 'X' characters and convert them.
+
+2. Destructuring:
+   - Traverse through the string from left to right.
+   - Each time a 'X' is found, attempt to "convert" the next three characters (if they are 'X') to 'O' in one move.
+   - Count how many such moves are needed.
+
+3. Conversional solution into smaller subtask:
+   - Subtask 1: Traverse the string and check for sequences of consecutive 'X' characters.
+   - Subtask 2: When three consecutive 'X' characters are found, simulate the move and increment the move count.
+   - Subtask 3: Skip the next two characters after performing a move, since they are already converted.
+
+*/
+
+ /* 
+Conversional Solution into Subtasks:
+1. Traverse the string from left to right.
+2. For each 'X' found, check if a group of three consecutive 'X's can be converted to 'O'.
+3. When a move is made (i.e., three consecutive 'X' characters are turned into 'O'), increment the move counter.
+4. Skip past the three characters that have been changed.
+
+*/
+
+ /* 
+Subtasks of Conversional Solution into Code:
+1. Initialize a variable to keep track of the number of moves.
+2. Iterate over the string, checking for 'X' characters and attempting to convert three consecutive 'X' characters.
+3. After converting, skip the next two characters to avoid unnecessary moves.
+4. Return the total number of moves.
+
+*/
+
+public class MinimumMovesToConvertXToO {
+
+    /* 
+    Function to find the minimum number of moves required to convert all 'X' to 'O'.
+    We select three consecutive 'X' characters in each move and convert them to 'O'.
+    */
+    public static int minMovesToConvert(String s) {
+        int moves = 0;
+        int n = s.length();
+        char[] arr = s.toCharArray();
+        
+        // Iterate through the string
+        for (int i = 0; i <= n - 3; i++) {
+            // When 'X' is found, perform the move
+            if (arr[i] == 'X') {
+                moves++;  // Increment move count
+                // Convert the next 3 characters to 'O'
+                arr[i] = arr[i+1] = arr[i+2] = 'O';
+            }
+        }
+        
+        return moves;
+    }
+    public static void main(String[] args) {
+        // Test case 1
+        String s1 = "XXX";
+        System.out.println("Minimum moves: " + minMovesToConvert(s1)); // Expected output: 1
+        
+        // Test case 2
+        String s2 = "XXOX";
+        System.out.println("Minimum moves: " + minMovesToConvert(s2)); // Expected output: 2
+        
+        // Test case 3
+        String s3 = "OOOO";
+        System.out.println("Minimum moves: " + minMovesToConvert(s3)); // Expected output: 0
+    }
+}
+/* 
+    Time and Space Complexity Explanation:
+    Time Complexity:
+    - O(n), where `n` is the length of the string. We process each character of the string only once, performing constant-time operations.
+    
+    Space Complexity:
+    - O(1), we are only using a fixed amount of space (variables for counting moves and a char array for modifying the string).
+    */
+
+    /* 
+    Code Walkthrough:
+    Let's walk through the example `s = "XXOX"`:
+
+    - Initial string: `XXOX`
+    - We start iterating through the string:
+      - At index 0, we find 'X'. We perform a move, converting the first 3 characters to 'O', resulting in `OOOX`.
+      - At index 3, there are no more 'X' characters, so we stop.
+    
+    - Total moves = 2.
+
+    Output: `2`
+    */
+/*
+
+### Explanation:
+
+1. **`minMovesToConvert(String s)`**:
+   - This function calculates the minimum number of moves required to convert all 'X' characters to 'O'. 
+     It does so by iterating through the string, and whenever an 'X' is encountered, 
+     it checks the next two characters as well, converting all three to 'O' in one move.
+
+2. **Steps**:
+   - **Initialization**: 
+      We initialize a counter `moves` to track the number of moves.
+   - **Loop through the string**: 
+      We check every position in the string. If a 'X' is found, 
+      we convert it and the next two characters (if they exist) to 'O'. 
+      We then increment the `moves` counter and skip ahead by 3 positions.
+   - **End Condition**: 
+      The loop continues until we reach the third-to-last position, ensuring that we can always check the next three characters.
+
+3. **Time Complexity**:
+   - The solution iterates over the string exactly once, making the time complexity O(n), where `n` is the length of the string.
+   
+4. **Space Complexity**:
+   - The space complexity is O(1) because we only use a constant amount of extra space. 
+     We modify the string in-place using a character array and maintain a single counter.
+
+### Example Walkthrough:
+
+For the string `s = "XXOX"`:
+- First iteration: At index 0, we encounter 'X'. We change the first three characters (`"XXX" -> "OOO"`) in one move, resulting in `OOOX`.
+- At index 3, the loop ends because there are no more 'X' characters left.
+- The result is 2 moves, as expected.
+
+### Output:
+
+For the given test cases:
+1. `XXX` → 1 move.
+2. `XXOX` → 2 moves.
+3. `OOOO` → 0 moves.
+*/
+--------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
 /* 
 Question:
 You are given a string s consisting of n characters which are either 'X' or 'O'.
