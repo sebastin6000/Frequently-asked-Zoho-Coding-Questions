@@ -1,3 +1,169 @@
+--------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
+/* 
+Question Section:
+Given two strings A and B, find if A is a subsequence of B.
+
+Example 1:
+Input:
+A = AXY 
+B = YADXCP
+Output: 0 
+Explanation: A is not a subsequence of B as 'Y' appears before 'A'.
+
+Example 2:
+Input:
+A = gksrek
+B = geeksforgeeks
+Output: 1
+Explanation: A is a subsequence of B.
+
+Your Task:
+You don't need to read input or print anything. 
+Complete the function isSubSequence() which takes A and B as input parameters and returns a boolean value denoting if A is a subsequence of B or not. 
+
+Expected Time Complexity: O(N) where N is the length of string B.
+Expected Auxiliary Space: O(1)
+
+Constraints:
+1 <= |A|, |B| <= 10^4
+*/
+
+/* 
+Understanding the Problem Statement:
+We are tasked with determining whether string A is a subsequence of string B. 
+A subsequence is formed by deleting some (or none) of the characters from B without changing the relative order of the remaining characters. 
+Our goal is to check if A can be derived from B by possibly deleting some characters but maintaining their relative order in B.
+
+We are given two strings:
+1. A: The string we are checking if it is a subsequence of B.
+2. B: The string we are comparing A with.
+
+We need to return:
+- True (1) if A is a subsequence of B.
+- False (0) if A is not a subsequence of B.
+*/
+
+/* 
+Extracting Information from the Problem Statement:
+1. Input data type: 
+   - A and B are both strings.
+2. Expected Output: 
+   - A boolean value: 1 (True) if A is a subsequence of B, 0 (False) otherwise.
+3. Output return type:
+   - Boolean (1 or 0).
+4. Explanation of Time complexity expectations:
+   - The expected time complexity is O(N), where N is the length of string B.
+   - This implies that the solution should process the string B in a linear pass.
+5. Explanation of given Constraints:
+   - The length of A and B is between 1 and 10^4, so our solution needs to be efficient, ideally linear in time complexity with respect to the length of B.
+*/
+
+/* 
+Thinking Solution for the Problem Statement:
+1. Identification:
+   - This problem can be identified as a "subsequence checking" problem.
+   - A subsequence is a sequence that appears in the same relative order, but not necessarily consecutively.
+
+2. Destructuring the problem:
+   - We need to determine whether all characters of A can be found in B in the same order (not necessarily contiguous).
+
+3. Conversional Solution into smaller subtask:
+   - We will iterate through string B and try to match the characters of A one by one.
+   - If all characters of A are found in B in order, return True.
+   - If we reach the end of B and have not matched all characters of A, return False.
+*/
+
+/* 
+Conversional Solution into Subtasks:
+1. Iterate through both strings A and B.
+2. For each character in B, check if it matches the current character of A.
+3. If it matches, move to the next character in A.
+4. If all characters in A are matched before we exhaust string B, return True.
+5. If we exhaust string B without matching all of A, return False.
+*/
+
+/* 
+Subtasks of Conversional Solution into Code:
+1. Initialize two pointers, one for string A and one for string B.
+2. Traverse through string B.
+3. If a character in B matches the current character in A, move the pointer for A forward.
+4. If the pointer for A reaches the end of A, return True (A is a subsequence of B).
+5. If we finish traversing B and haven't matched all characters of A, return False.
+*/
+
+public class Solution {
+    
+    /* 
+    isSubSequence function:
+    This function checks whether string A is a subsequence of string B.
+    It returns true (1) if A is a subsequence of B, otherwise false (0).
+    */
+    public static int isSubSequence(String A, String B) {
+        int n = A.length();
+        int m = B.length();
+
+        // Pointers for A and B
+        int i = 0, j = 0;
+        
+        // Traverse through B and try to match characters with A
+        while (i < n && j < m) {
+            // If characters match, move pointer for A
+            if (A.charAt(i) == B.charAt(j)) {
+                i++;
+            }
+            // Always move pointer for B
+            j++;
+        }
+        
+        // If all characters of A have been matched
+        if (i == n) {
+            return 1; // A is a subsequence of B
+        } else {
+            return 0; // A is not a subsequence of B
+        }
+    }
+    
+    public static void main(String[] args) {
+        // Testing with some sample inputs
+        System.out.println(isSubSequence("gksrek", "geeksforgeeks")); // Output: 1
+        System.out.println(isSubSequence("AXY", "YADXCP")); // Output: 0
+    }
+}
+
+/* 
+    Time and Space Complexity Explanation:
+    Time Complexity:
+    - We are iterating through string B only once (O(N), where N is the length of B). 
+    - At each step, we either match a character from A with B or skip to the next character of B.
+    Space Complexity:
+    - We are using constant extra space, O(1), since we only need two pointers (i and j) for traversal.
+    */
+
+    /* 
+    Code Walkthrough:
+    Given the input A = "gksrek" and B = "geeksforgeeks", let's walk through the code:
+
+    Initialize:
+    i = 0, j = 0 (Pointers for A and B)
+
+    Start the loop:
+    1. Compare A[0] ('g') with B[0] ('g') - they match, so increment i (i = 1) and j (j = 1).
+    2. Compare A[1] ('k') with B[1] ('e') - they don't match, increment j (j = 2).
+    3. Compare A[1] ('k') with B[2] ('e') - they don't match, increment j (j = 3).
+    4. Compare A[1] ('k') with B[3] ('k') - they match, increment i (i = 2) and j (j = 4).
+    5. Compare A[2] ('s') with B[4] ('s') - they match, increment i (i = 3) and j (j = 5).
+    6. Compare A[3] ('r') with B[5] ('f') - they don't match, increment j (j = 6).
+    7. Compare A[3] ('r') with B[6] ('o') - they don't match, increment j (j = 7).
+    8. Compare A[3] ('r') with B[7] ('r') - they match, increment i (i = 4) and j (j = 8).
+    9. Compare A[4] ('e') with B[8] ('e') - they match, increment i (i = 5) and j (j = 9).
+    10. Compare A[5] ('k') with B[9] ('k') - they match, increment i (i = 6) and j (j = 10).
+
+    At this point, we have matched all characters of A, so the function returns 1.
+
+    If A had not been fully matched, the function would have returned 0.
+    */
+
+--------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
 /* 
 Given two strings A and B, find if A is a subsequence of B.
 
