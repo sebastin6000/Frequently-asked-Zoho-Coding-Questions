@@ -1,3 +1,148 @@
+--------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
+/* 
+Question Section:
+Given a number N, the task is to print the prime numbers from 1 to N.
+
+Example 1:
+Input: N = 10
+Output: 2, 3, 5, 7
+Explanation : The output “2, 3, 5, 7” for input N = 10 represents the list of the prime numbers less than or equal to 10.
+
+Example 2:
+Input: N = 5
+Output: 2, 3, 5
+Explanation : The output “2, 3, 5” for input N = 5 represents the list of the prime numbers less than or equal to 5.
+*/
+
+/* 
+Understanding the Problem Statement:
+We are tasked with identifying all prime numbers from 1 to N. A prime number is a number greater than 1 that has no divisors other than 1 and itself.
+
+Given an integer N, the objective is to print all prime numbers from 1 to N, in ascending order, separated by spaces.
+
+Prime numbers have the following properties:
+- They are greater than 1.
+- They are only divisible by 1 and themselves.
+
+We are expected to find and print all primes less than or equal to N efficiently, as N can be quite large (up to 10^6 or more).
+*/
+
+/* 
+Extracting Information from the Problem Statement:
+1. Input data type:
+   - A single integer N, where N is the upper limit up to which prime numbers are to be found.
+2. Expected Output:
+   - A list of prime numbers from 1 to N, printed in ascending order, separated by spaces.
+3. Output return type:
+   - Void (The program prints the results directly and does not return anything).
+4. Explanation of Time complexity expectations:
+   - We need an efficient solution to find primes up to N.
+   - The expected time complexity should be O(N log log N) or better to handle large values of N.
+5. Explanation of given Constraints:
+   - N will be at least 2 (since the smallest prime is 2).
+   - The algorithm should be optimized to handle N up to 10^6 or larger.
+*/
+
+/* 
+Thinking Solution for the Problem Statement:
+1. Identification:
+   - This is a classic problem of generating all prime numbers up to N.
+   - A brute force solution would check each number individually for primality, but this is inefficient for large N.
+
+2. Destructuring:
+   - We need to identify which numbers from 2 to N are prime.
+   - A prime number is only divisible by 1 and itself.
+   - We can use the **Sieve of Eratosthenes** algorithm to efficiently identify all primes up to N.
+
+3. Conversional Solution into smaller subtask:
+   - Step 1: Implement the Sieve of Eratosthenes algorithm.
+   - Step 2: Use the sieve to mark non-prime numbers.
+   - Step 3: Print the remaining numbers that are marked as prime.
+   - The Sieve of Eratosthenes is optimal for this task with a time complexity of O(N log log N), 
+     which is much faster than checking each number individually.
+
+*/
+
+/* 
+Conversional Solution into Subtasks:
+1. Initialize a boolean array to mark prime numbers.
+2. For each number starting from 2, mark its multiples as non-prime.
+3. After marking the non-prime numbers, print the numbers that are still marked as prime.
+*/
+
+/* 
+Subtasks of Conversional Solution into Code:
+1. Create a boolean array `isPrime` to store whether each number from 0 to N is prime.
+2. Set `isPrime[0]` and `isPrime[1]` to false because 0 and 1 are not prime.
+3. Use the Sieve of Eratosthenes to mark all multiples of each number starting from 2 as non-prime.
+4. Finally, print all the indices of the array that are still marked as true (those are the prime numbers).
+*/
+
+public class PrimeNumbers {
+
+    /* 
+    This function prints all prime numbers from 1 to N using the Sieve of Eratosthenes.
+    */
+    public static void printPrimes(int N) {
+        // Step 1: Create a boolean array to mark prime numbers
+        boolean[] isPrime = new boolean[N + 1];
+        
+        // Step 2: Initialize the array; assume all numbers are prime
+        for (int i = 0; i <= N; i++) {
+            isPrime[i] = true;
+        }
+        
+        // Step 3: 0 and 1 are not prime numbers
+        isPrime[0] = isPrime[1] = false;
+
+        // Step 4: Implement the Sieve of Eratosthenes
+        for (int i = 2; i * i <= N; i++) {
+            if (isPrime[i]) {
+                // Mark all multiples of i as non-prime
+                for (int j = i * i; j <= N; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+        
+        // Step 5: Print all prime numbers
+        for (int i = 2; i <= N; i++) {
+            if (isPrime[i]) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+    public static void main(String[] args) {
+        // Testing with some sample inputs
+        printPrimes(10); // Output: 2 3 5 7
+        System.out.println();
+        printPrimes(5);  // Output: 2 3 5
+    }
+}
+ /* 
+    Time and Space Complexity Explanation:
+    Time Complexity:
+    - The Sieve of Eratosthenes algorithm runs in O(N log log N). This is because for each prime number `p`, 
+       we mark all of its multiples as non-prime, and the total number of such operations grows much slower than N.
+    
+    Space Complexity:
+    - We use a boolean array of size N+1 to track whether each number is prime, so the space complexity is O(N).
+    */
+
+    /* 
+    Code Walkthrough:
+    Given input N = 10:
+
+    1. Initialize the `isPrime[]` array of size 11, with all values set to true.
+    2. Set `isPrime[0] = false` and `isPrime[1] = false` because 0 and 1 are not prime.
+    3. Use the Sieve of Eratosthenes to mark multiples of each number as non-prime:
+       - For i = 2, mark multiples of 2 (i.e., 4, 6, 8, 10) as non-prime.
+       - For i = 3, mark multiples of 3 (i.e., 9) as non-prime.
+    4. After processing, print the numbers that remain marked as prime: 2, 3, 5, and 7.
+
+    Output: 2 3 5 7
+    */
+--------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
 /* 
 Question: Given a number N, the task is to print the prime numbers from 1 to N.
 Examples: 
