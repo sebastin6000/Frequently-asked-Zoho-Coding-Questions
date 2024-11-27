@@ -1,3 +1,185 @@
+--------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
+
+/* 
+Question Section:
+Given an array `arr[]`, the task is to push all the zeros to the right end of the array while maintaining the order of non-zero elements. 
+Perform the operation in place, i.e., modify the array itself.
+
+Examples:
+
+Input: arr[] = [1, 2, 0, 4, 3, 0, 5, 0]
+Output: [1, 2, 4, 3, 5, 0, 0, 0]
+Explanation: There are three 0s that are moved to the end.
+
+Input: arr[] = [10, 20, 30]
+Output: [10, 20, 30]
+Explanation: No change in array as there are no 0s.
+
+Input: arr[] = [0, 0]
+Output: [0, 0]
+Explanation: No change in array as there are all 0s.
+
+Constraints:
+1 ≤ arr.size() ≤ 10^5
+0 ≤ arr[i] ≤ 10^5
+*/
+
+/* 
+Understanding the Problem Statement:
+- We are given an array `arr[]` and need to rearrange the array such that all zeros are moved to the end while maintaining the order of non-zero elements.
+- The operation needs to be done in place, which means no additional arrays or data structures should be used for the rearrangement.
+- The array may contain any number of zeros, and we are guaranteed to have at least one non-zero element since the size of the array is at least 1.
+
+What is being asked?
+- We need to write a function that takes an array as input, modifies it in place, 
+  and returns the array with all zeros moved to the right end, while the order of non-zero elements is preserved.
+*/
+
+ /* 
+Extracting Information from the Problem Statement:
+1. Input data type:
+   - A single array `arr[]` containing integers.
+2. Expected Output:
+   - The same array `arr[]` after modification, with all zeros moved to the right while maintaining the order of non-zero elements.
+3. Output return type:
+   - The array `arr[]` itself is modified in place, and the function does not need to return anything explicitly.
+4. Explanation of Time complexity expectations:
+   - We need to achieve the task with a time complexity of O(n), where `n` is the size of the array. 
+     This is because we are performing operations in place and should only traverse the array once.
+5. Explanation of given Constraints:
+   - The maximum size of the array is `10^5`, so we must ensure the solution works efficiently even for large arrays (up to 100,000 elements).
+*/
+
+ /* 
+Thinking Solution for the Problem Statement:
+1. Identification:
+   - The problem is about rearranging the array by pushing zeros to the end while maintaining the order of non-zero elements.
+   - A common approach for such problems is using two pointers or a similar technique to shift elements efficiently.
+   
+2. Destructuring:
+   - We need to traverse the array from left to right.
+   - Whenever we find a non-zero element, we move it to the front of the array.
+   - We use a pointer `index` to keep track of where the next non-zero element should go.
+   - After the traversal, all the positions from `index` to the end of the array will be filled with zeros.
+
+3. Conversional solution into smaller subtask:
+   - Subtask 1: Iterate through the array, and for every non-zero element, move it to the next available position.
+   - Subtask 2: After the iteration, fill all remaining positions with zeros.
+
+*/
+
+ /* 
+Conversional Solution into Subtasks:
+1. Iterate through the array and push non-zero elements to the front.
+2. After processing all elements, fill any remaining positions with zeros.
+3. Ensure that the operation is done in place without using additional memory.
+
+*/
+
+ /* 
+Subtasks of Conversional Solution into Code:
+1. Initialize a pointer `index` to track the position where the next non-zero element should be moved.
+2. Traverse the array and for every non-zero element, move it to the `index` position and increment the `index`.
+3. Once the traversal is complete, all positions from `index` to the end of the array should be set to zero.
+
+*/
+
+public class PushZerosToEnd {
+
+    /* 
+    Function to move all zeros to the right end of the array while maintaining the order of non-zero elements.
+    This is done in-place by iterating through the array once and shifting elements accordingly.
+    */
+    public static void pushZerosToEnd(int[] arr) {
+        int n = arr.length;
+        int index = 0;  // Pointer to track the next non-zero position
+        
+        // Traverse the array
+        for (int i = 0; i < n; i++) {
+            // If the current element is non-zero, move it to the 'index' position
+            if (arr[i] != 0) {
+                arr[index] = arr[i];
+                if (index != i) {  // Only increment index if it is moved
+                    arr[i] = 0;  // Set the current position to zero
+                }
+                index++;  // Increment the position for the next non-zero element
+            }
+        }
+    }
+    public static void main(String[] args) {
+        // Test case 1
+        int[] arr1 = {1, 2, 0, 4, 3, 0, 5, 0};
+        pushZerosToEnd(arr1);
+        System.out.println("After pushing zeros to the end: " + java.util.Arrays.toString(arr1)); 
+        // Expected output: [1, 2, 4, 3, 5, 0, 0, 0]
+
+        // Test case 2
+        int[] arr2 = {10, 20, 30};
+        pushZerosToEnd(arr2);
+        System.out.println("After pushing zeros to the end: " + java.util.Arrays.toString(arr2)); 
+        // Expected output: [10, 20, 30]
+
+        // Test case 3
+        int[] arr3 = {0, 0};
+        pushZerosToEnd(arr3);
+        System.out.println("After pushing zeros to the end: " + java.util.Arrays.toString(arr3)); 
+        // Expected output: [0, 0]
+    }
+}
+  /* 
+    Time and Space Complexity Explanation:
+    Time Complexity:
+    - O(n), where n is the size of the array. 
+      We only need to make one pass through the array to move the non-zero elements and fill the remaining positions with zeros.
+    - This is efficient because we traverse the array once and perform constant-time operations inside the loop.
+
+    Space Complexity:
+    - O(1), because we are modifying the array in place and not using any extra space except for a few variables (`index` and `i`).
+    */
+
+    /* 
+    Code Walkthrough:
+    Let's walk through the example with `arr = [1, 2, 0, 4, 3, 0, 5, 0]`:
+
+    1. Initially, `arr = [1, 2, 0, 4, 3, 0, 5, 0]` and `index = 0`.
+    2. Traverse the array:
+       - `arr[0] = 1` is non-zero, so we place `1` at index 0 (no change) and increment `index` to 1.
+       - `arr[1] = 2` is non-zero, so we place `2` at index 1 (no change) and increment `index` to 2.
+       - `arr[2] = 0`, so we skip it.
+       - `arr[3] = 4` is non-zero, so we place `4` at index 2 (replaces the 0) and increment `index` to 3.
+       - `arr[4] = 3` is non-zero, so we place `3` at index 3 (no change) and increment `index` to 4.
+       - `arr[5] = 0`, so we skip it.
+       - `arr[6] = 5` is non-zero, so we place `5` at index 4 (replaces the 0) and increment `index` to 5.
+       - `arr[7] = 0`, so we skip it.
+
+    3. After the loop finishes, `arr = [1, 2, 4, 3, 5, 0, 0, 0]`.
+
+    Final result: `arr = [1, 2, 4, 3, 5, 0, 0, 0]`.
+
+    Output: `[1, 2, 4, 3, 5, 0, 0, 0]`
+    */
+
+
+/* 
+
+### Explanation:
+
+1. **`pushZerosToEnd(int[] arr)`**:
+   - This function traverses the array from left to right. For each non-zero element, it places it at the current `index` position and increments `index`.
+   - After placing a non-zero element, the original position is set to zero.
+   - This ensures that all non-zero elements are moved to the front, and all zeros are pushed to the end.
+
+2. **Time and Space Complexity**:
+   - **Time Complexity**: O(n), where `n` is the size of the array. We traverse the array once, and all operations inside the loop are constant time.
+   - **Space Complexity**: O(1), as we
+
+ only use a few variables for iteration (`index`, `i`).
+
+3. **Code Walkthrough**:
+   - The function processes each element, shifting non-zero elements to the front while setting zeros at the back. 
+     It does so in a single pass through the array, making it efficient.
+*/
+--------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
 /* 
 Question:
 Given an array arr[]. 
