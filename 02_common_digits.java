@@ -39,6 +39,14 @@ Extracting Information from the Problem Statement:
 - The digits should be in ascending order.
 - Time Complexity Expectation: O(N), where N is the size of the array.
 - Space Complexity Expectation: O(N), for storing the distinct digits.
+- Constraints:
+   1 <= N <= 10^5: 
+     This means the array nums can have up to 100,000 elements. 
+     The size of the array can be quite large, so the algorithm must be efficient enough to handle the upper limit of 100,000 numbers.
+
+   1 <= nums[i] <= 10^9: 
+      Each integer in the array nums can be as large as 1 billion (10^9). 
+      This means that each number can have at most 9 digits (since 10^9 has 9 digits).
   
 The task is to process the array, extract digits, remove duplicates, and return them sorted.
 
