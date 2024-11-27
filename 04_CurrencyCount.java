@@ -1,3 +1,159 @@
+--------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
+/* 
+Question:
+Given an amount, we need to find the minimum number of notes of different denominations that sum up to the given amount.
+We have an infinite supply of notes of denominations {2000, 500, 200, 100, 50, 20, 10, 5, 1}.
+Start from the highest denomination and try to use as many notes of that denomination as possible. 
+Return the number of notes of each denomination used.
+
+Examples:
+
+Input: 800
+Output:
+Currency   Count 
+500 : 1
+200 : 1
+100 : 1
+
+Input: 2456
+Output:
+Currency   Count 
+2000 : 1
+200 : 2
+50 : 1
+5 : 1
+1 : 1
+
+Your Task:
+Complete the function minNotes() that takes an integer amount and returns the number of notes needed for that amount using the least number of notes.
+
+Expected Time Complexity: O(n), where n is the number of denominations.
+Expected Space Complexity: O(1), as we are using a fixed number of denominations.
+
+Constraints:
+1 ≤ amount ≤ 10^18
+The denominations are fixed and we can assume they will not change.
+*/
+
+/* 
+Understanding the Problem Statement:
+We are given an amount and need to determine the minimum number of currency notes from the available denominations that sum up to this amount. 
+We start with the largest denomination and use as many notes of that denomination as possible, then move to the next smaller denomination, and so on.
+
+Extracting Information from the Problem Statement:
+- Input: An integer `amount` representing the total sum.
+- Expected Output: The denominations and their respective counts in descending order, showing how many notes of each denomination are used.
+- Time Complexity: O(n), where n is the number of denominations. We simply iterate through the fixed set of denominations.
+- Space Complexity: O(1), as the space used does not scale with the input size, since the number of denominations is fixed.
+
+Constraints:
+- The amount is at most 10^18, but the number of denominations is fixed and small (9 denominations).
+- We assume an infinite supply of notes of each denomination.
+
+Thinking Solution for the Problem Statement:
+1. Start with the largest denomination and use as many of that denomination as possible.
+2. Subtract the value of the used notes from the total amount.
+3. Move to the next smaller denomination and repeat the process.
+4. Continue until the amount becomes 0, ensuring that we use the least number of notes.
+
+Subtasks:
+1. Initialize the array of denominations in descending order.
+2. For each denomination, calculate how many notes can be used, and subtract the corresponding amount.
+3. Continue this until the amount becomes 0.
+4. Output the denominations used along with their counts.
+
+Subtasks of Conversional Solution into Code:
+- **Initialize denominations**: We will maintain an array of fixed denominations in descending order.
+- **Calculate notes for each denomination**: For each denomination, 
+    calculate how many notes are needed by dividing the remaining amount by the denomination value.
+- **Reduce the amount**: After calculating the number of notes for a denomination, subtract the corresponding value from the amount.
+- **Return the results**: After processing all denominations, return the list of denominations and their respective counts.
+
+Java Code according to Conversational Subtasks:
+
+*/
+
+import java.util.*;
+
+public class CurrencyNotes {
+  
+    // Function to find the minimum number of notes for a given amount
+    public static void minNotes(long amount) {
+        // Define the denominations in descending order
+        long[] denominations = {2000, 500, 200, 100, 50, 20, 10, 5, 1};
+        
+        // List to store the results (denomination and count)
+        List<String> result = new ArrayList<>();
+        
+        // Iterate over each denomination
+        for (long denom : denominations) {
+            // Calculate the number of notes for the current denomination
+            long count = amount / denom;
+            
+            // If count is greater than 0, it means we can use some notes of this denomination
+            if (count > 0) {
+                // Add the denomination and its count to the result list
+                result.add(denom + " : " + count);
+                
+                // Reduce the amount by the corresponding value
+                amount -= count * denom;
+            }
+        }
+        
+        // Output the result
+        System.out.println("Currency   Count");
+        for (String line : result) {
+            System.out.println(line);
+        }
+    }
+  
+    // Main method to test the function
+    public static void main(String[] args) {
+        // Test Case 1
+        System.out.println("For amount 800:");
+        minNotes(800);  // Expected Output: Currency Count -> 500:1, 200:1, 100:1
+
+        // Test Case 2
+        System.out.println("\nFor amount 2456:");
+        minNotes(2456); // Expected Output: Currency Count -> 2000:1, 200:2, 50:1, 5:1, 1:1
+    }
+}
+
+/*
+Time and Space Complexity Explanation:
+- **Time Complexity**: O(n), where n is the number of denominations (which is 9). 
+    We iterate through the fixed list of denominations once, performing constant time operations for each.
+- **Space Complexity**: O(1), as the space used is constant. 
+    The result list stores at most 9 entries, as there are 9 denominations, and no additional space is used for large inputs.
+
+Complete Code Walkthrough:
+- The function `minNotes(long amount)` starts by defining the available denominations in descending order.
+- We then iterate through each denomination and calculate how many notes can be used by dividing the amount by the current denomination.
+- For each denomination, if we can use some notes, we append the denomination and its count to the result list.
+- After calculating the notes for a denomination, we subtract the corresponding value from the remaining amount.
+- Finally, we print the denominations and their respective counts in the required format.
+
+Test Case 1:
+- Input: 800
+- The denominations used are:
+  - 1 note of 500 (remaining amount = 300)
+  - 1 note of 200 (remaining amount = 100)
+  - 1 note of 100 (remaining amount = 0)
+- Expected Output: Currency Count -> 500:1, 200:1, 100:1
+
+Test Case 2:
+- Input: 2456
+- The denominations used are:
+  - 1 note of 2000 (remaining amount = 456)
+  - 2 notes of 200 (remaining amount = 56)
+  - 1 note of 50 (remaining amount = 6)
+  - 1 note of 5 (remaining amount = 1)
+  - 1 note of 1 (remaining amount = 0)
+- Expected Output: Currency Count -> 2000:1, 200:2, 50:1, 5:1, 1:1
+*/
+
+--------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
+
 /* 
 Question: 
 Given an amount, 
