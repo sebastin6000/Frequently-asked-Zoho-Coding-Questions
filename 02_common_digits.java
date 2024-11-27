@@ -1,5 +1,134 @@
-https://www.geeksforgeeks.org/problems/make-a-distinct-digit-array2007/1
+// https://www.geeksforgeeks.org/problems/make-a-distinct-digit-array2007/1
+// WITH TEMPLATE 
+/* 
+Question:
+Given an array nums of positive integers of size N, find all distinct digits present in the numbers of the array.
+You need to return the list of distinct digits present in the array sorted in ascending order.
 
+Example 1:
+Input: nums = [131, 11, 48]
+Output: 1 3 4 8
+Explanation: 1, 3, 4, and 8 are the distinct digits that can be extracted from the numbers.
+
+Example 2:
+Input: nums = [111, 222, 333, 4444, 666]
+Output: 1 2 3 4 6
+Explanation: 1, 2, 3, 4, and 6 are the distinct digits that can be extracted from the numbers.
+
+Your Task: 
+You need to complete the function common_digits() 
+that takes nums as input parameter and returns a list of digits which can be extracted from the given array in ascending order.
+
+Expected Time Complexity: O(N)
+Expected Space Complexity: O(N)
+
+Constraints:
+1 <= N <= 10^5
+1 <= numsi <= 10^9
+*/
+
+/* 
+Understanding the Problem Statement:
+We are given an array of positive integers. We need to extract all distinct digits from these integers and return them in ascending order.
+We are required to complete the function common_digits() to solve this problem.
+This function should process the array and return a list of distinct digits, ensuring no duplicates, sorted in ascending order.
+
+Extracting Information from the Problem Statement:
+- Input: An array `nums` of integers.
+- Expected Output: A sorted list of distinct digits that appear in any of the integers of the array.
+- The digits should be in ascending order.
+- Time Complexity Expectation: O(N), where N is the size of the array.
+- Space Complexity Expectation: O(N), for storing the distinct digits.
+  
+The task is to process the array, extract digits, remove duplicates, and return them sorted.
+
+Thinking Solution for the Problem Statement:
+1. Identify the task: The task is to extract distinct digits from an array of numbers.
+2. We need to extract digits from each number in the array.
+3. We will use a set to collect all the digits because a set automatically ensures no duplicates.
+4. After collecting all digits, we can convert the set into a list, sort it, and return it.
+5. This approach should be optimal because:
+   - We only iterate through the numbers once to extract digits, making it O(N).
+   - The set ensures no duplicates.
+   - Sorting the digits (which are at most 10) is constant in terms of time complexity.
+
+Conversional Solution into Subtasks:
+1. Iterate through the given array.
+2. For each number, extract its digits.
+3. Add each digit to a set (to ensure distinct digits).
+4. Convert the set of digits into a sorted list.
+5. Return the sorted list of digits.
+
+Subtasks of Conversional Solution into Code:
+- **Extracting digits**: For each number in the array, split it into digits.
+- **Ensuring uniqueness**: Use a set to avoid duplicates.
+- **Sorting the result**: Convert the set to a list and sort it in ascending order.
+- **Returning the result**: Return the sorted list of digits.
+
+Java Code according to Conversational Subtasks:
+
+*/
+import java.util.*;
+
+public class StringTransformation {
+
+    // Function to extract all distinct digits from the given array nums
+    public static List<Integer> common_digits(int[] nums) {
+        // Set to store unique digits
+        Set<Integer> digitSet = new HashSet<>();
+        
+        // Iterate through each number in the array
+        for (int num : nums) {
+            // Convert the number to string to easily access each digit
+            while (num > 0) {
+                // Extract the last digit
+                int digit = num % 10;
+                // Add it to the set
+                digitSet.add(digit);
+                // Remove the last digit
+                num /= 10;
+            }
+        }
+        
+        // Convert the set to a list and sort it
+        List<Integer> sortedDigits = new ArrayList<>(digitSet);
+        Collections.sort(sortedDigits);
+        
+        return sortedDigits;
+    }
+
+    // Main method to test the function
+    public static void main(String[] args) {
+        // Test Case 1
+        int[] nums1 = {131, 11, 48};
+        List<Integer> result1 = common_digits(nums1);
+        System.out.println(result1); // Expected Output: [1, 3, 4, 8]
+
+        // Test Case 2
+        int[] nums2 = {111, 222, 333, 4444, 666};
+        List<Integer> result2 = common_digits(nums2);
+        System.out.println(result2); // Expected Output: [1, 2, 3, 4, 6]
+    }
+}
+
+/*
+Time and Space Complexity Explanation:
+- **Time Complexity**: O(N), where N is the size of the array `nums`.
+  - Iterating through each number in the array takes O(N).
+  - Extracting digits from each number takes O(log(num)) for each number, but this is bounded by a constant factor since the maximum number of digits any number can have is 9 (since 10^9 has 9 digits).
+  - Sorting the digits in the set takes O(1) time, as there are at most 10 digits (0-9).
+  
+- **Space Complexity**: O(N) for storing the unique digits in the set and the final sorted list.
+
+Complete Code Walkthrough:
+- We start by iterating through the input array `nums`.
+- For each number, we extract its digits by repeatedly taking the remainder when divided by 10 (i.e., `num % 10`) and adding the digit to the set.
+- After processing all the numbers, the set contains all unique digits.
+- We convert the set to a list, sort it, and return the sorted list as the final result.
+*/ 
+
+--------------------------------------------------------------------------------------------
+// WITHOUT PROBLEM SOLVING TEMPLATE
 /* 
 Question:
 
