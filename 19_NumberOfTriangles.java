@@ -1,189 +1,187 @@
---------------------------UNFINISHED----------------------
-
 /* 
-Question: 
+Question Section:
 Given an unsorted integer array arr[], 
-find the number of triangles that can be formed with three different array elements as lengths of three sides of triangles.
-A triangle with three given sides is only possible if sum of any two sides is always greater than the third side.
+find the number of triangles that can be formed with three different array elements as the lengths of three sides of triangles.
+A triangle with three given sides is only possible if the sum of any two sides is greater than the third side.
 
-Example 1:
+Examples:
+
 Input: arr[] = [3, 5, 4]
 Output: 1
-Explanation: A triangle is possible with all the elements 5, 3, and 4 (5 + 3 > 4, 5 + 4 > 3, 3 + 4 > 5)
+Explanation: A triangle is possible with all the elements 5, 3, and 4 (5+3>4, 5+4>3, 3+4>5).
 
-Example 2:
 Input: arr[] = [6, 4, 9, 7, 8]
 Output: 10
-Explanation: There are 10 triangles possible with the given elements like (6,4,9), (6,7,8), etc.
+Explanation: There are 10 triangles possible with the given elements like (6, 4, 9), (6, 7, 8),...
 
 Constraints:
-3 <= arr.size() <= 103
-1 <= arr[i] <= 103
+3 <= arr.size() <= 10^3
+1 <= arr[i] <= 10^3
 */
 
-
 /* 
-Input-output explanation:
+Understanding the Problem Statement:
+- The problem involves finding the number of valid triangles that can be formed with the given sides.
+- A valid triangle can be formed when the sum of the lengths of any two sides is greater than the third side (Triangle Inequality Theorem).
+- We need to determine how many such valid triangles can be formed with three distinct sides from the given unsorted array.
 
-Input:
-arr[] = [3, 5, 4]
-Output:
-1
-
-Explanation: The input array has three elements: 3, 5, and 4. These three elements form a valid triangle since:
-- 3 + 4 > 5
-- 3 + 5 > 4
-- 4 + 5 > 3
-Therefore, the output is 1, indicating that exactly one triangle can be formed with these sides.
-
-Input:
-arr[] = [6, 4, 9, 7, 8]
-Output:
-10
-
-Explanation: The input array has five elements: 6, 4, 9, 7, and 8. You can form 10 different triangles by choosing three different elements at a time:
-Possible combinations:
-- (6, 4, 9)
-- (6, 7, 8)
-- (6, 9, 7)
-- (4, 7, 8)
-- etc.
-
-The output is 10 because there are 10 such combinations that satisfy the triangle condition.
+What is being asked?
+- We need to count the number of distinct triangles that can be formed from the given array where each triangle satisfies the triangle inequality condition.
 
 */
 
 /* 
-Constraints explanation:
+Extracting Information from the Problem Statement:
+1. Input data type:
+   - A single array `arr` consisting of integers representing possible side lengths.
 
-- The size of the array, arr[], is between 3 and 1000 elements (3 <= arr.size() <= 103). 
-- The values of the array elements are between 1 and 1000 (1 <= arr[i] <= 103).
+2. Expected Output:
+   - A single integer representing the number of valid triangles that can be formed with three elements from the array.
 
-Given these constraints, our approach should handle arrays of size up to 1000 efficiently. 
-We will be using sorting and then checking combinations in a way that ensures the solution runs quickly within the given limits.
+3. Output return type:
+   - Integer value (the count of valid triangles).
+
+4. Explanation of Time complexity expectations:
+   - We are expected to solve the problem efficiently, 
+     likely with a time complexity of O(n^2) or O(n^3), given the constraints on array size (up to 1000 elements).
+
+5. Explanation of given Constraints:
+   - The array has a length between 3 and 1000, and each element is between 1 and 1000.
+   - The approach must efficiently handle arrays of size up to 1000 while checking the triangle inequality conditions.
 */
 
 /* 
-Relatable analogy or real-world scenario:
+Thinking Solution for the Problem Statement:
+1. Identification:
+   - The problem involves checking every combination of three distinct elements 
+     and verifying if they can form a valid triangle using the triangle inequality theorem.
 
-Imagine you're organizing a team for a tug-of-war game. You want to select three players at a time from a group of friends, but for a fair game, you have a special rule:
-- The combined strength of any two players must be greater than the strength of the third player.
-
-So, you need to check all possible groups of three players and see if they meet the strength requirement. 
-This is essentially checking all possible combinations of three numbers in the array to see if they form a valid triangle where:
-- sum of any two sides > third side
-
-Let's break this down:
-
-1. **Group of Players**: These are the numbers in your array.
-2. **Checking Combinations**: You need to check all possible combinations of three players (numbers), just like trying all combinations of three numbers from the array.
-3. **Triangle Condition**: The sum of the strengths of any two players must be greater than the third player's strength (like forming a valid triangle).
-
-We can check these combinations and count how many valid triangles we can form.
+2. Destructuring:
+   - A valid triangle requires three sides such that:
+     - sum of any two sides > the third side.
+   - This means for three sides `a`, `b`, and `c`, they form a valid triangle if:
+     - a + b > c
+     - a + c > b
+     - b + c > a
+     
+3. Conversional solution into smaller subtask:
+   - Subtask 1: Sort the array `arr[]` to simplify the checking of the triangle inequality.
+   - Subtask 2: Iterate over all possible triplets of distinct elements in the array and check if they satisfy the triangle inequality.
+   - Subtask 3: Count how many valid triangles can be formed and return that count.
 
 */
 
 /* 
-Relatable analogy Java code step by step:
-
-Step 1: 
-We will first sort the array of players' strengths so that we can easily check the triangle condition (sum of two sides > third side).
-
-Step 2: 
-Then, we will use three nested loops to check every possible combination of three numbers.
-
-Step 3:
-For each combination, check if it satisfies the triangle condition (sum of any two sides > third side).
-
-Step 4: 
-Count how many valid triangles there are and return the count.
+Conversional Solution into Subtasks:
+1. Sort the array to make it easier to check the triangle inequality.
+2. Use a triple nested loop to check all possible triplets of distinct elements in the array.
+3. For each triplet, verify if they satisfy the triangle inequality theorem.
+4. Count and return the number of valid triangles.
 
 */
 
-import java.util.Arrays;
+ /* 
+Subtasks of Conversional Solution into Code:
+1. Sort the array `arr[]` in non-decreasing order.
+2. Iterate through all triplets of elements in the array using three nested loops.
+3. For each triplet, check the triangle inequality conditions.
+4. If the conditions are met, increment the count of valid triangles.
+5. Return the final count.
 
-public class NumberOfTriangles {
+*/
 
-    // Function to count the number of valid triangles
+public class TriangleCount {
+
+    /* 
+    Function to count the number of valid triangles that can be formed.
+    This function sorts the array, then uses three nested loops to check every triplet of elements to see if they form a valid triangle.
+    */
     public static int countTriangles(int[] arr) {
-        int n = arr.length; // Get the size of the array
-        int count = 0; // Initialize the counter for valid triangles
+        // Step 1: Sort the array to make checking easier
+        java.util.Arrays.sort(arr);
         
-        // Step 1: Sort the array so that we can check the triangle condition easily
-        Arrays.sort(arr);
-
-        // Step 2: Iterate through all possible combinations of three elements
+        int n = arr.length;
+        int count = 0;
+        
+        // Step 2: Use three nested loops to check every triplet
         for (int i = 0; i < n - 2; i++) {
             for (int j = i + 1; j < n - 1; j++) {
                 for (int k = j + 1; k < n; k++) {
-                    // Step 3: Check if the combination (arr[i], arr[j], arr[k]) forms a valid triangle
-                    if (arr[i] + arr[j] > arr[k]) {
-                        count++; // If valid, increment the count
+                    // Step 3: Check the triangle inequality
+                    if (arr[i] + arr[j] > arr[k] && arr[i] + arr[k] > arr[j] && arr[j] + arr[k] > arr[i]) {
+                        count++;
                     }
                 }
             }
         }
-
-        // Step 4: Return the total number of valid triangles
+        
+        // Step 4: Return the final count of valid triangles
         return count;
     }
-
-    // Main method to test the function
     public static void main(String[] args) {
         // Test case 1
         int[] arr1 = {3, 5, 4};
-        System.out.println(countTriangles(arr1)); // Output: 1
-
+        System.out.println("Number of triangles: " + countTriangles(arr1)); // Expected output: 1
+        
         // Test case 2
         int[] arr2 = {6, 4, 9, 7, 8};
-        System.out.println(countTriangles(arr2)); // Output: 10
+        System.out.println("Number of triangles: " + countTriangles(arr2)); // Expected output: 10
     }
 }
 
-/* 
-Time and Space Complexity Explanation:
+    /* 
+    Time and Space Complexity Explanation:
+    Time Complexity:
+    - O(n^3), where `n` is the number of elements in the array. This is because we are checking all possible triplets using three nested loops.
+    - Sorting the array takes O(n log n), but this is dominated by the O(n^3) complexity from the triple loop.
+    
+    Space Complexity:
+    - O(1), since we only use a constant amount of extra space (apart from the input array).
+    */
 
-Time Complexity:
-- Sorting the array takes O(n log n), where n is the size of the array.
-- The three nested loops go through all combinations of three elements, which results in O(n^3) time complexity.
+    /* 
+    Code Walkthrough:
+    Let's walk through the example `arr = [6, 4, 9, 7, 8]`:
 
-Thus, the overall time complexity is O(n^3). This is acceptable for smaller arrays, but may not be efficient enough for the largest possible input sizes (n = 1000).
+    1. The array is sorted to become `[4, 6, 7, 8, 9]`.
+    2. We check all triplets using three nested loops:
+       - For `i = 0`, `j = 1`, `k = 2`, we check if the sum of the first two sides is greater than the third side, and so on for other triplets.
+    3. After checking all the triplets, we count the valid ones.
+    
+    Output: `10` valid triangles.
+    */
 
-Space Complexity:
-- We are using only a constant amount of extra space, aside from the input array itself. So, the space complexity is O(1).
+/*
+
+### Explanation:
+
+1. **`countTriangles(int[] arr)`**:
+   - The function first sorts the array to simplify the triangle inequality check.
+   - It then uses three nested loops to check every possible combination of three elements.
+   - For each triplet, the function verifies if the sides satisfy the triangle inequality conditions (i.e., 
+     the sum of any two sides must be greater than the third side).
+   - If the condition holds true, the count is incremented.
+
+2. **Time Complexity**:
+   - Sorting the array takes \( O(n \log n) \).
+   - The triple nested loops checking all triplets have a time complexity of \( O(n^3) \), where \( n \) is the length of the array.
+   - Thus, the overall time complexity is \( O(n^3) \), which is feasible for \( n \) up to 1000.
+
+3. **Space Complexity**:
+   - The space complexity is \( O(1) \), apart from the input array.
+
+### Example Walkthrough:
+
+For the input `arr = [6, 4, 9, 7, 8]`:
+1. After sorting, the array becomes `[4, 6, 7, 8, 9]`.
+2. The valid triangles formed are:
+   - (4, 6, 7), (4, 6, 8), (4, 6, 9), (4, 7, 8), (4, 7, 9), (4, 8, 9), (6, 7, 8), (6, 7, 9), (6, 8, 9), (7, 8, 9).
+3. Thus, there are 10 valid triangles.
+
+### Output:
+
+For the given test cases:
+1. `[3, 5, 4]` → Number of triangles: `1`.
+2. `[6, 4, 9, 7, 8]` → Number of triangles: `10`.
 
 */
-
-/* 
-FOR loop walkthrough with every iteration with given input, Complete code walkthrough with applying the given input in code and explanation:
-
-Input: arr[] = [3, 5, 4]
-
-1. Sorting the array: arr = [3, 4, 5]
-2. First iteration:
-   i = 0, j = 1, k = 2, arr[i] = 3, arr[j] = 4, arr[k] = 5
-   Check if 3 + 4 > 5 -> True, so this forms a valid triangle.
-   count = 1
-3. No further valid triangles are found, so we return count = 1.
-
-Input: arr[] = [6, 4, 9, 7, 8]
-
-1. Sorting the array: arr = [4, 6, 7, 8, 9]
-2. First iteration:
-   i = 0, j = 1, k = 2, arr[i] = 4, arr[j] = 6, arr[k] = 7
-   Check if 4 + 6 > 7 -> True, valid triangle.
-   count = 1
-   i = 0, j = 1, k = 3, arr[i] = 4, arr[j] = 6, arr[k] = 8
-   Check if 4 + 6 > 8 -> True, valid triangle.
-   count = 2
-   And so on...
-3. After checking all combinations, we return count = 10.
-*/
-
-/* Complete code walkthrough with applying the given input in code and explanation:
-- First, the array is sorted, which helps simplify the triangle checks.
-- Then, we loop through all possible combinations of three elements using nested loops.
-- For each combination, we check if the triangle inequality holds, i.e., if the sum of any two sides is greater than the third.
-- Finally, we count how many valid triangles we can form and return the count.
-*/
-
