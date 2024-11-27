@@ -1,3 +1,201 @@
+--------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
+/* 
+Question Section:
+Given a number N, check whether N is a Twisted Prime number or not.
+A number is called a Twisted Prime if it is a prime and its reverse is also a prime.
+
+Example 1:
+Input: N = 97
+Output: 1
+Explanation: 97 is a prime number, and its reverse, 79, is also a prime number. Thus, 97 is a twisted prime.
+
+Example 2:
+Input: N = 43
+Output: 0
+Explanation: 43 is a prime number, but its reverse, 34, is not a prime. Thus, 43 is not a twisted prime.
+*/
+
+/* 
+Understanding the Problem Statement:
+We need to determine if a given number N is a Twisted Prime. A Twisted Prime has two characteristics:
+1. The number itself is a prime number.
+2. Its reverse is also a prime number.
+
+We need to return:
+- 1 if N is a Twisted Prime.
+- 0 if N is not a Twisted Prime.
+
+To check whether a number is prime, we can use an efficient primality test. We also need to reverse the number and check if the reversed number is also prime.
+
+*/
+
+ /* 
+Extracting Information from the Problem Statement:
+1. Input data type:
+   - A single integer N.
+2. Expected Output:
+   - 1 if N is a Twisted Prime.
+   - 0 if N is not a Twisted Prime.
+3. Output return type:
+   - An integer: 1 for Twisted Prime, 0 for non-Twisted Prime.
+4. Explanation of Time complexity expectations:
+   - We need to check both the primality of N and the primality of its reverse.
+   - The expected time complexity is O(sqrt(N)) for checking the primality of N and its reverse.
+   - Given that N can be as large as 10^9, we need an efficient primality check to ensure the solution runs within time limits.
+5. Explanation of given Constraints:
+   - 1 <= N <= 10^9, meaning the input number can be very large, so we need efficient algorithms for both primality testing and number reversal.
+*/
+
+ /* 
+Thinking Solution for the Problem Statement:
+1. Identification:
+   - This problem involves checking if a number is a prime and if its reverse is also prime.
+   - We need two functions: one for checking primality and another to reverse the number.
+
+2. Destructuring:
+   - Step 1: Check if N is prime.
+   - Step 2: Reverse N and check if the reversed number is prime.
+   - Step 3: If both N and its reverse are prime, return 1 (Twisted Prime).
+   - Step 4: Otherwise, return 0 (not a Twisted Prime).
+
+3. Conversional solution into smaller subtask:
+   - Subtask 1: Implement a function to check whether a number is prime.
+   - Subtask 2: Implement a function to reverse the digits of a number.
+   - Subtask 3: Check if both N and its reversed value are prime and return the appropriate result.
+
+*/
+
+ /* 
+Conversional Solution into Subtasks:
+1. Prime checking function: 
+   - Use a primality test function that checks if a number N is divisible by any integer up to √N.
+2. Reverse the number:
+   - Reverse the digits of N and convert the reversed digits back into an integer.
+3. Check both N and the reversed number for primality:
+   - If both are prime, return 1; otherwise, return 0.
+
+*/
+
+ /* 
+Subtasks of Conversional Solution into Code:
+1. Create a `isPrime(int num)` function to check if a number is prime.
+2. Create a `reverseNumber(int num)` function to reverse the digits of the number.
+3. In the `isTwistedPrime(int N)` function:
+   - Check if both N and its reverse are prime numbers.
+   - If both are prime, return 1 (Twisted Prime).
+   - Otherwise, return 0 (not a Twisted Prime).
+*/
+
+public class TwistedPrime {
+
+    /* 
+    Function to check if a number is prime.
+    A prime number is only divisible by 1 and itself.
+    */
+    public static boolean isPrime(int num) {
+        if (num <= 1) {
+            return false; // 0 and 1 are not prime numbers
+        }
+        if (num == 2) {
+            return true; // 2 is a prime number
+        }
+        if (num % 2 == 0) {
+            return false; // even numbers other than 2 are not prime
+        }
+        for (int i = 3; i * i <= num; i += 2) {
+            if (num % i == 0) {
+                return false; // num is divisible by i, so it's not prime
+            }
+        }
+        return true; // num is prime if no divisor is found
+    }
+
+    /* 
+    Function to reverse the digits of a number.
+    */
+    public static int reverseNumber(int num) {
+        int reversed = 0;
+        while (num > 0) {
+            reversed = reversed * 10 + (num % 10); // Add last digit of num to reversed
+            num /= 10; // Remove last digit from num
+        }
+        return reversed;
+    }
+
+    /* 
+    Function to check if a number is a Twisted Prime.
+    A number is a Twisted Prime if both the number and its reverse are prime numbers.
+    */
+    public static int isTwistedPrime(int N) {
+        // Step 1: Check if N is prime
+        if (isPrime(N)) {
+            // Step 2: Reverse N and check if the reverse is prime
+            int reversedN = reverseNumber(N);
+            if (isPrime(reversedN)) {
+                return 1; // Both N and its reverse are prime, so it's a Twisted Prime
+            }
+        }
+        return 0; // Either N is not prime or its reverse is not prime
+    }
+    public static void main(String[] args) {
+        // Testing with some sample inputs
+        System.out.println(isTwistedPrime(97)); // Output: 1
+        System.out.println(isTwistedPrime(43)); // Output: 0
+    }
+}
+  /* 
+    Time and Space Complexity Explanation:
+    Time Complexity:
+    - The `isPrime()` function runs in O(sqrt(N)) time, as we check divisibility from 2 up to √N.
+    - The `reverseNumber()` function runs in O(d), where d is the number of digits in N, which is O(log N).
+    - So, the total time complexity is O(sqrt(N)) for prime checking and O(log N) for reversing the number.
+    - Therefore, the time complexity for the solution is O(sqrt(N) + log N).
+
+    Space Complexity:
+    - The space complexity is O(1), as we use a constant amount of extra space for variables.
+    */
+
+    /* 
+    Code Walkthrough:
+    Let's walk through the example with N = 97:
+
+    1. Call `isTwistedPrime(97)`:
+        - `isPrime(97)` returns true, since 97 is a prime number.
+        - Reverse 97 to get 79.
+        - `isPrime(79)` returns true, since 79 is also a prime number.
+    2. Since both 97 and 79 are prime, return 1 (Twisted Prime).
+
+    Let's walk through the example with N = 43:
+
+    1. Call `isTwistedPrime(43)`:
+        - `isPrime(43)` returns true, since 43 is a prime number.
+        - Reverse 43 to get 34.
+        - `isPrime(34)` returns false, since 34 is not a prime number.
+    2. Since the reverse of 43 is not prime, return 0 (not a Twisted Prime).
+    */
+
+/*
+Explanation:
+
+1.`isPrime(int num)`: This function checks whether a number is prime by testing divisibility from 2 up to the square root of the number. 
+                           It returns `true` if the number is prime and `false` otherwise.
+
+2. `reverseNumber(int num)`: This function reverses the digits of a number by repeatedly taking the last digit and appending it to the reversed result.
+
+3. `isTwistedPrime(int N)`: This function checks whether a number N is a Twisted Prime. 
+                                It first checks if N is prime. Then, it reverses N and checks if the reversed number is also prime. 
+                                If both are prime, it returns 1, indicating that N is a Twisted Prime. Otherwise, it returns 0.
+
+4. Time Complexity:
+   - The time complexity for checking if a number is prime is O(sqrt(N)).
+   - The time complexity for reversing the number is O(log N), as the number of digits in N is proportional to log N.
+   - Thus, the total time complexity for checking a Twisted Prime is O(sqrt(N) + log N), which is efficient for N up to 10^9.
+
+5. Space Complexity: The space complexity is O(1), as we use a constant amount of space for storing intermediate results and variables.
+
+This solution should work efficiently within the problem constraints.
+*?
+--------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
 /* 
 Question:
 Given a number N. Check whether N is a Twisted Prime number or not.
