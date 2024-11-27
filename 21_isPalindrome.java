@@ -1,161 +1,175 @@
 /* 
------------------------------
-Question Section
------------------------------
+Question Section:
 Given an integer, check whether it is a palindrome or not.
+A number is a palindrome if it reads the same forwards and backwards, e.g., 121, 555, etc.
 
-Note: Strings which read the same backwards as forwards, e.g. MADAM, MOM etc.
+Examples:
 
-Example 1:
 Input: n = 555
 Output: Yes
 
-Example 2:
 Input: n = 123
 Output: No
 
 Your Task:
-You don't need to read or print anything. Your task is to complete the function is_palindrome() which takes the number as input parameter and returns "Yes" if it is palindrome otherwise returns "No" (Without quotes).
-
-Expected Time Complexity: O(x)
-Expected Space Complexity: O(x) where x is number of digits in n.
-
-Constraints:
-1 <= n <= 1000.
+You don't need to read or print anything. 
+Your task is to complete the function `is_palindrome()` which takes the number as input parameter and returns "Yes" 
+if it is a palindrome otherwise returns "No" (Without quotes).
 */
 
 /* 
------------------------------
-Understanding the Problem Statement
------------------------------
-The task is to check if a given integer is a palindrome. A number is a palindrome if it reads the same backward as it does forward. For example:
-- 555 is a palindrome (reads the same forward and backward).
-- 123 is not a palindrome (it is 321 when reversed).
+Understanding the Problem Statement:
+- A palindrome number is one that remains the same when reversed. For example:
+  - 555 → when reversed, it is still 555, so it is a palindrome.
+  - 123 → when reversed, it becomes 321, which is not equal to 123, so it is not a palindrome.
+- We are asked to implement a function `is_palindrome()` that checks if a given integer `n` is a palindrome.
+- The function should return "Yes" if `n` is a palindrome and "No" otherwise.
 
-We are required to implement a method is_palindrome() that will return "Yes" if the number is a palindrome, otherwise return "No".
+What is being asked?
+- We need to return a string ("Yes" or "No") based on whether the integer `n` is a palindrome or not.
+
 */
 
 /* 
------------------------------
-Extracting Information from the Problem Statement
------------------------------
-- Input: A single integer n.
-- Output: "Yes" if the number is a palindrome, "No" if it is not.
-- Time complexity: O(x), where x is the number of digits in n. This is because we are comparing the digits of the number.
-- Space complexity: O(x), as we need to store the digits in a string or reverse it.
-- Constraints: The integer n will be between 1 and 1000.
+Extracting Information from the Problem Statement:
+1. Input data type:
+   - An integer `n`.
+
+2. Expected Output:
+   - A string: "Yes" if `n` is a palindrome, otherwise "No".
+
+3. Output return type:
+   - String.
+
+4. Explanation of Time complexity expectations:
+   - Time complexity should be O(x), where x is the number of digits in `n`, 
+     because we will reverse the number and compare it with the original number.
+   
+5. Explanation of given Constraints:
+   - The given number `n` will be between 1 and 1000, meaning it will have at most 4 digits.
+   - The function must efficiently handle this constraint.
+
 */
 
 /* 
------------------------------
-Thinking Solution for the Problem Statement
------------------------------
-To check if a number is a palindrome:
-1. We can convert the integer into a string.
-2. Compare the string with its reverse.
-3. If both are equal, the number is a palindrome; otherwise, it is not.
+Thinking Solution for the Problem Statement:
+1. Identification:
+   - We need to check if a number reads the same forwards and backwards.
+   - A simple approach is to reverse the digits of the number and check if it matches the original number.
+   
+2. Destructuring:
+   - Convert the number to a string to facilitate comparison.
+   - Reverse the string and compare it with the original string.
 
-Steps:
-1. Convert the integer to a string.
+3. Conversional solution into smaller subtask:
+   - Subtask 1: Convert the number to a string.
+   - Subtask 2: Reverse the string.
+   - Subtask 3: Compare the original string and the reversed string.
+   - Subtask 4: Return "Yes" if they are the same, otherwise return "No".
+
+*/
+
+/* 
+Conversional Solution into Subtasks:
+1. Convert the integer into a string representation.
 2. Reverse the string.
-3. Compare the original string with the reversed one.
-4. If they are the same, return "Yes", otherwise return "No".
+3. Compare the original string and the reversed string.
+4. Return "Yes" if they are equal, otherwise return "No".
+
 */
 
 /* 
------------------------------
-Conversional Solution into Subtasks
------------------------------
-S.no | Subtask Description
-1    | Convert the integer to a string representation.
-2    | Reverse the string.
-3    | Compare the original string and the reversed string.
-4    | Return "Yes" if they are the same, else return "No".
+Subtasks of Conversional Solution into Code:
+1. Convert the integer to a string.
+2. Reverse the string and compare it with the original string.
+3. Return "Yes" if the reversed string matches the original string, otherwise return "No".
+
 */
 
-/* 
------------------------------
-Subtasks of Conversional Solution into Code
------------------------------
-1. Convert the integer to a string using Integer.toString().
-2. Reverse the string using StringBuilder.
-3. Compare the original string with the reversed string.
-4. Return "Yes" if the comparison is true, else "No".
-*/
+public class PalindromeNumber {
 
-/* 
------------------------------
-Java Code According to Conversational Subtasks
------------------------------
-*/
-
-public class Palindrome {
-
-    // Function to check if a number is a palindrome
+    /* 
+    Function to check if a given number is a palindrome.
+    1. Convert the number to a string.
+    2. Reverse the string.
+    3. Compare the original string and the reversed string.
+    4. Return "Yes" if they are the same, otherwise return "No".
+    */
     public static String is_palindrome(int n) {
-        // Step 1: Convert the integer to a string
-        String numStr = Integer.toString(n);
+        // Convert the integer to a string
+        String original = Integer.toString(n);
         
-        // Step 2: Reverse the string using StringBuilder
-        String reversedStr = new StringBuilder(numStr).reverse().toString();
+        // Reverse the string
+        String reversed = new StringBuilder(original).reverse().toString();
         
-        // Step 3: Compare the original string with the reversed string
-        if (numStr.equals(reversedStr)) {
-            return "Yes";  // If both are the same, return "Yes"
+        // Check if the original string is equal to the reversed string
+        if (original.equals(reversed)) {
+            return "Yes";
         } else {
-            return "No";   // Otherwise, return "No"
+            return "No";
         }
     }
-
-    // Main method for testing the function
     public static void main(String[] args) {
-        System.out.println(is_palindrome(555));  // Output: Yes
-        System.out.println(is_palindrome(123));  // Output: No
+        // Test case 1
+        int n1 = 555;
+        System.out.println(is_palindrome(n1)); // Expected: "Yes"
+        
+        // Test case 2
+        int n2 = 123;
+        System.out.println(is_palindrome(n2)); // Expected: "No"
     }
 }
+    /* 
+    Time and Space Complexity Explanation:
+    Time Complexity:
+    - Converting the number to a string takes O(x), where x is the number of digits in the number `n`.
+    - Reversing the string also takes O(x).
+    - Comparing the original and reversed strings takes O(x).
+    - So the overall time complexity is O(x), where x is the number of digits in `n`.
 
+    Space Complexity:
+    - The space complexity is O(x) because we are storing the original and reversed string, where x is the number of digits in `n`.
+    */
 
-/* 
------------------------------
-Time and Space Complexity Explanation
------------------------------
-- Time Complexity: O(x), where x is the number of digits in the integer n. This is because we are converting the number to a string, and reversing it, both of which take linear time relative to the number of digits.
-- Space Complexity: O(x), because we are storing the string representation of the number and its reversed version.
+    /* 
+    Code Walkthrough:
+    Let's walk through the input `n = 555`:
+    1. Convert `n` to a string: `"555"`.
+    2. Reverse the string: `"555"`.
+    3. Compare the original string `"555"` with the reversed string `"555"`.
+    4. Since they are the same, return "Yes".
 
-For example:
-For n = 123, there are 3 digits, so the time and space complexity will be O(3).
+    Let's walk through the input `n = 123`:
+    1. Convert `n` to a string: `"123"`.
+    2. Reverse the string: `"321"`.
+    3. Compare the original string `"123"` with the reversed string `"321"`.
+    4. Since they are not the same, return "No".
+    */
+/*
+### Explanation:
+
+1. **`is_palindrome(int n)`**:
+   - The function first converts the integer `n` to a string using `Integer.toString(n)`.
+   - Then, it reverses the string using `new StringBuilder(original).reverse().toString()`.
+   - It compares the original string with the reversed string. If they are the same, the number is a palindrome, and it returns "Yes". 
+     Otherwise, it returns "No".
+
+2. **Time and Space Complexity**:
+   - **Time Complexity**: O(x), 
+     where `x` is the number of digits in the number `n`. 
+     The operations of converting the number to a string, reversing the string, 
+     and comparing the original and reversed strings all take linear time relative to the number of digits.
+     
+   - **Space Complexity**: O(x), since we store the original string and the reversed string.
+
+3. **Code Walkthrough**:
+   - For `n = 555`: The string representation is `"555"`, and when reversed, it remains `"555"`, so the function returns "Yes".
+   - For `n = 123`: The string representation is `"123"`, and when reversed, it becomes `"321"`, so the function returns "No".
+
+### Output:
+
+For the given test cases:
+1. `n = 555` → Output: `"Yes"`
+2. `n = 123` → Output: `"No"`
+
 */
-
-/* 
------------------------------
-Walkthrough of the "for" loop or "while" loop used in the code
------------------------------
-The code does not explicitly use any "for" or "while" loops. Instead, we use built-in methods from Java's StringBuilder class to reverse the string.
-
-Here's the breakdown:
-1. Convert the number to a string: `String numStr = Integer.toString(n);`
-2. Reverse the string using StringBuilder: `String reversedStr = new StringBuilder(numStr).reverse().toString();`
-3. Compare the original string with the reversed string using `numStr.equals(reversedStr)`.
-
-This is a simple and efficient way to check if the number is a palindrome without the need for explicit loops.
-*/
-
-
-/* 
------------------------------
-Complete Code Walkthrough with Explanation
------------------------------
-Let's go through the code step by step:
-
-1. The function `is_palindrome()` takes an integer n as input.
-2. First, the integer is converted into a string using `Integer.toString(n)`.
-3. Then, we reverse the string using `new StringBuilder(numStr).reverse().toString()`.
-4. We compare the original string with the reversed string using the `.equals()` method.
-5. If they are equal, it means the number is a palindrome, so the function returns "Yes".
-6. If not, it returns "No".
-
-For example:
-If we call `is_palindrome(555)`, the integer 555 will be converted into the string "555", which is the same when reversed. Thus, it will return "Yes".
-For `is_palindrome(123)`, the string "123" is not the same as its reverse "321", so the function will return "No".
-*/
-
