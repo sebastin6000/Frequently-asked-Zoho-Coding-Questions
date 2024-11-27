@@ -24,7 +24,7 @@ Expected Space Complexity: O(N)
 
 Constraints:
 1 <= N <= 10^5
-1 <= numsi <= 10^9
+1 <= nums[i] <= 10^9
 */
 
 /* 
