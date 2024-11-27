@@ -1,3 +1,197 @@
+--------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
+/* 
+Question Section:
+Given two numbers `a` and `b` as the interval range, the task is to find the prime numbers in between this interval.
+
+Examples: 
+
+Input: a = 1, b = 10
+Output: 2, 3, 5, 7
+
+Input: a = 10, b = 20
+Output: 11, 13, 17, 19
+*/
+
+/* 
+Understanding the Problem Statement:
+- We are given two integers `a` and `b` which define an interval [a, b].
+- The task is to find all the prime numbers between `a` and `b` (inclusive).
+- A prime number is a number greater than 1 that has no divisors other than 1 and itself.
+- The output should list all the prime numbers in the interval in ascending order.
+
+What is being asked?
+- The goal is to identify and print the prime numbers in the given range [a, b].
+
+*/
+
+ /* 
+Extracting Information from the Problem Statement:
+1. Input data type:
+   - Two integers `a` and `b` representing the interval.
+2. Expected Output:
+   - A list of prime numbers in the range [a, b].
+3. Output return type:
+   - A list of integers representing the prime numbers within the given range.
+4. Explanation of Time complexity expectations:
+   - The primality check for a single number takes O(sqrt(N)) time.
+   - We will need to check all numbers from `a` to `b`, so the overall time complexity will be O((b - a) * sqrt(b)).
+5. Explanation of given Constraints:
+   - There are no explicit constraints, but based on typical prime number problems, 
+     we assume that the range `a` to `b` is reasonably sized (not exceeding 10^6 or so).
+*/
+
+ /* 
+Thinking Solution for the Problem Statement:
+1. Identification:
+   - This is a problem of finding all prime numbers in a given interval.
+   - We need to apply a primality test for every number in the range [a, b].
+
+2. Destructuring:
+   - Step 1: Iterate through all numbers in the range [a, b].
+   - Step 2: For each number, check if it is prime.
+   - Step 3: If a number is prime, add it to the result list.
+   - Step 4: Finally, print the list of prime numbers.
+
+3. Conversional solution into smaller subtask:
+   - Subtask 1: Create a function to check if a number is prime.
+   - Subtask 2: Iterate through the range [a, b], check each number for primality, and store the primes.
+   - Subtask 3: Output the list of prime numbers.
+
+*/
+
+ /* 
+Conversional Solution into Subtasks:
+1. Prime checking function: 
+   - Implement a function to check if a number is prime using a trial division method up to sqrt(num).
+2. Loop over the range [a, b] and check if each number is prime.
+3. Print the primes found in the interval.
+
+*/
+
+ /* 
+Subtasks of Conversional Solution into Code:
+1. Implement a `isPrime(int num)` function to check for prime numbers.
+2. Implement a main function that iterates through the interval [a, b], checks primality for each number, and collects prime numbers.
+3. Output the prime numbers found within the given range.
+
+*/
+
+public class PrimeInInterval {
+
+    /* 
+    Function to check if a number is prime.
+    A prime number is greater than 1 and has no divisors other than 1 and itself.
+    */
+    public static boolean isPrime(int num) {
+        if (num <= 1) {
+            return false; // Numbers less than or equal to 1 are not prime
+        }
+        if (num == 2) {
+            return true; // 2 is a prime number
+        }
+        if (num % 2 == 0) {
+            return false; // Even numbers other than 2 are not prime
+        }
+        for (int i = 3; i * i <= num; i += 2) {
+            if (num % i == 0) {
+                return false; // num is divisible by i, so it is not prime
+            }
+        }
+        return true; // num is prime if no divisors were found
+    }
+
+    /* 
+    Function to find and print all prime numbers in the interval [a, b].
+    */
+    public static void printPrimesInRange(int a, int b) {
+        for (int i = a; i <= b; i++) {
+            if (isPrime(i)) {
+                System.out.print(i + " "); // Print the prime number
+            }
+        }
+        System.out.println(); // Move to a new line after printing all primes
+    }
+    public static void main(String[] args) {
+        // Test case 1
+        System.out.print("Primes between 1 and 10: ");
+        printPrimesInRange(1, 10); // Expected output: 2 3 5 7
+
+        // Test case 2
+        System.out.print("Primes between 10 and 20: ");
+        printPrimesInRange(10, 20); // Expected output: 11 13 17 19
+    }
+}
+
+    /* 
+    Time and Space Complexity Explanation:
+    Time Complexity:
+    - The `isPrime()` function runs in O(sqrt(N)) time for a given number N, as it checks divisibility from 2 to √N.
+    - We will call the `isPrime()` function for each number in the range [a, b], so the total time complexity is O((b - a) * sqrt(b)).
+    - For large ranges, this is efficient enough to handle typical inputs within the problem's constraints.
+
+    Space Complexity:
+    - The space complexity is O(1), as we only use a constant amount of space (for loop variables and a small number of temporary variables).
+    */
+
+    /* 
+    Code Walkthrough:
+    Let's walk through the example with `a = 1` and `b = 10`:
+
+    1. Call `printPrimesInRange(1, 10)`:
+        - Check if 1 is prime (it's not).
+        - Check if 2 is prime (it is, so print 2).
+        - Check if 3 is prime (it is, so print 3).
+        - Check if 4 is prime (it's not).
+        - Check if 5 is prime (it is, so print 5).
+        - Check if 6 is prime (it's not).
+        - Check if 7 is prime (it is, so print 7).
+        - Check if 8 is prime (it's not).
+        - Check if 9 is prime (it's not).
+        - Check if 10 is prime (it's not).
+    2. Output: `2 3 5 7`
+
+    Now, for the example with `a = 10` and `b = 20`:
+
+    1. Call `printPrimesInRange(10, 20)`:
+        - Check if 10 is prime (it's not).
+        - Check if 11 is prime (it is, so print 11).
+        - Check if 12 is prime (it's not).
+        - Check if 13 is prime (it is, so print 13).
+        - Check if 14 is prime (it's not).
+        - Check if 15 is prime (it's not).
+        - Check if 16 is prime (it's not).
+        - Check if 17 is prime (it is, so print 17).
+        - Check if 18 is prime (it's not).
+        - Check if 19 is prime (it is, so print 19).
+        - Check if 20 is prime (it's not).
+    2. Output: `11 13 17 19`
+
+    */
+
+/*
+### Explanation:
+
+1. **`isPrime(int num)`**: 
+This function checks whether a given number `num` is prime. It returns `true` if the number is prime, 
+and `false` otherwise. The function efficiently checks divisibility up to `sqrt(num)`.
+
+2. **`printPrimesInRange(int a, int b)`**: 
+This function iterates through all numbers from `a` to `b` and checks whether each number is prime using the `isPrime` function. 
+If a number is prime, it is printed.
+
+3. **Time Complexity**:
+   - The time complexity of checking whether a number is prime is O(sqrt(N)), where `N` is the number being checked.
+   - Since we check each number in the range [a, b], the total time complexity is O((b - a) * sqrt(b)).
+
+4. **Space Complexity**:
+   - The space complexity is O(1), as the program uses only a constant amount of extra space for storing temporary variables.
+
+5. **Code Walkthrough**:
+   - The code prints all prime numbers between `a` and `b` for each test case. For example, for the range [1, 10], it prints `2 3 5 7`, and for [10, 20], 
+     it prints `11 13 17 19`.
+*/
+
+--------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
 /* 
 Question: 
 Given two numbers a and b as an interval range, the task is to find the prime numbers in between this interval.
