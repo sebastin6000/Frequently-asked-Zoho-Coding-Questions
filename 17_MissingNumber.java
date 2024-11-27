@@ -1,3 +1,183 @@
+--------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
+
+/* 
+Question Section:
+You are given an array `arr` of size `n - 1` that contains distinct integers in the range from 1 to n (inclusive). 
+This array represents a permutation of the integers from 1 to n with one element missing. Your task is to identify and return the missing element.
+
+Examples:
+
+Input: arr[] = [1, 2, 3, 5]
+Output: 4
+Explanation: All the numbers from 1 to 5 are present except 4.
+
+Input: arr[] = [8, 2, 4, 5, 3, 7, 1]
+Output: 6
+Explanation: All the numbers from 1 to 8 are present except 6.
+
+Input: arr[] = [1]
+Output: 2
+Explanation: Only 1 is present so the missing element is 2.
+
+Constraints:
+1 ≤ arr.size() ≤ 10^6
+1 ≤ arr[i] ≤ arr.size() + 1.
+*/
+
+/* 
+Understanding the Problem Statement:
+- We are given an array `arr` which contains distinct integers, 
+  but with one number missing from the range `1` to `n` where `n` is the size of the array + 1.
+- The objective is to find which number between `1` and `n` is missing from the array.
+
+What is being asked?
+- We are required to return the missing number from the array. 
+
+*/
+
+ /* 
+Extracting Information from the Problem Statement:
+1. Input data type:
+   - A single array `arr` with `n-1` distinct integers, where each element belongs to the range `[1, n]`.
+   
+2. Expected Output:
+   - A single integer representing the missing element from the range `[1, n]`.
+
+3. Output return type:
+   - Integer value (the missing element).
+
+4. Explanation of Time complexity expectations:
+   - We are expected to solve the problem in O(n) time, since the array can have up to 10^6 elements.
+
+5. Explanation of given Constraints:
+   - The size of the array `arr` is between 1 and 10^6, so we need to be mindful of time and space efficiency.
+*/
+
+ /* 
+Thinking Solution for the Problem Statement:
+1. Identification:
+   - This problem is a variation of finding a missing element in a sequence. 
+   - We are given `n-1` numbers, so the total sum of numbers from 1 to `n` should be known.
+
+2. Destructuring:
+   - The total sum of numbers from 1 to `n` is given by the formula `n*(n+1)/2`.
+   - The sum of elements in the array `arr` is simply the sum of its elements.
+   - The missing number can be found by subtracting the sum of the elements in `arr` from the expected total sum.
+
+3. Conversional solution into smaller subtask:
+   - Subtask 1: Compute the expected sum of integers from 1 to `n` using the formula.
+   - Subtask 2: Compute the sum of all elements in the array `arr`.
+   - Subtask 3: The missing number is the difference between the expected sum and the actual sum of the array.
+
+*/
+
+ /* 
+Conversional Solution into Subtasks:
+1. Calculate the expected sum for the sequence from 1 to `n` using the formula `n*(n+1)/2`.
+2. Calculate the sum of elements in the given array `arr`.
+3. Subtract the sum of elements in `arr` from the expected sum to get the missing number.
+
+*/
+
+ /* 
+Subtasks of Conversional Solution into Code:
+1. Initialize a variable for the expected sum based on the size of the array `arr` and the formula for the sum of the first `n` numbers.
+2. Initialize a variable to accumulate the sum of elements in `arr`.
+3. Find the difference between the expected sum and the actual sum to determine the missing number.
+4. Return the missing number.
+
+*/
+
+public class MissingElement {
+
+    /* 
+    Function to find the missing number in the array.
+    We calculate the expected sum of numbers from 1 to `n` and subtract the sum of elements in `arr` to find the missing number.
+    */
+    public static int findMissingElement(int[] arr) {
+        int n = arr.length + 1;  // The total number of elements should be n.
+        
+        // Step 1: Calculate the expected sum from 1 to n
+        int expectedSum = n * (n + 1) / 2;
+        
+        // Step 2: Calculate the sum of elements in the array
+        int actualSum = 0;
+        for (int num : arr) {
+            actualSum += num;
+        }
+        
+        // Step 3: The missing number is the difference between expected and actual sum
+        return expectedSum - actualSum;
+    }
+    public static void main(String[] args) {
+        // Test case 1
+        int[] arr1 = {1, 2, 3, 5};
+        System.out.println("Missing element: " + findMissingElement(arr1)); // Expected output: 4
+        
+        // Test case 2
+        int[] arr2 = {8, 2, 4, 5, 3, 7, 1};
+        System.out.println("Missing element: " + findMissingElement(arr2)); // Expected output: 6
+        
+        // Test case 3
+        int[] arr3 = {1};
+        System.out.println("Missing element: " + findMissingElement(arr3)); // Expected output: 2
+    }
+}
+  /* 
+    Time and Space Complexity Explanation:
+    Time Complexity:
+    - O(n), where `n` is the length of the array. We traverse the array once to calculate the sum of its elements.
+    
+    Space Complexity:
+    - O(1), since we only use a constant amount of space for the sum calculations and the expected sum.
+    */
+
+    /* 
+    Code Walkthrough:
+    Let's walk through the example `arr = [1, 2, 3, 5]`:
+
+    - The length of the array is 4, so `n = 5` (the total number of elements expected).
+    - The expected sum from 1 to 5 is `5*(5+1)/2 = 15`.
+    - The sum of elements in the array is `1 + 2 + 3 + 5 = 11`.
+    - The missing number is `15 - 11 = 4`.
+
+    Output: `4`
+    */
+/*
+
+### Explanation:
+
+1. **`findMissingElement(int[] arr)`**:
+   - The function first computes the expected sum of integers from 1 to `n` using the formula `n * (n + 1) / 2`, where `n` is the length of the array plus 1.
+   - It then computes the sum of all elements in the array.
+   - The missing element is simply the difference between the expected sum and the actual sum.
+
+2. **Steps**:
+   - **Step 1**: Calculate the total sum of integers from 1 to `n` using the formula `n*(n+1)/2`.
+   - **Step 2**: Calculate the sum of elements in the array.
+   - **Step 3**: The missing number is the difference between the expected sum and the actual sum.
+
+3. **Time Complexity**:
+   - The solution iterates through the array once to calculate its sum, making the time complexity O(n), where `n` is the length of the array.
+
+4. **Space Complexity**:
+   - The space complexity is O(1) because only a constant amount of extra space is used for sum calculations and the expected sum.
+
+### Example Walkthrough:
+
+For the input `arr = [1, 2, 3, 5]`:
+- Expected sum for the numbers from 1 to 5: `5*(5+1)/2 = 15`.
+- Sum of the elements in the array: `1 + 2 + 3 + 5 = 11`.
+- The missing number is `15 - 11 = 4`.
+
+### Output:
+
+For the given test cases:
+1. `[1, 2, 3, 5]` → Missing number is `4`.
+2. `[8, 2, 4, 5, 3, 7, 1]` → Missing number is `6`.
+3. `[1]` → Missing number is `2`.
+*/
+--------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
 /* 
 Question:
 You are given an array arr of size n - 1 that contains distinct integers in the range from 1 to n (inclusive). 
