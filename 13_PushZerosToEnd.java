@@ -1,3 +1,170 @@
+--------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
+/* 
+Question Section:
+Given two sorted arrays `arr1[]` and `arr2[]` of distinct elements, where the first array has one extra element, 
+the task is to find the index of the extra element in the first array.
+
+Examples:
+
+Input: arr1[] = [2,4,6,8,9,10,12], arr2[] = [2,4,6,8,10,12]
+Output: 4
+Explanation: In the first array, 9 is extra and its index is 4.
+
+Input: arr1[] = [3,5,7,8,11,13], arr2[] = [3,5,7,11,13]
+Output: 3
+Explanation: In the first array, 8 is extra and its index is 3.
+
+Input: arr1[] = [3,5], arr2[] = [3]
+Output: 1
+Explanation: In the first array, 5 is extra and its index is 1.
+
+Constraints:
+- 2 <= arr1.size() <= 10^5
+- 1 <= arr1[i], arr2[i] <= 10^6
+*/
+
+/* 
+Understanding the Problem Statement:
+- We are given two sorted arrays `arr1` and `arr2`. 
+- The first array `arr1` contains one additional element compared to the second array `arr2`.
+- Both arrays are sorted in increasing order, and the extra element in `arr1` is the one that is missing from `arr2`.
+- The task is to find the index of this extra element in `arr1`.
+
+What is being asked?
+- The objective is to return the index of the extra element in `arr1` that does not appear in `arr2`.
+*/
+
+ /* 
+Extracting Information from the Problem Statement:
+1. Input data type:
+   - Two arrays of distinct integers `arr1` and `arr2`. 
+   - Both arrays are sorted in ascending order.
+2. Expected Output:
+   - A single integer, which is the index of the extra element in `arr1`.
+3. Output return type:
+   - Integer (index of the extra element).
+4. Explanation of Time complexity expectations:
+   - The time complexity of this solution should be O(n), where `n` is the length of `arr1`.
+   - We need to traverse both arrays at most once, which gives an efficient O(n) solution.
+5. Explanation of given Constraints:
+   - The size of `arr1` can be as large as 100,000, so an O(n) solution is necessary to ensure that the solution runs in reasonable time.
+*/
+
+ /* 
+Thinking Solution for the Problem Statement:
+1. Identification:
+   - The problem is a "find the missing element" problem but with an extra element in a sorted array.
+   - We need to find which element is extra in `arr1` by comparing it with `arr2`.
+
+2. Destructuring:
+   - Step 1: Both arrays are sorted, so we can use a simple comparison approach.
+   - Step 2: We will iterate over both arrays, comparing corresponding elements.
+   - Step 3: If the elements at the same index in both arrays differ, the extra element is found at that index in `arr1`.
+   - Step 4: If the end of `arr2` is reached and no differences are found, then the extra element must be the last element of `arr1`.
+
+3. Conversional solution into smaller subtask:
+   - Subtask 1: Compare elements of `arr1` and `arr2` one by one.
+   - Subtask 2: If any element in `arr1` is not the same as the corresponding element in `arr2`, return the index.
+   - Subtask 3: If no discrepancy is found by the end of `arr2`, return the last index of `arr1`.
+
+*/
+
+ /* 
+Conversional Solution into Subtasks:
+1. Iterate through both arrays and compare elements.
+2. If an element in `arr1` is not equal to the element in `arr2` at the same position, return the index of the differing element.
+3. If the loop finishes and no discrepancy is found, return the last element's index in `arr1`.
+
+*/
+
+ /* 
+Subtasks of Conversional Solution into Code:
+1. Compare elements from both arrays.
+2. If any elements are different, return the index of the extra element in `arr1`.
+3. If no discrepancy is found, return the index of the last element in `arr1`.
+
+*/
+
+public class ExtraElementInArray {
+
+    /* 
+    Function to find the index of the extra element in arr1.
+    We compare elements of arr1 and arr2. If they differ, arr1 has the extra element at that index.
+    If no difference is found during the iteration, return the last index of arr1.
+    */
+    public static int findExtraElementIndex(int[] arr1, int[] arr2) {
+        int n = arr1.length;
+        int m = arr2.length;
+        
+        // Traverse both arrays and compare each element
+        for (int i = 0; i < m; i++) {
+            if (arr1[i] != arr2[i]) {
+                return i; // Found the extra element at index i in arr1
+            }
+        }
+        
+        // If no differences were found, the extra element must be at the last position of arr1
+        return n - 1; 
+    }
+    public static void main(String[] args) {
+        // Test case 1
+        int[] arr1_1 = {2, 4, 6, 8, 9, 10, 12};
+        int[] arr2_1 = {2, 4, 6, 8, 10, 12};
+        System.out.println("Index of extra element: " + findExtraElementIndex(arr1_1, arr2_1)); // Expected output: 4
+
+        // Test case 2
+        int[] arr1_2 = {3, 5, 7, 8, 11, 13};
+        int[] arr2_2 = {3, 5, 7, 11, 13};
+        System.out.println("Index of extra element: " + findExtraElementIndex(arr1_2, arr2_2)); // Expected output: 3
+
+        // Test case 3
+        int[] arr1_3 = {3, 5};
+        int[] arr2_3 = {3};
+        System.out.println("Index of extra element: " + findExtraElementIndex(arr1_3, arr2_3)); // Expected output: 1
+    }
+}
+
+ /* 
+    Time and Space Complexity Explanation:
+    Time Complexity:
+    - The time complexity is O(n), where n is the size of the larger array `arr1`. We only need to traverse both arrays once, comparing elements.
+    - In the worst case, we may compare all elements in `arr2`, which gives a linear time complexity.
+
+    Space Complexity:
+    - The space complexity is O(1), as we are only using a constant amount of space for the loop variables and no additional data structures.
+    */
+
+    /* 
+    Code Walkthrough:
+    Let's walk through the example with `arr1 = [2, 4, 6, 8, 9, 10, 12]` and `arr2 = [2, 4, 6, 8, 10, 12]`:
+
+    1. We compare `arr1[0]` with `arr2[0]` (both are 2). No difference, continue.
+    2. Compare `arr1[1]` with `arr2[1]` (both are 4). No difference, continue.
+    3. Compare `arr1[2]` with `arr2[2]` (both are 6). No difference, continue.
+    4. Compare `arr1[3]` with `arr2[3]` (both are 8). No difference, continue.
+    5. Compare `arr1[4]` with `arr2[4]` (arr1 has 9, arr2 has 10). They differ, so the extra element is found at index 4 in `arr1`.
+
+    Output: `4`
+    */
+
+/*
+
+### Explanation:
+
+1. **`findExtraElementIndex(int[] arr1, int[] arr2)`**:
+   - This function compares each element in `arr1` with `arr2` (which is one element shorter). 
+     The moment an element in `arr1` differs from `arr2`, it returns the index of the differing element.
+   - If no differences are found by the end of `arr2`, the extra element must be the last element of `arr1`, and we return the index `n - 1`.
+
+2. **Time and Space Complexity**:
+   - **Time Complexity**: O(n), where `n` is the size of `arr1`. We traverse both arrays at most once.
+   - **Space Complexity**: O(1), since we only use a few variables for iteration.
+
+3. **Code Walkthrough**:
+   - The function checks each index in both arrays, and if an element from `arr1` differs from the corresponding element in `arr2`, it returns that index. 
+     If no differences are found by the end, the last element of `arr1` is returned.
+*/
+--------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
 /* 
 Question:
 Given an array arr[]. 
