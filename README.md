@@ -8,6 +8,9 @@
 
 This repository is dedicated to solving **most frequently asked Zoho coding questions**. It aims to help you prepare for Zoho interviews by providing Java-based solutions. We are actively creating and regularly updating a **problem-solving template** that will guide you step-by-step in efficiently solving coding problems in a structured manner.
 
+## Zoho CheatSheet:
+[Zoho CheatSheet](https://docs.google.com/document/d/1C9AmL3lmO_B-Ufhh_rDN_X9NKFIJrF6Ru3dS2FdoJrk/edit?usp=sharing)<br/> 
+
 ## Key Features: 🌟
 - Solutions to popular **Zoho coding questions**. 📑
 - Java-based implementations for each problem. 💻
