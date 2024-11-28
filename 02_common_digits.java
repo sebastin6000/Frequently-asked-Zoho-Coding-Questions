@@ -26,6 +26,32 @@ Constraints:
 1 <= nums[i] <= 10^9
 */
 
+/*                   TEMPLATE 
+
+1.Understanding the Problem Statement:
+2.Extracting Information from the Problem Statement:
+2.1 Input data type or data structure - 
+2.2 Expected Output - 
+2.3 Output return data type (or) data structure type - 
+2.4 Understanding the Constraints - 
+2.5 Understanding Time complexity expectations if any in the given problem statement.
+
+3.Thinking Solution for the Problem Statement:
+3.1 Getting Solution from Input and Output:
+
+4.Input to Output convesion steps into smaller subtasks:
+4.1 After finding the steps from input to output conversion convert the steps into subtasks
+
+5.Input to Output conversion subtasks into Code:
+5.1 Things needed to complete eash Subtask ?
+5.2 Do every subtask in an Efficient manner with efficient Data structure and Algorithm.
+5.2.1 Efficient data structure - 
+5.2.2 Efficient Algorithm / pattern - 
+5.3 Combine all the efficient subtask code and you get result.
+
+*/
+
+
 /* 
 Understanding the Problem Statement:
 We are given an array of positive integers. We need to extract all distinct digits from these integers and return them in ascending order.
