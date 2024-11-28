@@ -18,26 +18,6 @@ This repository is dedicated to solving **most frequently asked Zoho coding ques
 - Detailed explanations of the approach and solution. 🔍
 - Focus on writing clean, efficient, and optimized code. 🚀
 
-## Problem-Solving Template 🧩
-
-Our approach to solving coding problems follows a structured template:
-
-1. **Information Extracting from the Problem Statement**:  
-   - Read the problem statement carefully and extract all relevant details, including inputs, outputs, and constraints.
-
-2. **Thinking in a Conversational Manner**:  
-   - Conceptualize the problem in simple terms and think about how you would solve it in a real-life scenario.
-
-3. **Converting the Conversational Solution into Subtasks**:  
-   - Break down the solution into smaller, manageable tasks that can be solved step-by-step.
-
-4. **Converting the Subtasks into Code**:  
-   - Implement the solution by converting each subtask into code in a structured and logical manner.
-
-### Future Updates:
-- **Optimization**: We will continuously work on improving the efficiency of the solutions. ⏳
-- **Testing**: Additional test cases and testing strategies will be added in future updates. 🧪
-
 This repository is continuously growing, and we encourage contributions from anyone to improve the templates and solutions!
 
 Happy coding, and good luck with your Zoho interview preparation! 🎯
