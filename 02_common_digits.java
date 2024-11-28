@@ -2,7 +2,7 @@
 /* 
 Question:
 Given an array nums of positive integers of size N, find all distinct digits present in the numbers of the array.
-You need to return the list of distinct digits present in the array sorted in ascending order.
+You need to return the list of distinct digits present in the array sorted in ascending order. 
 
 Example 1:
 Input: nums = [131, 11, 48]
