@@ -1,5 +1,4 @@
 // https://www.geeksforgeeks.org/problems/make-a-distinct-digit-array2007/1
-// WITH TEMPLATE 
 /* 
 Question:
 Given an array nums of positive integers of size N, find all distinct digits present in the numbers of the array.
@@ -48,15 +47,13 @@ Extracting Information from the Problem Statement:
       Each integer in the array nums can be as large as 1 billion (10^9). 
       This means that each number can have at most 9 digits (since 10^9 has 9 digits).
   
-The task is to process the array, extract digits, remove duplicates, and return them sorted.
-
 Thinking Solution for the Problem Statement:
-1. Input to output in the question:
-    * In input 
-       They have array inside the array they stored positive integers 
-       In that array Every integer is 2 digit integer or 3 digit integer. 
-       what they have done is They have extracted every single integer from the 2 digit integer or 3 digit integer.
-       And then they have only give the unique elements from all the extracted digits from the 2 digit integer or 3 digit integer.
+The task is to process the array, extract digits, remove duplicates, and return them sorted.
+1. Input to output conversion in the question:
+In input they have array inside the array they stored positive integers 
+In that array Every integer is 2 digit integer or 3 digit integer. 
+What they have done is They have extracted every single integer from the 2 digit integer or 3 digit integer.
+And then they have only give the unique elements from all the extracted digits from the 2 digit integer or 3 digit integer.
        
 2. So, How we are going to achieve this:
    - we also have to extract all the individual digits from the 2 digit integer and 3 digit integer.
@@ -70,20 +67,11 @@ Thinking Solution for the Problem Statement:
    - The set ensures no duplicates.
    - Sorting the digits (which are at most 10) is constant in terms of time complexity.
 
-Conversional Solution into Subtasks:
-1. Iterate through the given array.
-2. For each number, extract its digits.
-3. Add each digit to a set (to ensure distinct digits).
-4. Convert the set of digits into a sorted list.
-5. Return the sorted list of digits.
-
-Subtasks of Conversional Solution into Code:
-- **Extracting digits**: For each number in the array, split it into digits.
-- **Ensuring uniqueness**: Use a set to avoid duplicates.
-- **Sorting the result**: Convert the set to a list and sort it in ascending order.
-- **Returning the result**: Return the sorted list of digits.
-
-Java Code according to Conversational Subtasks:
+Input to Output conversion Subtasks into Code:
+- Extracting digits: For each number in the array, split it into digits.
+- Ensuring uniqueness: Use a set to avoid duplicates.
+- Sorting the result: Convert the set to a list and sort it in ascending order.
+- Returning the result: Return the sorted list of digits.
 
 */
 import java.util.*;
@@ -130,13 +118,13 @@ public class StringTransformation {
 
 /*
 Time and Space Complexity Explanation:
-- **Time Complexity**: O(N), where N is the size of the array `nums`.
+- Time Complexity: O(N), where N is the size of the array `nums`.
   - Iterating through each number in the array takes O(N).
   - Extracting digits from each number takes O(log(num)) for each number, 
     but this is bounded by a constant factor since the maximum number of digits any number can have is 9 (since 10^9 has 9 digits).
   - Sorting the digits in the set takes O(1) time, as there are at most 10 digits (0-9).
   
-- **Space Complexity**: O(N) for storing the unique digits in the set and the final sorted list.
+- Space Complexity: O(N) for storing the unique digits in the set and the final sorted list.
 
 Complete Code Walkthrough:
 - We start by iterating through the input array `nums`.
