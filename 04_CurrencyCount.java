@@ -63,11 +63,11 @@ Subtasks:
 4. Output the denominations used along with their counts.
 
 Subtasks of Conversional Solution into Code:
-- **Initialize denominations**: We will maintain an array of fixed denominations in descending order.
-- **Calculate notes for each denomination**: For each denomination, 
+- Initialize denominations: We will maintain an array of fixed denominations in descending order.
+- Calculate notes for each denomination: For each denomination, 
     calculate how many notes are needed by dividing the remaining amount by the denomination value.
-- **Reduce the amount**: After calculating the number of notes for a denomination, subtract the corresponding value from the amount.
-- **Return the results**: After processing all denominations, return the list of denominations and their respective counts.
+- Reduce the amount: After calculating the number of notes for a denomination, subtract the corresponding value from the amount.
+- Return the results: After processing all denominations, return the list of denominations and their respective counts.
 
 Java Code according to Conversational Subtasks:
 
