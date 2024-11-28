@@ -40,22 +40,32 @@ Extracting Information from the Problem Statement:
 - Time Complexity Expectation: O(N), where N is the size of the array.
 - Space Complexity Expectation: O(N), for storing the distinct digits.
 - Constraints:
-   1 <= N <= 10^5: 
+   1 <= N <= 10^5: (10 x 10 x 10 x 10 x 10 = 100,000)
      This means the array nums can have up to 100,000 elements. 
      The size of the array can be quite large, so the algorithm must be efficient enough to handle the upper limit of 100,000 numbers.
 
-   1 <= nums[i] <= 10^9: 
+   1 <= nums[i] <= 10^9: (10 × 10 × 10 × 10 × 10 × 10 × 10 × 10 × 10 = 1,000,000,000)
       Each integer in the array nums can be as large as 1 billion (10^9). 
       This means that each number can have at most 9 digits (since 10^9 has 9 digits).
   
 The task is to process the array, extract digits, remove duplicates, and return them sorted.
 
 Thinking Solution for the Problem Statement:
-1. Identify the task: The task is to extract distinct digits from an array of numbers.
-2. We need to extract digits from each number in the array.
-3. We will use a set to collect all the digits because a set automatically ensures no duplicates.
-4. After collecting all digits, we can convert the set into a list, sort it, and return it.
-5. This approach should be optimal because:
+1. Input to output in the question:
+    * In input 
+       They have array inside the array they stored positive integers 
+       In that array Every integer is 2 digit integer or 3 digit integer. 
+       what they have done is They have extracted every single integer from the 2 digit integer or 3 digit integer.
+       And then they have only give the unique elements from all the extracted digits from the 2 digit integer or 3 digit integer.
+       
+2. So, How we are going to achieve this:
+   - we also have to extract all the individual digits from the 2 digit integer and 3 digit integer.
+   - Then we have to return only the unique elements from the 
+2. Identify the task: The task is to extract distinct digits from an array of numbers.
+3. We need to extract digits from each number in the array.
+4. We will use a set to collect all the digits because a set automatically ensures no duplicates.
+5. After collecting all digits, we can convert the set into a list, sort it, and return it.
+6. This approach should be optimal because:
    - We only iterate through the numbers once to extract digits, making it O(N).
    - The set ensures no duplicates.
    - Sorting the digits (which are at most 10) is constant in terms of time complexity.
