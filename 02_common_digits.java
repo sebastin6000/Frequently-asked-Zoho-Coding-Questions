@@ -102,7 +102,7 @@ Input to Output conversion Subtasks into Code:
 */
 import java.util.*;
 
-public class StringTransformation {
+public class CommonDigits {
 
     // Function to extract all distinct digits from the given array nums
     public static List<Integer> common_digits(int[] nums) {
