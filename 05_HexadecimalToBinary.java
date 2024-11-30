@@ -58,10 +58,10 @@ Subtasks:
 4. Return the concatenated result as the final binary number.
 
 Subtasks of Conversional Solution into Code:
-- **Step 1**: Parse each hexadecimal character.
-- **Step 2**: Convert the hexadecimal character into a 4-bit binary string.
-- **Step 3**: Concatenate these 4-bit binary strings.
-- **Step 4**: Return or print the final binary number.
+- Step 1: Parse each hexadecimal character.
+- Step 2: Convert the hexadecimal character into a 4-bit binary string.
+- Step 3: Concatenate these 4-bit binary strings.
+- Step 4: Return or print the final binary number.
 
 Java Code according to Conversational Subtasks:
 */
@@ -368,7 +368,8 @@ public class HexadecimalToBinary {
         - `'E' - 'A'` results in `4`
         - `'F' - 'A'` results in `5`
         
-        In essence, subtracting `'A'` from any of `'A'` to `'F'` gives us a number that represents the position of that letter in the sequence starting from `'A'`.
+        In essence, subtracting `'A'` from any of `'A'` to `'F'` gives us a number that represents the position of that letter 
+        in the sequence starting from `'A'`.
         
         Step 3: Adding 10
         Now, since in hexadecimal:
@@ -453,14 +454,19 @@ public class HexadecimalToBinary {
         The expression hexChar - 'A' + 10 converts 'A' to 10,
         'B' to 11, ..., and 'F' to 15 by subtracting the Unicode value of 'A' from hexChar and then adding 10 to shift the range to 10-15.
         Why it's done this way:
-        In hexadecimal, each character (either a number or a letter) represents a value. The subtraction operation (hexChar - '0' or hexChar - 'A') makes it easy to convert these characters to their corresponding integer values directly without needing an explicit lookup table or complex conditional logic.
+        In hexadecimal, each character (either a number or a letter) represents a value. 
+        The subtraction operation (hexChar - '0' or hexChar - 'A') makes it easy to convert these characters to their corresponding integer values directly without needing an explicit lookup table or complex conditional logic.
         
         For example:
         
         If hexChar is '9', then hexChar - '0' results in 9.
         If hexChar is 'A', then hexChar - 'A' + 10 results in 10.
         Improving and clarifying the code:
-        Since we are confident that the input is always valid (i.e., it's a valid hexadecimal string containing characters between '0'-'9' and 'A'-'F'), this check suffices to convert hex characters to their corresponding decimal values. However, it's a good practice to ensure that the input is valid to avoid runtime errors in real-world applications, especially when user input is involved.
+        Since we are confident that the input is always valid 
+        (i.e., it's a valid hexadecimal string containing characters between '0'-'9' and 'A'-'F'), 
+        this check suffices to convert hex characters to their corresponding decimal values. However, 
+        it's a good practice to ensure that the input is valid to avoid runtime errors in real-world applications, 
+        especially when user input is involved.
                     */
               }
 
@@ -492,7 +498,8 @@ public class HexadecimalToBinary {
             
             # # # 2. Getting the Binary String Using the Mapping: `hexToBinaryMap[decimal]`
             
-            Now that we 've validated that the `decimal` is a valid hexadecimal digit (i.e., it’s between 0 and 15), we need to convert this decimal value to its corresponding binary string representation.
+            Now that we 've validated that the `decimal` is a valid hexadecimal digit (i.e., it’s between 0 and 15), 
+            we need to convert this decimal value to its corresponding binary string representation.
             
             `hexToBinaryMap`is an array(or list) that maps each decimal value from 0 to 15 to its binary equivalent in a 4 - bit format.Here’ s how it works:
             
@@ -553,7 +560,8 @@ public class HexadecimalToBinary {
             ensures we are only working with valid hexadecimal digits, which have corresponding decimal values between 0 and 15.
               -
               Using the Mapping Array: The `hexToBinaryMap`
-            array is a simple and efficient way to get the binary equivalent of a decimal number(0 to 15).Each index in the array corresponds to a fixed 4 - bit binary value. -
+              array is a simple and efficient way to get the binary equivalent of a decimal number(0 to 15).
+              Each index in the array corresponds to a fixed 4 - bit binary value. -
               Efficient String Construction: The `StringBuilder`
             's `append()` method allows us to efficiently build the binary string by adding the 4-bit binary representation for each hexadecimal digit.
             
@@ -631,7 +639,8 @@ public class HexadecimalToBinary {
             provides the 4 - bit binary string
             for each decimal value from `0`
             to `15`. -
-              Efficient Appending: We append each 4 - bit binary string to the `StringBuilder`, constructing the full binary representation of the hexadecimal input.
+              Efficient Appending: 
+              We append each 4 - bit binary string to the `StringBuilder`, constructing the full binary representation of the hexadecimal input.
             
             This is a clean and efficient way to convert hexadecimal values to their binary equivalents!
             
@@ -724,5 +733,74 @@ public class HexadecimalToBinary {
   - Why this pattern? Because we have a direct and fixed mapping between hexadecimal digits and their binary representations (0-15 to 4-bit binary strings).
     
     Custom Pattern:
-  - The custom pattern is creating a lookup array to map hexadecimal values to their binary equivalents, then iterating over the input and appending the corresponding binary values to the result string.
+  - The custom pattern is creating a lookup array to map hexadecimal values to their binary equivalents, 
+    then iterating over the input and appending the corresponding binary values to the result string.
   */
+-----------------------------------------------------------------
+import java.util.*;    
+public class HexadecimalToBinary {
+    public static String convertHexToBinary(String hex) {
+        // Step 1: Initialize an empty string to store the result
+        StringBuilder binary = new StringBuilder();
+
+        // Hexadecimal-to-binary mapping manually
+        String[] hexToBinaryMap = {
+            "0000",
+            "0001",
+            "0010",
+            "0011",
+            "0100",
+            "0101",
+            "0110",
+            "0111",
+            "1000",
+            "1001",
+            "1010",
+            "1011",
+            "1100",
+            "1101",
+            "1110",
+            "1111"
+        };
+
+        // Step 2: For each character in the hexadecimal string
+        for (int i = 0; i < hex.length(); i++) {
+            // Get the hexadecimal character
+            char hexChar = hex.charAt(i);
+
+            // Step 3: Convert the hexadecimal character to its decimal equivalent
+            int decimal = -1;
+            if (hexChar >= '0' && hexChar <= '9') {
+                decimal = hexChar - '0'; // Convert '0'-'9' to 0-9
+                
+            } else if (hexChar >= 'A' && hexChar <= 'F') {
+                decimal = hexChar - 'A' + 10; // Convert 'A'-'F' to 10-15
+
+            }
+
+            // Step 4: Use the decimal value to get the binary string
+            if (decimal >= 0 && decimal <= 15) {
+                // Get the corresponding binary string from the mapping
+                binary.append(hexToBinaryMap[decimal]);
+            }
+        }
+
+        // Step 5: Return the resulting binary string
+        return binary.toString();
+    }
+
+    /* 
+    Main function to run the program
+    */
+    public static void main(String[] args) {
+        // Example input
+        String hex = "1AC5";
+
+        // Convert hexadecimal to binary
+        String binary = convertHexToBinary(hex);
+
+        // Output the result
+        System.out.println("Hexadecimal: " + hex);
+        System.out.println("Binary: " + binary);
+    }
+}
