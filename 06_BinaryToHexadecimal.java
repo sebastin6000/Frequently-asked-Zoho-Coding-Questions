@@ -1,10 +1,10 @@
---------------------------------------------------- WITH TEMPLATE --------------------------------------------------------------------
 /* 
 Question:
 Given a Binary Number, the task is to convert the given binary number to its equivalent hexadecimal number. 
 The input could be very large and may not fit even into an unsigned long long int.
 
 Examples: 
+
 Input: 110001110
 Output: 18E
 
@@ -14,710 +14,176 @@ Output: 794A1.5B36 794A1D9B
 
 /* 
 Understanding the Problem Statement:
-We are given a binary number as input, and the task is to convert it into its hexadecimal equivalent.
-- Binary numbers use base 2, consisting of only 0s and 1s.
-- Hexadecimal numbers use base 16, consisting of digits from 0-9 and letters A-F.
+The problem requires us to convert a binary number (which may be very large) into its hexadecimal representation. 
+The binary number can be either an integer or a floating-point number.
 
-Each group of four binary digits corresponds to one hexadecimal digit. For instance:
-- `0000` in binary = `0` in hexadecimal
-- `1111` in binary = `F` in hexadecimal
+What is being asked?
+We are asked to convert the given binary string into hexadecimal. We need to handle both integer and fractional binary parts, as described in the example.
 
-The problem requires that we:
-1. Take the binary input, which may be very large (could be a floating-point number as well, like `1.1011`).
-2. Split the number into integer and fractional parts.
-3. Convert both parts to hexadecimal.
-4. Return the final hexadecimal number as a string.
-
-Extracting Information from the Problem Statement:
-- Input: A binary number as a string.
-- Expected Output: The equivalent hexadecimal number as a string.
-- Output Return Type: String.
-- Time Complexity: O(n), where n is the number of bits in the binary string.
-- Space Complexity: O(n), where n is the space required for storing the final result.
-
-Constraints:
-- The input binary number can be very large, and may contain both integer and fractional parts.
-  
-Thinking Solution for the Problem Statement:
-1. The binary number can have two parts: the integer part and the fractional part. We need to process both parts separately.
-2. For the integer part, we can group the binary digits into chunks of four, convert each chunk to hexadecimal, and concatenate them.
-3. For the fractional part, we can group the digits into chunks of four and convert them to hexadecimal in the same way.
-4. If the fractional part does not contain a full group of four digits, we can add leading zeros to make a complete group.
-5. Combine both parts (integer and fractional) and return the final result.
-
-Subtasks:
-1. Split the binary number into integer and fractional parts.
-2. Convert the integer part from binary to hexadecimal.
-3. Convert the fractional part from binary to hexadecimal.
-4. Combine both parts and return the hexadecimal number as a string.
-
-Subtasks of Conversional Solution into Code:
-- **Step 1**: Split the input binary number into integer and fractional parts.
-- **Step 2**: Convert the integer part from binary to hexadecimal.
-- **Step 3**: Convert the fractional part from binary to hexadecimal.
-- **Step 4**: Combine both parts into a single hexadecimal result.
-- **Step 5**: Return the result.
-
-Java Code according to Conversational Subtasks:
+The binary number is provided as a string, and we need to convert it efficiently into hexadecimal.
 */
 
-import java.util.*;
+/* 
+Extracting Information from the Problem Statement:
+- Input data type: Binary number provided as a string. 
+  The string can be very large and may contain both an integer and a fractional part (represented as '1.0101' or similar).
+- Expected Output: The output should be a hexadecimal representation of the binary number.
+- Output return data type: String, where the hexadecimal equivalent of the binary number is returned.
+- Constraints:
+  - The binary number can be very large and should be handled as a string.
+  - The number can have a fractional part.
+- Time complexity expectations: Efficient conversion of a potentially large binary number into its hexadecimal form is expected. 
+  The overall time complexity should depend on the size of the input binary number.
+*/
+
+/* 
+Thinking Solution for the Problem Statement:
+1. The binary number can be split into two parts: the integer part and the fractional part (if any).
+2. The conversion from binary to hexadecimal is straightforward:
+   - First, group the binary number into chunks of 4 bits from right to left (for integer part).
+   - Convert each 4-bit group to its hexadecimal equivalent.
+   - Similarly, for the fractional part, group the bits in chunks of 4 from left to right, and convert each group to hexadecimal.
+3. For handling large binary numbers, we will work with strings to avoid overflow issues.
+4. The conversion is done in two stages:
+   - Integer part to hexadecimal.
+   - Fractional part to hexadecimal (if present).
+5. We need to manage precision for the fractional part and stop the conversion at a reasonable point to avoid precision loss.
+*/
+
+/* 
+Input to Output conversion steps into smaller subtasks:
+S.No | Subtask Description
+1    | Split the input binary string into integer and fractional parts.
+2    | Convert the integer part from binary to hexadecimal.
+3    | Convert the fractional part from binary to hexadecimal.
+4    | Concatenate both parts to form the final hexadecimal representation.
+5    | Handle the edge cases where the fractional part is missing or the input is empty.
+*/
+
+/* 
+Input to Output conversion subtasks into Code:
+S.No | Subtask Description                                     | Code Approach
+1    | Split binary number into integer and fractional parts.  | Split input using '.' to separate the integer and fractional parts.
+2    | Convert integer part to hexadecimal.                    | Group the binary integer part in chunks of 4 and convert each to hexadecimal.
+3    | Convert fractional part to hexadecimal.                 | Group the binary fractional part in chunks of 4, convert, 
+                                                                 and append until no more significant bits.
+4    | Concatenate the integer and fractional results.         | Combine the results for the final output.
+5    | Handle edge cases.                                      | Handle cases where either part might be empty.
+*/
+
+/* 
+Code Requirement to complete the subtasks:
+- We will use a loop to iterate over the binary string.
+- A helper function to convert binary to hexadecimal will be necessary.
+- A string data structure will be used to store the final output.
+- We will also need some string manipulation for splitting the binary number and handling the fractional part.
+*/
+
+/* 
+Java Code according to conversational subtasks:
+*/
+import java.math.BigInteger;
 
 public class BinaryToHexadecimal {
+    
+    /* 
+    Explanation of Approach:
+    - First, we will split the input binary number into integer and fractional parts.
+    - We will then convert the integer part from binary to hexadecimal.
+    - After that, we will convert the fractional part from binary to hexadecimal.
+    - If no fractional part exists, we will skip that step.
+    - Finally, we will combine both parts and output the result.
+    */
 
-    // Helper function to convert the binary string to hexadecimal
-    private static String binaryToHex(String binary) {
-        // Result string
-        StringBuilder hex = new StringBuilder();
-        
-        // Ensure the binary string length is a multiple of 4 by adding leading zeros if necessary
-        int length = binary.length();
-        int remainder = length % 4;
-        if (remainder != 0) {
-            int padding = 4 - remainder;
-            for (int i = 0; i < padding; i++) {
-                binary = "0" + binary;
-            }
+    // Helper function to convert binary string to hexadecimal string
+    public static String binaryToHex(String binary) {
+        // Check if the binary string is empty
+        if (binary.isEmpty()) {
+            return "0";
         }
-        
-        // Process the binary string in chunks of 4
-        for (int i = 0; i < binary.length(); i += 4) {
-            String chunk = binary.substring(i, i + 4);
-            int decimalValue = Integer.parseInt(chunk, 2);  // Convert binary chunk to decimal
-            hex.append(Integer.toHexString(decimalValue).toUpperCase());  // Convert decimal to hex and append
-        }
-        
-        return hex.toString();
+
+        // Use BigInteger to handle very large binary numbers
+        BigInteger number = new BigInteger(binary, 2);
+        return number.toString(16).toUpperCase(); // Convert to hexadecimal and convert to uppercase
     }
 
-    // Function to convert binary to hexadecimal with integer and fractional parts
-    public static String convertBinaryToHex(String binary) {
-        // Split binary number into integer and fractional parts
+    // Function to convert binary number (with fractional part) to hexadecimal
+    public static String convertBinaryToHexadecimal(String binary) {
+        // Split the input binary number into integer and fractional parts
         String[] parts = binary.split("\\.");
         String integerPart = parts[0];
         String fractionalPart = (parts.length > 1) ? parts[1] : "";
-        
+
         // Convert integer part to hexadecimal
-        String integerHex = binaryToHex(integerPart);
-        
-        // Convert fractional part to hexadecimal
-        String fractionalHex = "";
+        String hexInteger = binaryToHex(integerPart);
+
+        // Convert fractional part to hexadecimal (if it exists)
+        String hexFractional = "";
         if (!fractionalPart.isEmpty()) {
-            // Ensure the fractional part has 4 bits per chunk
-            fractionalHex = binaryToHex(fractionalPart);
+            // Loop to process the fractional part in chunks of 4 binary digits
+            StringBuilder sb = new StringBuilder();
+            while (!fractionalPart.isEmpty()) {
+                // Take the first 4 digits from fractional part
+                if (fractionalPart.length() >= 4) {
+                    sb.append(binaryToHex(fractionalPart.substring(0, 4)));
+                    fractionalPart = fractionalPart.substring(4); // Remove processed part
+                } else {
+                    // For remaining bits that are less than 4
+                    sb.append(binaryToHex(fractionalPart));
+                    break;
+                }
+            }
+            hexFractional = sb.toString();
         }
-        
-        // Combine integer part and fractional part
-        if (!fractionalHex.isEmpty()) {
-            return integerHex + "." + fractionalHex;
-        } else {
-            return integerHex;
+
+        // If the fractional part exists, concatenate integer and fractional parts with a dot
+        if (!hexFractional.isEmpty()) {
+            return hexInteger + "." + hexFractional;
         }
+
+        return hexInteger; // Return integer part only if no fractional part
     }
 
-    // Main method to test the function
+    // Main function to test the code
     public static void main(String[] args) {
-        // Test Case 1
-        String binary1 = "110001110";
-        System.out.println("Binary: " + binary1);
-        System.out.println("Hexadecimal: " + convertBinaryToHex(binary1)); // Expected Output: 18E
-
-        // Test Case 2
-        String binary2 = "1111001010010100001.010110110011011";
-        System.out.println("Binary: " + binary2);
-        System.out.println("Hexadecimal: " + convertBinaryToHex(binary2)); // Expected Output: 794A1.5B36
+        String binaryInput1 = "110001110";
+        String binaryInput2 = "1111001010010100001.010110110011011";
+        
+        System.out.println("Binary: " + binaryInput1 + " => Hexadecimal: " + convertBinaryToHexadecimal(binaryInput1));
+        System.out.println("Binary: " + binaryInput2 + " => Hexadecimal: " + convertBinaryToHexadecimal(binaryInput2));
     }
 }
 
 /* 
 Time and Space Complexity Explanation:
-- **Time Complexity**: O(n), where n is the number of bits in the binary string. 
-                       We iterate over each binary digit a constant number of times to process it and convert to hexadecimal.
-- **Space Complexity**: O(n), where n is the space used to store the binary-to-hexadecimal conversion result. 
-                        The space complexity depends on the length of the binary string and its corresponding hexadecimal output.
+- Time Complexity:
+  - Splitting the binary string: O(n), where n is the length of the binary string.
+  - Converting the integer part using BigInteger: O(n).
+  - Converting the fractional part involves splitting into chunks and processing each chunk, leading to O(m) time, where m is the length of the fractional part.
+  - Overall time complexity: O(n + m), where n is the integer part's length and m is the fractional part's length.
 
-Complete Code Walkthrough:
-- We define the helper function `binaryToHex()`, which takes a binary string, ensures it is padded to a multiple of 4, 
-  and then processes it in chunks of 4 to convert to hexadecimal.
-- The main function `convertBinaryToHex()` splits the binary number into integer and fractional parts.
-  It then uses `binaryToHex()` to convert both parts separately and combines them.
-- In the `main()` method, we test the function with two binary numbers, one simple and one with both integer and fractional parts.
-- For example, with the binary input "110001110", the output is "18E". Similarly, for "1111001010010100001.010110110011011", the output is "794A1.5B36".
-
-Test Case 1:
-- Input: "110001110"
-- Conversion: "110001110" → "18E"
-- Output: 18E
-
-Test Case 2:
-- Input: "1111001010010100001.010110110011011"
-- Conversion: "1111001010010100001" → "794A1" and "010110110011011" → "5B36"
-- Output: 794A1.5B36
-*/
-
---------------------------------------------------- WITHOUT TEMPLATE --------------------------------------------------------------------
-/* 
-Question: Given a Binary Number, the task is to convert the given binary number to its equivalent hexadecimal number. 
-The input could be very large and may not fit even into an unsigned long long int.
-
-Input: 110001110
-Output: 18E
-
-Input: 1111001010010100001.010110110011011
-Output: 794A1.5B36 794A1D9B.
+- Space Complexity:
+  - We store the result of the conversion, which takes O(n + m) space.
+  - Overall space complexity: O(n + m), where n is the integer part's length and m is the fractional part's length.
 */
 
 /* 
-Input-output explanation:
-For the binary input '110001110', the hexadecimal output is '18E'. 
-In the second example, the input '1111001010010100001.010110110011011' gives the output '794A1.5B36' and '794A1D9B'.
-The conversion involves translating groups of four binary digits into a single hexadecimal digit.
+Explanation of "for" and "while" loops used in the code:
+- In the code, a loop is used to handle the fractional part. We take the first 4 digits of the fractional part and convert them. 
+  The loop continues until there are no more bits left in the fractional part.
+  - For example, if the input is "1111001010010100001.010110110011011", 
+    the loop processes the fractional part in chunks of 4 digits, converting each chunk into its hexadecimal equivalent.
+
+Iterations for the example "1111001010010100001.010110110011011":
+- First iteration: Takes "0101", converts to "5".
+- Second iteration: Takes "1011", converts to "B".
+- Third iteration: Takes "0110", converts to "6".
+- Final result for the fractional part: ".5B36".
 */
 
 /* 
-Constraints explanation:
-- The binary input can be very large, potentially exceeding typical integer limits.
-- The input may also contain a fractional part, denoted by a '.'.
-- We need to handle both integral and fractional parts separately.
+Complete code walkthrough with applying the given input:
+- The input binary "110001110" is split into the integer part "110001110" and no fractional part. It is then converted to hexadecimal as "18E".
+- The input binary "1111001010010100001.010110110011011" is split into integer part "1111001010010100001" and fractional part "010110110011011". 
+  The integer part is converted to hexadecimal as "794A1", and the fractional part is converted to "5B36", giving the final result "794A1.5B36".
 */
-
-/* 
-Relatable analogy or real-world scenario: "The Library Catalog: Grouping Binary Books into Hex Codes"
-Imagine you are a librarian converting a long list of book titles (binary digits) into a more manageable format (hexadecimal). 
-Each book title can be represented by a group of four letters (binary digits). 
-You take each group of four letters and assign it a unique code (hexadecimal digit). 
-If you have a decimal point, it separates two sections of titles (integral and fractional parts) that you treat separately.
-*/
-
-/* 
-Relatable analogy Java code step by step:
-1. Start with reading the binary input.
-2. Split the input into integral and fractional parts if there's a '.'.
-3. For each part, process the digits in chunks of four (like grouping titles).
-4. Convert each group of four binary digits to its hexadecimal equivalent.
-5. Combine the results back, adding the decimal point if needed.
-*/
-// Code without Explanation
-
-import java.util.HashMap;
-
-public class BinaryToHexadecimal
-{
-    private static final HashMap < String, Character > binaryToHexMap = new HashMap < > ();
-
-    static {
-        binaryToHexMap.put("0000", '0');
-        binaryToHexMap.put("0001", '1');
-        binaryToHexMap.put("0010", '2');
-        binaryToHexMap.put("0011", '3');
-        binaryToHexMap.put("0100", '4');
-        binaryToHexMap.put("0101", '5');
-        binaryToHexMap.put("0110", '6');
-        binaryToHexMap.put("0111", '7');
-        binaryToHexMap.put("1000", '8');
-        binaryToHexMap.put("1001", '9');
-        binaryToHexMap.put("1010", 'A');
-        binaryToHexMap.put("1011", 'B');
-        binaryToHexMap.put("1100", 'C');
-        binaryToHexMap.put("1101", 'D');
-        binaryToHexMap.put("1110", 'E'); 
-        binaryToHexMap.put("1111", 'F');
-    }
-
-    public static String convertBinaryToHexadecimal(String binary) {
-        StringBuilder hexResult = new StringBuilder();
-
-        String[] parts = binary.split("\\.");
-        String integralPart = parts[0];
-        String fractionalPart = parts.length > 1 ? parts[1] : "";
-
-        hexResult.append(processBinaryPart(integralPart));
-
-        if (!fractionalPart.isEmpty()) {
-            hexResult.append(".");
-            hexResult.append(processBinaryPart(fractionalPart));
-        }
-
-        return hexResult.toString();
-    }
-
-    private static String processBinaryPart(String binaryPart) {
-        StringBuilder hexPart = new StringBuilder();
-
-
-        int paddingLength = (4 - (binaryPart.length() % 4)) % 4;
-        binaryPart = "0".repeat(paddingLength) + binaryPart;
-
-
-        for (int i = 0; i < binaryPart.length(); i += 4) {
-            String binaryChunk = binaryPart.substring(i, i + 4);
-            hexPart.append(binaryToHexMap.get(binaryChunk));
-        }
-
-        return hexPart.toString();
-    }
-
-    public static void main(String[] args) {
-        String binaryInput = "1111001010010100001.010110110011011";
-        String result = convertBinaryToHexadecimal(binaryInput);
-        System.out.println(result);
-    }
-}
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-// Code with Explanation
-    
-import java.util.HashMap;
-
-public class BinaryToHexadecimal {
-
-    // Step 1: Create a mapping from binary strings to hexadecimal characters
-    private static final HashMap<String, Character> binaryToHexMap = new HashMap<>();
-    /* 
-    The line: private static final HashMap<String, Character> binaryToHexMap = new HashMap<>();
-    declares and initializes a `HashMap` in Java that is used to map 4-bit binary strings 
-    (e.g., `"0000"`, `"0001"`, `"1111"`) to their corresponding hexadecimal characters (e.g., `'0'`, `'1'`, `'F'`).
-
- 1. `private` Access Modifier
-   - The `private` keyword means that this `HashMap` can only be accessed from within the `BinaryToHexadecimal` class.
-   - It cannot be accessed or modified from other classes, 
-      which is typical for utility structures that don't need to be exposed outside of their class.
-
- 2. `static` Keyword
-   - The `static` keyword means that the `HashMap` is shared among all instances of the `BinaryToHexadecimal` class, 
-      rather than being specific to any one instance.
-   - Since the `HashMap` is used as a constant and initialized once, it makes sense to declare it as `static`.
-
- 3. `final` Keyword
-   - The `final` keyword means that once this `HashMap` is assigned a value (in this case, 
-      initialized with key-value pairs), it cannot be reassigned to point to a different `HashMap` object.
-   - However, the contents of the `HashMap` (the mappings) can still be modified
-       (like adding or removing key-value pairs), but the reference to the `HashMap` itself is fixed.
-
- 4. `HashMap<String, Character>`
-   - `HashMap`: A `HashMap` is a data structure in Java that stores key-value pairs. It allows you to efficiently look up values by their keys.
-   - `String`: This is the type of the key in the map. In this case, each key is a 4-bit binary string (e.g., `"0000"`, `"0010"`, `"1111"`).
-   - `Character`: This is the type of the value in the map.
-      In this case, each value is a hexadecimal character corresponding to the 4-bit binary string (e.g., `'0'`, `'A'`, `'F'`).
-
- 5. Initialization with `new HashMap<>()`
-   - This creates a new, empty `HashMap` that will hold key-value pairs where:
-     - The key is a binary string of 4 characters (e.g., `"0000"`).
-     - The value is a hexadecimal character (e.g., `'0'`, `'A'`).
-   - The `<>` (diamond operator) infers the types from the declaration, so you don’t need to repeat `String` and `Character` on the right-hand side.
-
- Usage of `binaryToHexMap`
- The `binaryToHexMap` is used to convert binary strings to hexadecimal characters by associating 4-bit binary strings with their corresponding hexadecimal digits.
-
-For example, the map might contain entries like:
-
-- `"0000"` maps to `'0'`
-- `"0001"` maps to `'1'`
-- `"1010"` maps to `'A'`
-- `"1111"` maps to `'F'`
-
-When you process a 4-bit segment of a binary number, you can quickly look up its hexadecimal equivalent by querying this map.
-
-Example of Populating the `HashMap`
-
-In your code, the `binaryToHexMap` is populated inside a `static` block, 
-which is a special block that runs once when the class is loaded. Here’s an example of what that looks like:
-
-
-static {
-    binaryToHexMap.put("0000", '0');
-    binaryToHexMap.put("0001", '1');
-    binaryToHexMap.put("0010", '2');
-    binaryToHexMap.put("0011", '3');
-    binaryToHexMap.put("0100", '4');
-    binaryToHexMap.put("0101", '5');
-    binaryToHexMap.put("0110", '6');
-    binaryToHexMap.put("0111", '7');
-    binaryToHexMap.put("1000", '8');
-    binaryToHexMap.put("1001", '9');
-    binaryToHexMap.put("1010", 'A');
-    binaryToHexMap.put("1011", 'B');
-    binaryToHexMap.put("1100", 'C');
-    binaryToHexMap.put("1101", 'D');
-    binaryToHexMap.put("1110", 'E');
-    binaryToHexMap.put("1111", 'F');
-}
-How the `binaryToHexMap` is Used
-The `binaryToHexMap` is used inside your method `processBinaryPart(String binaryPart)` 
-to convert 4-bit chunks of the binary string into their hexadecimal equivalents:
-
-1. First, the binary string is padded (if necessary) so its length is a multiple of 4.
-2. Then, the string is processed in chunks of 4 bits.
-3. For each chunk, the program looks up the corresponding hexadecimal character from the `binaryToHexMap`.
-
-For example:
-- If the 4-bit binary chunk is `"1010"`, the map lookup would be `binaryToHexMap.get("1010")`, which returns `'A'`.
-
- Summary:
-- `binaryToHexMap` is a `HashMap` used to map 4-bit binary strings to their corresponding hexadecimal characters.
-- This map is initialized  once using a `static` block when the class is loaded.
-- The `binaryToHexMap` is then used to look up the hexadecimal equivalent of each 4-bit chunk of the binary string during the conversion process.
-
-    */
-    
-    static {
-        binaryToHexMap.put("0000", '0');
-        binaryToHexMap.put("0001", '1');
-        binaryToHexMap.put("0010", '2');
-        binaryToHexMap.put("0011", '3');
-        binaryToHexMap.put("0100", '4');
-        binaryToHexMap.put("0101", '5');
-        binaryToHexMap.put("0110", '6');
-        binaryToHexMap.put("0111", '7');
-        binaryToHexMap.put("1000", '8');
-        binaryToHexMap.put("1001", '9');
-        binaryToHexMap.put("1010", 'A');
-        binaryToHexMap.put("1011", 'B');
-        binaryToHexMap.put("1100", 'C');
-        binaryToHexMap.put("1101", 'D');
-        binaryToHexMap.put("1110", 'E');
-        binaryToHexMap.put("1111", 'F');
-        
-        /*
-        In Java, the `static` keyword has specific meanings depending on where it is applied. 
-        When used in a static block, it indicates that the block belongs to the class itself
-        rather than any particular instance of the class.
-        Here’s why using `static` is beneficial in this context:
-        
-        ### Reasons for Using `static`
-        
-        1. **Class-Level Initialization**: 
-           - The static block runs when the class is loaded, 
-           which means that the `binaryToHexMap` is initialized only once, 
-           regardless of how many instances of the class are created. 
-           This is efficient because it avoids repeated initialization.
-        
-        2. **Shared Resource**: 
-           - Since `binaryToHexMap` is static, 
-           it is shared across all instances of the class. 
-           This is suitable for resources that don’t need to be unique to each instance,
-           such as a mapping of binary strings to hexadecimal values.
-        
-        3. **Performance**: 
-           - Initializing the map once and reusing it for all method calls improves performance.
-           If the map were initialized in a method,
-           it would incur overhead each time the method is called.
-        
-        4. **Accessibility**: 
-           - Static members can be accessed without needing to create an instance of the class.
-           This is particularly useful if the map is used in static methods,
-           allowing for straightforward access.
-        
-        ### Example Scenario
-        Suppose you are creating a large application that frequently converts binary to hexadecimal.
-        By using a static map, you ensure that the mapping is set up only once at the start, 
-        which saves time and resources compared to recreating the map every time a conversion is needed.
-        
-        ### Summary
-        In summary, using `static` for the initialization block and the `binaryToHexMap` enhances efficiency,
-        ensures shared access, and simplifies the design of the class. 
-        */
-    }
-
-    public static void main(String[] args) {
-        String binaryInput = "1111001010010100001.010110110011011";
-        String result = convertBinaryToHexadecimal(binaryInput);
-        System.out.println(result);
-    }
-
-    // Step 2: Convert the binary string to hexadecimal
-    public static String convertBinaryToHexadecimal(String binary) {
-        StringBuilder hexResult = new StringBuilder();
-        
-        // Step 3: Split the binary string into integral and fractional parts
-        String[] parts = binary.split("\\.");
-        String integralPart = parts[0];
-        // using Tenory operator "condition ? value_if_true : value_if_false;"
-        // Explaination : 
-        //    if parts.length is greater than 1 means, fractionalPart will be parts array index 1 element
-        //       parts.length is lesser than 1 means, "" this will the value in fractionalPart
-        String fractionalPart = parts.length > 1 ? parts[1] : "";
-        /* 
-    
-        The line of code you provided is used to handle the fractional part of a binary number
-        when converting it to hexadecimal. 
-        Let's break it down step by step:
-
-        ### Explanation of the Code
-
-        String fractionalPart = parts.length > 1 ? parts[1] : "";
-        
-        1. **Splitting the Input**:
-           - Prior to this line, the binary input string is split using the `split("\\.")` method,
-             which separates the integral and fractional parts based on the decimal point (`.`).
-             This results in an array called `parts`.
-        
-        2. **Array Length Check**:
-           - The `parts.length > 1` check determines if there is a fractional part present. 
-           - If the input string contains a decimal point,
-            `parts` will have at least two elements: `parts[0]` will be the integral part, 
-            and `parts[1]` will be the fractional part.
-        
-        3. **Ternary Operator**:
-           - The line uses the ternary operator `? :` to assign a value to `fractionalPart`.
-           - If `parts.length` is greater than 1, it means there is a fractional part,
-           and `parts[1]` is assigned to `fractionalPart`.
-           - If there is no fractional part (i.e., `parts.length` is 1),
-           an empty string `""` is assigned to `fractionalPart`.
-        
-        ### Purpose of This Line
-        
-        - **Robust Handling**: This line ensures that the code can handle both cases: 
-            binary inputs with and without a fractional part.
-        - **Prevention of Null Pointer Exceptions**: By checking the length of the `parts` array, 
-            the code avoids potential errors when trying to access an index that doesn’t exist.
-        
-        ### Example Scenarios
-        
-        1. **With Fractional Part**:
-           - Input: `111100101.0101`
-           - After splitting: `parts[0]` = `111100101`, `parts[1]` = `0101`
-           - Result: `fractionalPart` = `0101`
-        
-        2. **Without Fractional Part**:
-           - Input: `111100101`
-           - After splitting: `parts[0]` = `111100101`, `parts.length` = 1
-           - Result: `fractionalPart` = `""`
-
-        */
-
-        // Step 4: Process the integral part
-        hexResult.append(processBinaryPart(integralPart));
-
-        // Step 5: Process the fractional part if exists
-        if (!fractionalPart.isEmpty()) {
-            hexResult.append(".");
-            hexResult.append(processBinaryPart(fractionalPart));
-        }
-
-        return hexResult.toString();
-    }
-
-    // Helper method to convert binary part to hexadecimal
-    private static String processBinaryPart(String binaryPart) {
-        StringBuilder hexPart = new StringBuilder();
-        
-        // Padding the binary string to make its length a multiple of 4
-        int paddingLength = (4 - (binaryPart.length() % 4)) % 4;
-        binaryPart = "0".repeat(paddingLength) + binaryPart;
-        /* 
-        The lines:
-        int paddingLength = (4 - (binaryPart.length() % 4)) % 4;
-        binaryPart = "0".repeat(paddingLength) + binaryPart;
-      
-        are used to pad the binary string (`binaryPart`) to make its length a multiple of 4. 
-        This is necessary because each hexadecimal digit corresponds to exactly 4 binary digits (bits).
-        If the length of the binary part is not a multiple of 4,
-        padding with zeros ensures that it can be split into 4-bit chunks for conversion to hexadecimal.
-      
-        Let me explain each part in detail:
-      
-           1. `binaryPart.length() % 4`: 
-             - This expression calculates the remainder when the length of the binary string (`binaryPart.length()`) is divided by 4. 
-             - For example, if `binaryPart` has a length of 7, `binaryPart.length() % 4` would be `7 % 4 = 3`.
-          
-           2. `(4 - (binaryPart.length() % 4)) % 4`: 
-             - This part calculates how many zeros need to be added to the front of the binary string to make its length a multiple of 4.
-             - The formula works like this:
-               - If the remainder is 0 (`binaryPart.length() % 4 == 0`), it means the length is already a multiple of 4, so no padding is needed, and `paddingLength` will be `0`.
-               - If the remainder is 1, 2, or 3, this formula calculates how many zeros need to be added to make the total length divisible by 4.
-             
-             For example:
-             - If `binaryPart.length() % 4 = 3` (i.e., the length is 7), the formula calculates `4 - 3 = 1`, so 1 zero will be added to make the total length 8.
-             - If `binaryPart.length() % 4 = 2` (i.e., the length is 6), the formula calculates `4 - 2 = 2`, so 2 zeros will be added to make the total length 8.
-             - If `binaryPart.length() % 4 = 1` (i.e., the length is 5), the formula calculates `4 - 1 = 3`, so 3 zeros will be added to make the total length 8.
-             - If `binaryPart.length() % 4 = 0` (i.e., the length is already a multiple of 4), the formula calculates `4 - 0 = 0`, so no zeros are added.
-          
-           3. `binaryPart = "0".repeat(paddingLength) + binaryPart;`:
-             - This line creates a string of zeros of length `paddingLength` (calculated in the previous step) and prepends it to the `binaryPart`.
-             - The `"0".repeat(paddingLength)` method creates a string consisting of `paddingLength` zeros.
-               This string is then concatenated with the original `binaryPart`, ensuring that the binary string now has a length that is a multiple of 4.
-             
-             For example:
-             - If `paddingLength = 2` and `binaryPart = "1101"`, it will result in `"001101"`.
-             - If `paddingLength = 0` and `binaryPart = "1101"`, it will remain `"1101"`.
-             
-          Let’s go through a concrete example to see how this works:
-          
-           Example 1: `binaryPart = "1101"` (already a multiple of 4)
-             - `binaryPart.length() = 4`
-             - `binaryPart.length() % 4 = 0`
-             - `paddingLength = (4 - 0) % 4 = 0`
-             - No padding is needed. The final `binaryPart` remains `"1101"`.
-          
-           Example 2: `binaryPart = "110"` (length = 3, not a multiple of 4)
-             - `binaryPart.length() = 3`
-             - `binaryPart.length() % 4 = 3`
-             - `paddingLength = (4 - 3) % 4 = 1`
-             - `"0".repeat(1)` results in `"0"`.
-             - Prepending `"0"` to `"110"` results in `"0110"`. Now the length is 4, which is divisible by 4.
-          
-           Example 3: `binaryPart = "101"` (length = 3, not a multiple of 4)
-             - `binaryPart.length() = 3`
-             - `binaryPart.length() % 4 = 3`
-             - `paddingLength = (4 - 3) % 4 = 1`
-             - `"0".repeat(1)` results in `"0"`.
-             - Prepending `"0"` to `"101"` results in `"0101"`. Now the length is 4.
-          
-           Why Do We Need This Padding?
-          
-          Hexadecimal (base 16) uses 4 bits to represent each digit:
-          - 1 hex digit = 4 bits (binary digits).
-          - If the binary string isn’t a multiple of 4, 
-            we need to pad it with zeros at the front to ensure that the final string can be divided into 4-bit chunks.
-          
-          For example:
-          - Binary `101` (length 3) becomes `0101` (length 4), so it can be correctly mapped to hexadecimal.
-          - Binary `111` (length 3) becomes `0111` (length 4), which can then be converted to hexadecimal.
-          
-          Without padding, the binary string would be incomplete when mapped to hexadecimal, resulting in incorrect conversions.
-          
-           Summary:
-          The code:
-          int paddingLength = (4 - (binaryPart.length() % 4)) % 4;
-          binaryPart = "0".repeat(paddingLength) + binaryPart;
-          
-          1. Calculates how many zeros are needed to pad the binary string to a multiple of 4 bits.
-          2. Prepares the string by prepending the necessary number of zeros to the original `binaryPart`.
-          3. Ensures that the binary string can be split into groups of 4 bits, 
-              each of which will then be converted to a hexadecimal digit.
-          
-          This is crucial for correctly converting binary numbers to hexadecimal, 
-           especially for cases where the binary string is not already a multiple of 4 in length.         
-        */
-
-        // Step 6: Convert each group of 4 binary digits
-        for (int i = 0; i < binaryPart.length(); i += 4) {
-            String binaryChunk = binaryPart.substring(i, i + 4);
-            hexPart.append(binaryToHexMap.get(binaryChunk));
-        }
-        /*
-        The code snippet you've posted:
-
-        for (int i = 0; i < binaryPart.length(); i += 4) {
-            String binaryChunk = binaryPart.substring(i, i + 4);
-            hexPart.append(binaryToHexMap.get(binaryChunk));
-        }
-        
-        is part of the method that converts binary strings into hexadecimal. 
-        This loop processes the binary string (`binaryPart`) in 4-bit chunks and uses the `binaryToHexMap` to look up each chunk's corresponding hexadecimal value.
-        
-         Let’s break it down:
-        1. The `for` loop:
-             for (int i = 0; i < binaryPart.length(); i += 4)
-             - This loop iterates over the `binaryPart` string.
-             - `i += 4` ensures that the loop moves by 4 positions in each iteration, effectively processing each 4-bit chunk of the binary string.
-             - The condition `i < binaryPart.length()` ensures that the loop runs until all the binary digits are processed.
-        
-         2. Extracting a 4-bit chunk:
-             String binaryChunk = binaryPart.substring(i, i + 4);
-        - `binaryPart.substring(i, i + 4)` extracts a substring of length 4, starting at position `i` and ending at position `i + 4`.
-        - This represents a 4-bit chunk from the binary string.
-        - Example:
-          - If `binaryPart` is `"11010111"`, on the first iteration when `i = 0`, `binaryChunk` will be `"1101"`.
-          - On the second iteration when `i = 4`, `binaryChunk` will be `"0111"`.
-        
-         3. Looking up the hexadecimal value:
-             hexPart.append(binaryToHexMap.get(binaryChunk));
-        - `binaryToHexMap.get(binaryChunk)` uses the `binaryToHexMap` `HashMap`
-            to find the hexadecimal character that corresponds to the current 4-bit chunk.
-        - The `binaryToHexMap` stores the relationship between a 4-bit binary string (the key)
-           and its corresponding hexadecimal character (the value).
-          
-        For example:
-        - `"0000"` maps to `'0'`
-        - `"0001"` maps to `'1'`
-        - `"1010"` maps to `'A'`
-        - `"1111"` maps to `'F'`
-        
-        - `hexPart.append(...)` appends the hexadecimal character to the `StringBuilder` (`hexPart`), which is used to build the final hexadecimal string.
-        
-        Let’s go through an example to see how this works.
-        
-         Input:
-        Let’s say `binaryPart` is `"11010111"`. The goal is to convert this binary string into its hexadecimal representation.
-        
-         Iteration 1 (i = 0):
-        - `binaryChunk` is `"1101"`.
-        - Look up `"1101"` in the `binaryToHexMap`, which gives `'D'`.
-        - Append `'D'` to `hexPart`.
-        
-         Iteration 2 (i = 4):
-        - `binaryChunk` is `"0111"`.
-        - Look up `"0111"` in the `binaryToHexMap`, which gives `'7'`.
-        - Append `'7'` to `hexPart`.
-        
-         Final `hexPart`:
-        - After the loop completes, `hexPart` will contain the string `"D7"`.
-        So, the binary string `"11010111"` is successfully converted to the hexadecimal string `"D7"`.
-        
-         Considerations:
-        - Padding: Before entering this loop, it's important that the `binaryPart` has a length that is a multiple of 4.
-           If it's not, the binary string is padded with leading zeros (as described in a previous part of the code) to ensure that each 4-bit chunk is complete. 
-        - Fractional Part: If you have a binary string that includes a fractional part (after a decimal point),
-           The same process applies to both the integral and fractional parts, handling each part separately.
-        
-        Code Recap:
-        The full method where this snippet is used (in your code) looks like this:
-        private static String processBinaryPart(String binaryPart) {
-            StringBuilder hexPart = new StringBuilder();
-        
-            // Padding the binary string to make its length a multiple of 4
-            int paddingLength = (4 - (binaryPart.length() % 4)) % 4;
-            binaryPart = "0".repeat(paddingLength) + binaryPart;
-        
-            // Convert each group of 4 binary digits
-            for (int i = 0; i < binaryPart.length(); i += 4) {
-                String binaryChunk = binaryPart.substring(i, i + 4);
-                hexPart.append(binaryToHexMap.get(binaryChunk));
-            }
-            return hexPart.toString();
-        }
-        
-        This method:
-        1. Pads the binary string if necessary to ensure its length is a multiple of 4.
-        2. Splits the padded binary string into 4-bit chunks.
-        3. Converts each 4-bit chunk to its corresponding hexadecimal character using the `binaryToHexMap`.
-        4. Returns the hexadecimal string.
-        
-         Summary:
-        - The `for` loop is responsible for splitting the binary string into 4-bit chunks.
-        - Each chunk is then looked up in the `binaryToHexMap` to get the corresponding hexadecimal value.
-        - The `StringBuilder` (`hexPart`) is used to build the final hexadecimal string by appending the hexadecimal characters for each 4-bit chunk.
-        */
-        return hexPart.toString();
-    }
-}
-
-        /* 
-        Time and Space Complexity Explanation:
-        - Time Complexity: O(n), where n is the number of bits in the binary input. 
-        We iterate over the binary input and process each 4-bit group once.
-        - Space Complexity: O(1) for the hex map, but O(m) for the resulting hexadecimal string where m is its length.
-        */
-        
-        /* 
-        FOR loop walkthrough with every iteration with given input:
-        For the input "1111001010010100001", the loop processes as follows:
-        - After padding: "00001111001010010100001"
-        - 1st iteration (i=0): takes "0000" → '0'
-        - 2nd iteration (i=4): takes "1111" → 'F'
-        - 3rd iteration (i=8): takes "0010" → '2'
-        - 4th iteration (i=12): takes "1001" → '9'
-        - 5th iteration (i=16): takes "0100" → '4'
-        - 6th iteration (i=20): takes "0001" → '1'
-        - Final integral hex: "F29" → appending '.' and continuing to process the fractional part.
-        */
-        
-        /* 
-        Complete code walkthrough with applying the given input in code:
-        - We define a map for binary to hexadecimal conversion.
-        - We split the input into integral and fractional parts.
-        - We pad the integral part to make its length a multiple of 4, then process each chunk to convert to hex.
-        - We do the same for the fractional part if it exists.
-        - Finally, we print the resulting hexadecimal string.
-        */
