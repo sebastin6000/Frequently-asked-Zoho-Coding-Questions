@@ -1,172 +1,203 @@
-/*
-TEMPLATE 
-
-1.Understanding the Problem Statement:
-2.Extracting Information from the Problem Statement:
-2.1 Input data type or data structure - 
-2.2 Expected Output - 
-2.3 Output return data type (or) data structure type - 
-2.4 Understanding the Constraints - 
-2.5 Understanding Time complexity expectations if any in the given problem statement.
-
-3.Thinking Solution for the Problem Statement:
-3.1 Getting Solution from Input to Output conversion:
-
-4.Input to Output convesion steps into smaller subtasks:
-4.1 After finding the steps from input to output conversion convert the steps into subtasks
-
-5.Input to Output conversion subtasks into Code:
-5.1 Things needed to complete eash Subtask ? : For this go any IDE with the subtasks and start to code.
-5.2 Do every subtask in an Efficient manner with efficient Data structure and Algorithm.
-5.2.1 Efficient data structure - 
-5.2.2 Efficient Algorithm / pattern - 
-
-*/
 /* 
-Question:
-Given an array arr[] of positive integers, your task is to sort the array such that:
-1. The first part of the array contains odd numbers sorted in descending order.
-2. The rest of the array contains even numbers sorted in ascending order.
+Section -1 (Question section)
+Problem Statement:
+Given an array arr[] of positive integers. Your task is to sort them so that the first part of the array contains odd numbers sorted in descending order, 
+and the rest of the portion contains even numbers sorted in ascending order.
 
-Example 1:
+Examples:
+
 Input: arr[] = [1, 2, 3, 5, 4, 7, 10]
 Output: [7, 5, 3, 1, 2, 4, 10]
-Explanation: 7, 5, 3, 1 are odd numbers in descending order, and 2, 4, 10 are even numbers in ascending order.
+Explanation: 7 5 3 1 are odds in descending order and 2 4 10 are evens in ascending order.
 
-Example 2:
 Input: arr[] = [0, 4, 5, 3, 7, 2, 1]
 Output: [7, 5, 3, 1, 0, 2, 4]
-Explanation: 7, 5, 3, 1 are odd numbers in descending order, and 0, 2, 4 are even numbers in ascending order.
+Explanation: 7 5 3 1 are odds in descending order and 0 2 4 are evens in ascending order.
 
-Your Task:
-Complete the function sortOddEven() 
-that takes arr as input and returns the sorted array with odd numbers first (sorted in descending order) and even numbers second (sorted in ascending order).
-
-Expected Time Complexity: O(nlogn)
-Expected Space Complexity: O(1)
+Expected Time Complexity: O(nlog(n))
+Expected Auxiliary Space: O(1)
 
 Constraints:
 1 ≤ arr.size() ≤ 10^5
-0 ≤ arr[i] ≤ 10^18
+0 ≤ arri ≤ 10^18
 */
 
-/* 
-Understanding the Problem Statement:
-We need to rearrange the elements of the array such that all the odd numbers are grouped together at the start in descending order, 
-and all the even numbers are grouped together at the end in ascending order.
-The array should be sorted in a way where odd numbers are in descending order followed by even numbers in ascending order.
+ /* 
+Section - 2 (Understanding the Problem Statement section)
+In the problem statement, we are tasked with sorting an array such that:
+1. Odd numbers should come first and be sorted in descending order.
+2. Even numbers should follow, sorted in ascending order.
+The main goal is to first segregate odd and even numbers, and then sort them separately in the specified order. 
+The constraints suggest the need for an efficient sorting algorithm, ideally with O(n log n) time complexity.
 
-Extracting Information from the Problem Statement:
-- Input: An array `arr[]` of positive integers.
-- Expected Output: The array sorted with odd numbers in descending order followed by even numbers in ascending order.
-- Time Complexity: O(n log n), where n is the size of the array.
-- Space Complexity: O(1), we can do this in-place without using extra space.
+The constraints also tell us that the array can have up to \(10^5\) elements, and the values of the array elements can be as large as \(10^{18}\). 
+This means that we need to handle large numbers and large input sizes efficiently.
+ */
 
-Constraints:
-- The size of the array can be up to 10^5.
-- The integers can be as large as 10^18.
+ /* 
+Section - 3 (Extracting Information from the Problem Statement section)
+- The input is an array of positive integers (arr[]), where the size of the array can be up to 10^5 elements.
+- We need to return a sorted array where:
+  1. The first part of the array contains odd numbers sorted in descending order.
+  2. The second part contains even numbers sorted in ascending order.
+- Expected output is an array that meets these conditions.
+- The time complexity should be O(n log n), meaning we should focus on using sorting algorithms like quicksort or mergesort.
+- The space complexity should be O(1), meaning we should aim to solve the problem without using extra space apart from the input array itself.
+- The constraints for the input size and number values indicate that the solution should be scalable for large inputs.
+ */
 
-Thinking Solution for the Problem Statement:
-1. Identify the odd and even numbers in the array.
+ /* 
+Section - 4 (Thinking Solution for the Problem Statement section)
+To solve this problem, we can break it down into the following steps:
+1. Separate the odd and even numbers into two lists.
 2. Sort the odd numbers in descending order.
 3. Sort the even numbers in ascending order.
-4. Combine the sorted odd and even numbers into a single array.
-5. Return the result.
+4. Concatenate the sorted odd numbers with the sorted even numbers to form the final sorted array.
+5. The sorting step requires an efficient algorithm (like quicksort or mergesort), and since we want the space complexity to be O(1), we should avoid extra memory usage.
+The constraints (1 ≤ arr.size() ≤ 10^5, 0 ≤ arri ≤ 10^18) require that our solution is both time-efficient and can handle large integers.
+ */
 
-Subtasks:
-1. Extract odd numbers and even numbers from the array.
-2. Sort odd numbers in descending order and even numbers in ascending order.
-3. Merge the two sorted lists into the result array.
+ /* 
+Section - 5 (Input to Output conversion steps into smaller subtasks section)
+Subtask 1: Separate the odd and even numbers into two separate lists.
+Subtask 2: Sort the odd numbers in descending order.
+Subtask 3: Sort the even numbers in ascending order.
+Subtask 4: Concatenate the sorted odd and even lists to form the final array.
+ */
 
-Subtasks of Conversional Solution into Code:
-- Extract odd and even numbers: We can iterate through the array and separate the odd and even numbers.
-- Sort the numbers: Use Java's built-in sorting functions to sort the odd and even numbers.
-- Combine the sorted arrays: After sorting, we combine the two arrays (odd and even) into one.
+ /* 
+Section - 6 (Input to Output conversion subtasks into Code section)
+Subtask 1: Separate the numbers into odd and even lists.
+Subtask 2: Sort the odd list in descending order.
+Subtask 3: Sort the even list in ascending order.
+Subtask 4: Concatenate the two lists (odd list + even list) and return the final array.
+ */
 
-Java Code according to Conversational Subtasks:
+ /* 
+Section - 7 (Code Requirement to complete the subtasks section)
+We need:
+1. A loop to iterate through the array and separate odd and even numbers.
+2. Sorting functions to sort both the odd and even arrays.
+3. A way to combine the two sorted lists into one final array.
+4. A function to handle the sorting and array manipulation.
+ */
 
+ /* 
+Section - 8 (Explanation of Approach section)
+1. We start by iterating through the array and segregating the odd and even numbers into two separate lists.
+2. We then sort the odd numbers in descending order using a built-in sorting method (e.g., `Arrays.sort()` with a custom comparator).
+3. Similarly, we sort the even numbers in ascending order using `Arrays.sort()`.
+4. After sorting, we concatenate the two lists: odd numbers first (descending), followed by even numbers (ascending).
+5. The complexity is dominated by the sorting step, which is O(n log n), and we use O(1) extra space, adhering to the problem's constraints.
+6. The approach handles both large arrays and large numbers, ensuring efficiency for the given input size (up to 100,000 elements).
+ */
+
+ /* 
+Section - 9 (Java Code according to Input to Output conversion subtasks)
 */
-
 import java.util.*;
 
-public class StringTransformation {
-  
-    // Function to sort the odd and even numbers as per the requirement
-    public static int[] sortOddEven(int[] arr) {
-        // Lists to store odd and even numbers
-        List<Integer> odds = new ArrayList<>();
-        List<Integer> evens = new ArrayList<>();
-        
+public class OddEvenSorter {
+
+    // Main function for testing
+    public static void main(String[] args) {
+        // Test the function with sample input
+        long[] arr = {1, 2, 3, 5, 4, 7, 10};
+        System.out.println(Arrays.toString(sortOddEven(arr)));  // Expected output: [7, 5, 3, 1, 2, 4, 10]
+    }
+
+    // Function to sort odd numbers in descending order and even numbers in ascending order
+    public static long[] sortOddEven(long[] arr) {
         // Step 1: Separate odd and even numbers
-        for (int num : arr) {
+        List<Long> oddNumbers = new ArrayList<>();
+        List<Long> evenNumbers = new ArrayList<>();
+
+        for (long num : arr) {
             if (num % 2 == 0) {
-                evens.add(num);
+                evenNumbers.add(num);
             } else {
-                odds.add(num);
+                oddNumbers.add(num);
             }
         }
-        
-        // Step 2: Sort odd numbers in descending order
-        Collections.sort(odds, Collections.reverseOrder());
-        
-        // Step 3: Sort even numbers in ascending order
-        Collections.sort(evens);
-        
-        // Step 4: Combine the sorted odd and even numbers into the result
-        int[] result = new int[arr.length];
-        int i = 0;
-        for (int odd : odds) {
-            result[i++] = odd;
-        }
-        for (int even : evens) {
-            result[i++] = even;
-        }
-        
-        // Return the final sorted array
-        return result;
-    }
-  
-    // Main method to test the function
-    public static void main(String[] args) {
-        // Test Case 1
-        int[] arr1 = {1, 2, 3, 5, 4, 7, 10};
-        System.out.println(Arrays.toString(sortOddEven(arr1))); // Expected Output: [7, 5, 3, 1, 2, 4, 10]
 
-        // Test Case 2
-        int[] arr2 = {0, 4, 5, 3, 7, 2, 1};
-        System.out.println(Arrays.toString(sortOddEven(arr2))); // Expected Output: [7, 5, 3, 1, 0, 2, 4]
+        // Step 2: Sort odd numbers in descending order
+        Collections.sort(oddNumbers, Collections.reverseOrder());
+
+        // Step 3: Sort even numbers in ascending order
+        Collections.sort(evenNumbers);
+
+        // Step 4: Combine the results
+        long[] result = new long[arr.length];
+        int index = 0;
+        
+        // Add sorted odd numbers to result array
+        for (long odd : oddNumbers) {
+            result[index++] = odd;
+        }
+        
+        // Add sorted even numbers to result array
+        for (long even : evenNumbers) {
+            result[index++] = even;
+        }
+
+        return result;
     }
 }
 
 /*
-Time and Space Complexity Explanation:
-- **Time Complexity**: 
-  - Separating odd and even numbers takes O(n), where n is the size of the array.
-  - Sorting the odd numbers in descending order takes O(n log n).
-  - Sorting the even numbers in ascending order also takes O(n log n).
-  - Therefore, the total time complexity is O(n log n).
-  
-- **Space Complexity**: 
-  - We use two lists (`odds` and `evens`) to store the odd and even numbers, which takes O(n) space.
-  - The result array takes O(n) space as well, leading to a total space complexity of O(n).
+Section - 10 (Time and Space Complexity Explanation)
+Time Complexity:
+- Separating the numbers into odd and even takes O(n) time, where n is the number of elements in the array.
+- Sorting the odd numbers and even numbers each takes O(n log n) time (since sorting is the most expensive operation).
+- Combining the two sorted lists into one takes O(n) time.
+Thus, the overall time complexity is O(n log n).
 
-Complete Code Walkthrough:
-- First, we iterate through the array to separate odd and even numbers. We use two lists: `odds` for odd numbers and `evens` for even numbers.
-- After that, we sort the `odds` list in descending order using `Collections.sort` with `Collections.reverseOrder()`, 
-  and sort the `evens` list in ascending order using the default sorting behavior of `Collections.sort`.
-- Finally, we combine the sorted odd and even numbers into the `result` array and return it.
+Space Complexity:
+- We use two lists (oddNumbers and evenNumbers), but they only store the elements in the input array. 
+- Since no extra space proportional to the input size is used (beyond the input and two temporary lists), 
+  the space complexity is O(1) auxiliary space, excluding the space used by the input array itself.
 
-Test Case 1:
-- Input: [1, 2, 3, 5, 4, 7, 10]
-- Odd numbers: [1, 3, 5, 7] (sorted in descending order: [7, 5, 3, 1])
-- Even numbers: [2, 4, 10] (sorted in ascending order: [2, 4, 10])
-- Combined result: [7, 5, 3, 1, 2, 4, 10]
+ */
 
-Test Case 2:
-- Input: [0, 4, 5, 3, 7, 2, 1]
-- Odd numbers: [5, 3, 7, 1] (sorted in descending order: [7, 5, 3, 1])
-- Even numbers: [0, 4, 2] (sorted in ascending order: [0, 2, 4])
-- Combined result: [7, 5, 3, 1, 0, 2, 4]
-*/ 
+/* 
+Section - 11 (If “for” loop or “while” loop are used in the code you have to walkthrough all the(more than 1) 
+“for” loop or “while” loop used in the code with every iteration with given input and this section has to be inside this structure of comments)
+Explanation of loops:
 
+Loop 1 (Separation of odd and even numbers):
+- This loop iterates through each element of the input array.
+- For input arr[] = [1, 2, 3, 5, 4, 7, 10], we check each element:
+  - 1 is odd, add to oddNumbers
+  - 2 is even, add to evenNumbers
+  - 3 is odd, add to oddNumbers
+  - 5 is odd, add to oddNumbers
+  - 4 is even, add to evenNumbers
+  - 7 is odd, add to oddNumbers
+  - 10 is even, add to evenNumbers
 
+Loop 2 (Sorting odd numbers in descending order):
+- After separating, the odd numbers list will be: [1, 3, 5, 7]
+- Sorting this in descending order gives: [7, 5, 3, 1]
+
+Loop 3 (Sorting even numbers in ascending order):
+- The even numbers list will be: [2, 4, 10]
+- Sorting this in ascending order gives: [2, 4, 10]
+
+Loop 4 (Combining sorted odd and even numbers):
+- We then combine the sorted odd and even numbers into the result array: [7, 5, 3, 1, 2, 4, 10]
+ */
+
+ /* 
+Section - 12 (Complete code walkthrough with applying the given input in code and explanation)
+The given input is [1, 2, 3, 5, 4, 7, 10].
+1. First, we separate the numbers into odd and even lists:
+   - oddNumbers = [1, 3, 5, 7]
+   - evenNumbers = [2, 4, 10]
+2. Then, we sort the odd numbers in descending order:
+   - sortedOddNumbers = [7, 5, 3, 1]
+3. Next, we sort the even numbers in ascending order:
+   - sortedEvenNumbers = [2, 4, 10]
+4. Finally, we combine the two lists into the result array:
+   - result = [7, 5, 3, 1, 2, 4, 10]
+Thus, the final output is [7, 5, 3, 1, 2, 4, 10].
+ */
