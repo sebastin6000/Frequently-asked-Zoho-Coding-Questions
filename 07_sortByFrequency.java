@@ -86,7 +86,8 @@ S.No | Subtask Description
 Input to Output Conversion Subtasks into Code:
 S.No | Subtask Description                                    | Code Approach
 1    | Calculate the frequency of each element.               | Use a HashMap to store the frequency of each element in the array.
-2    | Sort the elements based on frequency, and if needed, by value. | Use a Comparator to sort by frequency (descending) and by value (ascending).
+2    | Sort the elements based on frequency, and if needed,   |
+       by value.                                              | Use a Comparator to sort by frequency (descending) and by value (ascending).
 3    | Print the sorted array.                                | Iterate through the sorted list and print the elements in the required order.
 
 */
@@ -100,9 +101,7 @@ Code Requirement to Complete the Subtasks:
 
 */
 
-/* 
-Java Code According to Conversational Subtasks:
-*/
+/* Java Code According to Conversational Subtasks: */
 
 import java.util.*;
 
