@@ -93,9 +93,7 @@ This approach is efficient with a time complexity of O(N log log N).
 
 */
 
-/* 
-Section-9: Java Code According to Input to Output Conversion Subtasks
-*/
+/* Section-9: Java Code According to Input to Output Conversion Subtasks */
 public class PrimeNumbers {
 
     // Function to print all prime numbers from 1 to N
@@ -141,8 +139,7 @@ We use a boolean array of size N+1 to store the primality of each number up to N
 /* 
 Section-11: Explanation of Loops and Iterations
 - We have two loops in the code:
-1. The outer loop in the Sieve of Eratosthenes runs from 2 to sqrt(N). For each prime number `i`, 
-it marks all multiples of `i` as non-prime.
+1. The outer loop in the Sieve of Eratosthenes runs from 2 to sqrt(N). For each prime number `i`, it marks all multiples of `i` as non-prime.
 2. The second loop prints the numbers from 2 to N that are marked as prime in the `isPrime[]` array.
 
 For example, with N = 10:
@@ -167,10 +164,11 @@ Input: N = 10
 4. We continue until i reaches sqrt(10).
 5. The second loop prints the prime numbers: 2 3 5 7.
 */
+
 /*
 Key Concepts:
-1. **Prime Numbers**: Numbers greater than 1 that are divisible only by 1 and themselves.
-2. **Sieve of Eratosthenes**: An efficient algorithm to find all primes up to a number `N` by marking multiples of each prime number starting from 2.
-3. **Time Complexity**: O(N log log N) due to the sieve algorithm, which is efficient for large N (up to 10^4).
-4. **Space Complexity**: O(N)
+1. Prime Numbers: Numbers greater than 1 that are divisible only by 1 and themselves.
+2. Sieve of Eratosthenes: An efficient algorithm to find all primes up to a number `N` by marking multiples of each prime number starting from 2.
+3. Time Complexity: O(N log log N) due to the sieve algorithm, which is efficient for large N (up to 10^4).
+4. Space Complexity: O(N)
 */
