@@ -62,9 +62,9 @@ S. No. | Task                                                                 | 
 1      | Convert each Hexadecimal digit to its binary equivalent.             | Hexadecimal '1' -> '0001', 'A' -> '1010', 'C' -> '1100', etc.
 2      | Concatenate the binary values into a final binary string.            | After converting each digit, we join them together.
 3      | Handle leading zeros by ensuring each hex digit is                   |
-         represented by exactly 4 bits. | For example, 'A' should be '1010',  |
-         not just 'A' without leading zeros.                                  |
--------------------------------------------------------------------------------------------------------------------------------------------
+       |  represented by exactly 4 bits. | For example, 'A' should be '1010', |
+       |  not just 'A' without leading zeros.                                 |
+-------|----------------------------------------------------------------------|-------------------------------------------------------------
 */
 
 /*
@@ -73,9 +73,9 @@ Input to Output Conversion Subtasks into Code:
 2. Append the binary strings to a result string.
 3. Print the final binary string as the output.
 */
+
 /*
 Code Requirement to Complete the Subtasks:
-In order to efficiently convert the hexadecimal number to its binary equivalent, we need to address several key components:
 
 1. Need a Loop: 
     - Yes, we need a loop to iterate through each character in the input hexadecimal string. 
