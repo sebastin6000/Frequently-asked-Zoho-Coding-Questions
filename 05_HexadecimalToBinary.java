@@ -1,6 +1,6 @@
-
 /* 
-Question Section: 
+Section -1 (Question section)
+Problem Statement:
 Given a Hexadecimal number as an input, the task is to convert that number to a Binary number.
 
 Examples:
@@ -17,188 +17,197 @@ Input: Hexadecimal = 5D1F
 Output: Binary = 0101110100011111
 */
 
-/*
-Understanding the Problem Statement:
-The task requires converting a hexadecimal number to its binary equivalent. 
-A hexadecimal number is a base-16 number, and binary is a base-2 number. Every hex digit corresponds to exactly four binary digits (bits). 
-For example, in the given input `1AC5`, the hexadecimal digits `1`, `A`, `C`, and `5` need to be converted to their 4-bit binary representation.
-The goal is to output the binary number as a string of bits.
+ /* 
+Section - 2 (Understanding the Problem Statement section)
+The task is to take a hexadecimal number as input and convert it into its binary representation. A hexadecimal number uses base-16, 
+while binary uses base-2. Every digit in the hexadecimal system can be represented by 4 binary digits (bits).
+
+In this problem:
+1. We are given a hexadecimal string.
+2. We need to convert each hexadecimal character to its binary equivalent, ensuring that each binary representation is exactly 4 bits long.
+3. We will then concatenate the binary values of each hexadecimal character to form the final binary number.
+
+The goal is to implement this conversion and output the binary equivalent of the given hexadecimal number.
 */
 
-/*
-Extracting Information from the Problem Statement:
-1. Input data type or data structure:
-    - The input is a string representing a hexadecimal number (e.g., "1AC5").
-    
-2. Expected Output:
-    - The output should be a string that represents the binary equivalent of the hexadecimal input.
+ /* 
+Section - 3 (Extracting Information from the Problem Statement section)
+1. Input:
+   - A hexadecimal string (e.g., "1AC5", "5D1F") that we need to convert to binary.
+   - The hexadecimal string consists of characters from the set {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F}.
 
-3. Output return data type:
-    - The output is a string, specifically the binary representation of the hexadecimal number.
+2. Output:
+   - A string representing the binary equivalent of the given hexadecimal input.
+   - The binary output should be a concatenation of 4-bit binary representations for each hexadecimal digit.
 
-4. Constraints in the problem statement:
-    - The hexadecimal input can contain upper-case letters (A-F) and digits (0-9).
-    
-5. Time complexity expectations:
-    - The problem does not specify any strict time complexity expectations, but we assume we need to optimize the solution for large input sizes.
-    - Given that the number of hexadecimal digits is typically smaller than binary digits, the complexity should be proportional to the length of the input string.
+3. Constraints:
+   - The input hexadecimal string will be valid and consist of only valid hexadecimal characters.
+   - The length of the input string is not specified but is assumed to be reasonable for conversion.
 
+4. Time Complexity:
+   - For a given input string of length `n`, the algorithm iterates over each character once, converting it to binary, so the time complexity is O(n).
+
+5. Space Complexity:
+   - We use a string to store the resulting binary number, and the space complexity is O(n), where `n` is the length of the input hexadecimal string.
+ */
+
+ /* 
+Section - 4 (Thinking Solution for the Problem Statement section)
+To solve the problem, we can follow these steps:
+1. First, create a mapping for each hexadecimal character to its 4-bit binary equivalent.
+2. Then, iterate over the given hexadecimal string.
+3. For each hexadecimal character, retrieve its corresponding 4-bit binary value and concatenate it to a result string.
+4. Finally, return the concatenated binary string as the output.
+
+Each hexadecimal character corresponds to exactly 4 binary digits, 
+so we need to ensure that the binary string for each character is padded with leading zeros if necessary (i.e., ensure it's always 4 bits).
+ */
+
+ /* 
+Section - 5 (Input to Output conversion steps into smaller subtasks section)
+Subtask 1: Create a mapping of hexadecimal characters to their binary equivalents.
+Subtask 2: Iterate over the input hexadecimal string.
+Subtask 3: For each character, get its binary equivalent and ensure it's 4 bits long.
+Subtask 4: Concatenate the binary strings together to form the final result.
+Subtask 5: Output the final binary string.
+ */
+
+ /* 
+Section - 6 (Input to Output conversion subtasks into Code section)
+Subtask 1: We need a mapping between hexadecimal characters and their binary equivalents.
+Subtask 2: We need a loop to iterate through each character in the hexadecimal string.
+Subtask 3: For each character, convert it to binary using the mapping.
+Subtask 4: Concatenate the binary representations and return the final result.
+ */
+
+ /* 
+Section - 7 (Code Requirement to complete the subtasks section)
+We will use:
+1. A `HashMap` to store the hexadecimal to binary mapping.
+2. A loop to iterate through each character in the hexadecimal input string.
+3. String concatenation to form the final binary number.
+4. The `String.format` method or `Integer.toBinaryString` to ensure 4-bit binary representation.
+ */
+
+ /* 
+Section - 8 (Explanation of Approach section)
+1. Mapping: A `HashMap` is used to store the conversion from hexadecimal digits to their 4-bit binary equivalents.
+2. Iterating through input: We iterate through the hexadecimal string, convert each character to binary, and ensure it's exactly 4 bits using `String.format`.
+3. String concatenation: For each binary conversion, we append it to the result string.
+4. Output: Once all hexadecimal characters have been processed, the concatenated binary string is printed as the result.
+ */
+
+ /* 
+Section - 9 (Java Code according to Input to Output conversion subtasks)
 */
+import java.util.HashMap;
 
-/*
-Thinking Solution for the Problem Statement:
-To convert the hexadecimal number to binary:
-1. We need to process each hexadecimal digit individually.
-2. Every hexadecimal digit corresponds to a 4-bit binary representation.
-3. We can use a predefined mapping of hexadecimal characters ('0' to 'F') to their 4-bit binary values.
-4. We need to append each 4-bit binary representation to form the final result.
-5. Leading zeros must be included to ensure each hexadecimal digit is represented as exactly 4 bits.
-*/
+public class HexToBinary 
+{
+    // Function to convert Hexadecimal to Binary
+    public static String convertHexToBinary(String hex) 
+    {
+        // Map of Hexadecimal digits to Binary equivalents
+        HashMap < Character, String > hexToBinaryMap = new HashMap < > ();
+        hexToBinaryMap.put('0', "0000");
+        hexToBinaryMap.put('1', "0001");
+        hexToBinaryMap.put('2', "0010");
+        hexToBinaryMap.put('3', "0011");
+        hexToBinaryMap.put('4', "0100");
+        hexToBinaryMap.put('5', "0101");
+        hexToBinaryMap.put('6', "0110");
+        hexToBinaryMap.put('7', "0111");
+        hexToBinaryMap.put('8', "1000");
+        hexToBinaryMap.put('9', "1001");
+        hexToBinaryMap.put('A', "1010");
+        hexToBinaryMap.put('B', "1011");
+        hexToBinaryMap.put('C', "1100");
+        hexToBinaryMap.put('D', "1101");
+        hexToBinaryMap.put('E', "1110");
+        hexToBinaryMap.put('F', "1111");
 
-/*
-Input to Output Conversion Steps into Smaller Subtasks:
-S. No. | Task                                                                 | Explanation
--------|----------------------------------------------------------------------|-----------------------------------------------------------
-1      | Convert each Hexadecimal digit to its binary equivalent.             | Hexadecimal '1' -> '0001', 'A' -> '1010', 'C' -> '1100', etc.
-2      | Concatenate the binary values into a final binary string.            | After converting each digit, we join them together.
-3      | Handle leading zeros by ensuring each hex digit is                   |
-       |  represented by exactly 4 bits. | For example, 'A' should be '1010', |
-       |  not just 'A' without leading zeros.                                 |
--------|----------------------------------------------------------------------|-------------------------------------------------------------
-*/
-
-/*
-Input to Output Conversion Subtasks into Code:
-1. Convert each Hexadecimal digit to binary using a predefined map or manual conversion.
-2. Append the binary strings to a result string.
-3. Print the final binary string as the output.
-*/
-
-/*
-Code Requirement to Complete the Subtasks:
-
-1. Need a Loop: 
-    - Yes, we need a loop to iterate through each character in the input hexadecimal string. 
-      Each character needs to be processed individually to obtain its binary equivalent.
-
-2. Need a Data Structure: 
-    - We will use an array (or list) to store the binary representations of hexadecimal digits.
-    - Specifically, a `String[]` can be used to store the predefined binary values for each hexadecimal digit (0-9, A-F). 
-    - A `StringBuilder` will be used to accumulate the binary result as we loop through the hexadecimal digits.
-
-3. Need an If Condition:
-    - Yes, we need conditional checks to determine whether a given character is a digit ('0' to '9') or a letter ('A' to 'F'). 
-    - If the character is a digit, we can directly map it to its binary equivalent. 
-      If the character is a letter, we need to map it to its corresponding binary value based on the hexadecimal mapping (A -> 10, B -> 11, ..., F -> 15).
-
-4. Binary Mapping:
-    - We need to manually map each hexadecimal digit (0-9, A-F) to its 4-bit binary string. 
-      This can be done using an array where the index corresponds to the integer value of the hexadecimal character.
-
-5. Concatenation of Binary Values:
-    - After converting each hexadecimal digit into its binary form, we will append the binary value to a result string. 
-    - A `StringBuilder` is ideal for this task since it allows efficient string concatenation.
-
-6. Efficiency Considerations:
-    - We are processing each character of the input once, 
-      so the algorithm is efficient with a time complexity of O(n), where `n` is the length of the hexadecimal input string.
-    - Since each hexadecimal character maps directly to a fixed-length binary string (4 bits), there are no additional complexities in terms of space.
-
-In summary, the required components are:
-- A loop to process each character of the hexadecimal input.
-- A data structure (array or list) to store the binary representations.
-- Conditional checks (if statements) to handle both digits and letters in the hexadecimal string.
-- A `StringBuilder` to efficiently accumulate the final binary result.
-*/
-
-public class HexToBinary {
-    
-    // Method to convert Hexadecimal to Binary
-    public static String hexToBinary(String hex) {
-        // Step 1: Create a map for Hex to Binary conversion
-        String[] hexToBinaryMap = {
-            "0000", "0001", "0010", "0011", "0100", "0101", "0110", "0111", 
-            "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111"
-        };
-        
+        // StringBuilder to store the binary result
         StringBuilder binaryResult = new StringBuilder();
 
-        // Step 2: Loop through each character in the hexadecimal string
-        for (int i = 0; i < hex.length(); i++) {
-            // Convert the hex character to an index (0-15)
+        // Iterate over each character in the hex string
+        for (int i = 0; i < hex.length(); i++) 
+        {
             char hexChar = hex.charAt(i);
-            int index;
-            if (Character.isDigit(hexChar)) {
-                index = hexChar - '0'; // Convert digit to integer (e.g., '5' -> 5)
-            } else {
-                index = hexChar - 'A' + 10; // Convert letter A-F to integer (e.g., 'A' -> 10)
-            }
-            
-            // Append the corresponding 4-bit binary string to the result
-            binaryResult.append(hexToBinaryMap[index]);
+            // Append the corresponding 4-bit binary value for the current hex character
+            binaryResult.append(hexToBinaryMap.get(hexChar));
         }
-        
-        // Step 3: Return the final binary string
         return binaryResult.toString();
     }
-
-    // Main method to test the code
-    public static void main(String[] args) {
-        // Test case 1
+    public static void main(String[] args) 
+    {
+        // Test cases
         String hex1 = "1AC5";
-        String binary1 = hexToBinary(hex1);
-        System.out.println("Hexadecimal: " + hex1 + " -> Binary: " + binary1);
-        
-        // Test case 2
         String hex2 = "5D1F";
-        String binary2 = hexToBinary(hex2);
-        System.out.println("Hexadecimal: " + hex2 + " -> Binary: " + binary2);
+
+        // Output the result for both test cases
+        System.out.println("For Hexadecimal: " + hex1);
+        System.out.println("Binary: " + convertHexToBinary(hex1));
+
+        System.out.println("\nFor Hexadecimal: " + hex2);
+        System.out.println("Binary: " + convertHexToBinary(hex2));
     }
 }
 
-/*
-Time and Space Complexity Explanation:
+/* 
+Section - 10 (Time and Space Complexity Explanation)
 Time Complexity:
-- The time complexity of the algorithm is O(n), where n is the length of the hexadecimal input string.
-- This is because we loop through each character of the hexadecimal string, which is a constant-time operation.
+- The time complexity of the solution is O(n), where `n` is the length of the input hexadecimal string. 
+  We iterate over each character in the string and perform constant-time operations to convert it to binary.
 
 Space Complexity:
-- The space complexity is also O(n), as we use a StringBuilder to store the binary result, which grows linearly with the number of hexadecimal digits.
+- The space complexity is O(n) because we store the resulting binary string, 
+  which can be at most 4 times the length of the input hexadecimal string. 
+  The space for the `HashMap` is constant, as it stores the binary representation for the 16 possible hexadecimal digits.
+ */
 
-*/
+/* 
+Section - 11 (If “for” loop or “while” loop are used in the code you have to walkthrough all the(more than 1)
+              “for” loop or “while” loop used in the code with every iteration with given input and this section has to be inside this structure of comments)
+
+Explanation of loops:
+
+Loop 1 (Iterating through the hexadecimal string):
+- In this loop, we iterate over each character in the hexadecimal string and convert it to its binary equivalent using the `hexToBinaryMap`.
+- Example for `hex = "1AC5"`:
+    - For '1', the binary value is "0001".
+    - For 'A', the binary value is "1010".
+    - For 'C', the binary value is "1100".
+    - For '5', the binary value is "0101".
+    - The final binary string becomes: "0001101011000101".
+
+Loop 2 (Building the result):
+- The binary values are appended to the `StringBuilder` and the result is returned after the loop finishes.
+ */
+
+ /* 
+Section - 12 (Complete code walkthrough with applying the given input in code and explanation)
+
+For `hex = "1AC5"`:
+1. Start with '1', binary equivalent is "0001".
+2. Move to 'A', binary equivalent is "1010".
+3. Move to 'C', binary equivalent is "1100".
+4. Move to '5', binary equivalent is "0101".
+5. Concatenate all the binary strings to get "0001101011000101".
+
+For `hex = "5D1F"`:
+1
+
+. Start with '5', binary equivalent is "0101". 2. Move to 'D', binary equivalent is "1101". 3. Move to '1', 
+  binary equivalent is "0001". 4. Move to 'F', binary equivalent is "1111". 5. Concatenate all the binary strings to get "0101110100011111". */
+
 
 /*
-For Loop Walkthrough:
+ Key Points:
+- The algorithm uses a simple mapping of hexadecimal digits to their binary equivalents.
+- The loop goes through each character of the hexadecimal string and appends the corresponding 4-bit binary string to the result.
+- The result is built using `StringBuilder`, which is efficient for concatenating strings in Java.
 
-For the first test case (hexadecimal input = "1AC5"):
-- The loop will iterate over each character in the string.
-1st Iteration: 
-- Character = '1', corresponding binary = "0001"
-2nd Iteration: 
-- Character = 'A', corresponding binary = "1010"
-3rd Iteration: 
-- Character = 'C', corresponding binary = "1100"
-4th Iteration: 
-- Character = '5', corresponding binary = "0101"
-
-Final binary string = "0001101011000101"
-
+This approach ensures that we can convert any valid hexadecimal number into a binary number while maintaining O(n) time and space complexity.
 */
 
-/*
-Complete Code Walkthrough with Explanation:
 
-For the input hexadecimal string "1AC5", the process works as follows:
-
-1. The input is "1AC5".
-2. The method `hexToBinary()` is called with this input string.
-3. The method initializes a map of hexadecimal digits to their binary equivalents.
-4. The method loops through each character of the input string:
-   - '1' is converted to "0001"
-   - 'A' is converted to "1010"
-   - 'C' is converted to "1100"
-   - '5' is converted to "0101"
-5. The binary strings are appended together to form the final result: "0001101011000101".
-6. The output is printed: "Hexadecimal: 1AC5 -> Binary: 0001101011000101".
-
-*/
