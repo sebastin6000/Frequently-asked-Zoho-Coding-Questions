@@ -19,13 +19,10 @@ Output: Binary = 0101110100011111
 
  /* 
 Section - 2 (Understanding the Problem Statement section)
-The task is to take a hexadecimal number as input and convert it into its binary representation. A hexadecimal number uses base-16, 
-while binary uses base-2. Every digit in the hexadecimal system can be represented by 4 binary digits (bits).
-
-In this problem:
-1. We are given a hexadecimal string.
-2. We need to convert each hexadecimal character to its binary equivalent, ensuring that each binary representation is exactly 4 bits long.
-3. We will then concatenate the binary values of each hexadecimal character to form the final binary number.
+The task is to take a hexadecimal number as input and convert it into its binary representation. 
+A hexadecimal number uses base-16, 
+while binary uses base-2.
+Every digit in the hexadecimal system can be represented by 4 binary digits (bits).
 
 The goal is to implement this conversion and output the binary equivalent of the given hexadecimal number.
 */
@@ -45,10 +42,14 @@ Section - 3 (Extracting Information from the Problem Statement section)
    - The length of the input string is not specified but is assumed to be reasonable for conversion.
 
 4. Time Complexity:
-   - For a given input string of length `n`, the algorithm iterates over each character once, converting it to binary, so the time complexity is O(n).
+   - For a given input string of length `n`, 
+     the algorithm iterates over each character once, 
+     converting it to binary, so the time complexity is O(n).
 
 5. Space Complexity:
-   - We use a string to store the resulting binary number, and the space complexity is O(n), where `n` is the length of the input hexadecimal string.
+   - We use a string to store the resulting binary number, 
+     and the space complexity is O(n), 
+     where `n` is the length of the input hexadecimal string.
  */
 
  /* 
@@ -58,9 +59,6 @@ To solve the problem, we can follow these steps:
 2. Then, iterate over the given hexadecimal string.
 3. For each hexadecimal character, retrieve its corresponding 4-bit binary value and concatenate it to a result string.
 4. Finally, return the concatenated binary string as the output.
-
-Each hexadecimal character corresponds to exactly 4 binary digits, 
-so we need to ensure that the binary string for each character is padded with leading zeros if necessary (i.e., ensure it's always 4 bits).
  */
 
  /* 
