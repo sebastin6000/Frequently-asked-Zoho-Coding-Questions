@@ -20,7 +20,7 @@ Expected Auxiliary Space:  O(1)
 
 Constraints:
 1 ≤ arr.size() ≤ 105
-0 <= arri <= 1018
+0 <= arr[i] <= 1018
 */
 
  /* 
