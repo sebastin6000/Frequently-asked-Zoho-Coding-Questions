@@ -6,7 +6,6 @@ Your task is to sort them so that the first part of the array contains odd numbe
 and the rest of the portion contains even numbers sorted in ascending order.
 
 Examples:
-
 Input: arr[] = [1, 2, 3, 5, 4, 7, 10]
 Output: [7, 5, 3, 1, 2, 4, 10]
 Explanation: 7 5 3 1 are odds in descending order and 2 4 10 are evens in ascending order.
@@ -19,8 +18,8 @@ Expected Time Complexity:  O(nlog(n))
 Expected Auxiliary Space:  O(1)
 
 Constraints:
-1 ≤ arr.size() ≤ 105
-0 <= arr[i] <= 1018
+1 ≤ arr.size() ≤ 10 to power 5(100,000)
+0 <= arr[i] <= 10 to the power 18(Quintillion)
 */
 
  /* 
@@ -28,11 +27,6 @@ Section - 2 (Understanding the Problem Statement section)
 In the problem statement, we are tasked with sorting an array such that:
 1. Odd numbers should come first and be sorted in descending order.
 2. Even numbers should follow, sorted in ascending order.
-The main goal is to first segregate odd and even numbers, and then sort them separately in the specified order. 
-The constraints suggest the need for an efficient sorting algorithm, ideally with O(n log n) time complexity.
-
-The constraints also tell us that the array can have up to \(10^5\) elements, and the values of the array elements can be as large as \(10^{18}\). 
-This means that we need to handle large numbers and large input sizes efficiently.
  */
 
  /* 
