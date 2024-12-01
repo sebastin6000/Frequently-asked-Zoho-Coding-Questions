@@ -1,7 +1,8 @@
 /* 
 Section -1 (Question section)
 Problem Statement:
-Given an array arr[] of positive integers. Your task is to sort them so that the first part of the array contains odd numbers sorted in descending order, 
+Given an array arr[] of positive integers. 
+Your task is to sort them so that the first part of the array contains odd numbers sorted in descending order, 
 and the rest of the portion contains even numbers sorted in ascending order.
 
 Examples:
@@ -14,12 +15,12 @@ Input: arr[] = [0, 4, 5, 3, 7, 2, 1]
 Output: [7, 5, 3, 1, 0, 2, 4]
 Explanation: 7 5 3 1 are odds in descending order and 0 2 4 are evens in ascending order.
 
-Expected Time Complexity: O(nlog(n))
-Expected Auxiliary Space: O(1)
+Expected Time Complexity:  O(nlog(n))
+Expected Auxiliary Space:  O(1)
 
 Constraints:
-1 ≤ arr.size() ≤ 10^5
-0 ≤ arri ≤ 10^18
+1 ≤ arr.size() ≤ 105
+0 <= arri <= 1018
 */
 
  /* 
