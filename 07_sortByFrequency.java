@@ -47,12 +47,14 @@ We need to sort arrays of integers by frequency, and in case of a tie in frequen
 The input consists of multiple test cases, and for each test case, we are given a size of an array and the array elements. 
 The output for each test case should be the sorted array.
 
+Expected Output: The output should be a sorted array where elements are sorted by frequency, and in case of ties, by value.
+
+
 */
 
 /* 
 Extracting Information from the Problem Statement:
 - Input data type: The input consists of integers in an array for each test case.
-- Expected Output: The output should be a sorted array where elements are sorted by frequency, and in case of ties, by value.
 - Output return data type: The output is a space-separated list of integers in sorted order for each test case.
 - Constraints:
   - There can be multiple test cases (T up to 70).
