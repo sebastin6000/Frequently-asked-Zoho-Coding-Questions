@@ -157,7 +157,8 @@ public class BinaryToHex
 
 /* 
 * Section - 10: Time and Space Complexity Explanation
-* Time Complexity: O(n), where n is the length of the binary string (integer part and fractional part combined). We iterate over the binary string in chunks of 4 bits.
+* Time Complexity: O(n), where n is the length of the binary string (integer part and fractional part combined). 
+  We iterate over the binary string in chunks of 4 bits.
 * Space Complexity: O(n), due to the storage used for the binary string and its corresponding hexadecimal result.
 */
 
