@@ -2,7 +2,9 @@
     /* 
     * Section - 1: Question section
     * Convert a binary number to its hexadecimal equivalent.
-    * Input: A binary number (could be very large).
+    * Input: A binary number (could be very large)
+        An unsigned long long int is a data type with a range of values from 0 to 18,446,744,073,709,551,615 and takes up 8 bytes. 
+        The maximum value for an unsigned long long int variable is ULLONG_MAX, which is 18,446,744,073,709,551,615..
     * Output: The equivalent hexadecimal number.
     */
 
