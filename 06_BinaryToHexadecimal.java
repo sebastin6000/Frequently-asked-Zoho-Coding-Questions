@@ -1,11 +1,18 @@
 
     /* 
     * Section - 1: Question section
-    * Convert a binary number to its hexadecimal equivalent.
-    * Input: A binary number (could be very large)
+        Given a Binary Number, the task is to convert the given binary number to its equivalent hexadecimal number. 
+        The input could be very large and may not fit even into an unsigned long long int.
         An unsigned long long int is a data type with a range of values from 0 to 18,446,744,073,709,551,615 and takes up 8 bytes. 
-        The maximum value for an unsigned long long int variable is ULLONG_MAX, which is 18,446,744,073,709,551,615..
-    * Output: The equivalent hexadecimal number.
+        The maximum value for an unsigned long long int variable is ULLONG_MAX, which is 18,446,744,073,709,551,615.
+        
+        Examples: 
+        Input: 110001110
+        Output: 18E
+        
+        Input: 1111001010010100001.010110110011011
+        Output: 794A1.5B36 794A1D9B
+
     */
 
     /* 
