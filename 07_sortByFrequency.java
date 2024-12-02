@@ -216,3 +216,56 @@ Test Case 2:
 - Sorted list: [(9, 3), (2, 1), (5, 1)]
 - Output: "9 9 9 2 5"
 */
+/* 
+break down the line of code you're asking about:
+List<Map.Entry<Integer, Integer>> list = new ArrayList<>(frequencyMap.entrySet());
+
+### Key Concepts:
+1. `Map.Entry`: In Java, `Map` is an interface representing a collection of key-value pairs. 
+   Each key-value pair in a map is called an **entry**. 
+   The `Map.Entry` interface is used to represent these individual entries, which include both the key and the associated value.
+   In your case, the `Map<Integer, Integer>` is a `HashMap`, 
+   where the key is an integer (the element from the array) and the value is an integer (the frequency of that element in the array).
+
+2.`frequencyMap.entrySet()`: 
+  This method is called on the `frequencyMap`, which is a `HashMap<Integer, Integer>`. 
+  The `entrySet()` method returns a **set of Map.Entry objects**, 
+  where each `Map.Entry` object contains a key-value pair (the number from the array and its frequency).
+
+3.`new ArrayList<>(...)`: 
+This constructs a new `ArrayList` from the collection provided in the parentheses. In this case, 
+it's converting the set of entries (from `frequencyMap.entrySet()`) into a list.
+
+### Explanation of the Code:
+
+- `frequencyMap.entrySet()`: 
+  - This returns a **set** of entries (key-value pairs) from the map. 
+    For example, if `frequencyMap` contains `{5=2, 4=2, 6=1}`, the `entrySet()` method will return a set like: `{5=2, 4=2, 6=1}`.
+
+- `new ArrayList<>(frequencyMap.entrySet())`: 
+  - This creates a **list** from the set returned by `entrySet()`. 
+    A `List` is used here because a `List` provides better functionality for sorting, and we need to sort the entries by frequency and value.
+  - By passing the set directly to the `ArrayList` constructor, you're essentially converting the set into a list of `Map.Entry` objects. 
+    Each entry in this list will contain the element (key) and its frequency (value).
+
+### Why do we need this?
+The reason for converting the map entries into a list is that we need to **sort** the entries. 
+You can't sort a `Map` directly, but you can sort a `List`, which is why the entries are first converted into a list.
+
+Once converted into a list, the sorting logic (based on frequency and element value) can be applied using `Collections.sort()`.
+
+### Example:
+Suppose the `frequencyMap` is:
+{5=3, 4=2, 6=1}
+
+Calling `entrySet()` on `frequencyMap` would return a set like:
+[{5=3}, {4=2}, {6=1}]
+
+After creating the list from the set using `new ArrayList<>(...)`, you'd get:
+[{5=3}, {4=2}, {6=1}]
+
+
+This list of entries can then be sorted based on the specified criteria (first by frequency in descending order,
+and in case of a tie, by element value in ascending order).
+
+*/
