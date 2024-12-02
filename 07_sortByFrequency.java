@@ -125,6 +125,7 @@ public class SortArrayByFrequency {
         // Step 1: Calculate frequencies using a HashMap
         HashMap<Integer, Integer> frequencyMap = new HashMap<>();
         for (int num : arr) {
+          // https://www.scaler.com/topics/getordefault-in-java/ 
             frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
         }
 
