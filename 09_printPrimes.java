@@ -26,14 +26,14 @@ The task is to identify and print these prime numbers up to a given number N.
 What is being asked?
 We need to print all prime numbers from 1 to N. The solution needs to be efficient enough to handle large values of N (up to 10^4).
 
+Expected Output:
+- A sequence of prime numbers less than or equal to N.
 */
 
 /* 
 Section-3: Extracting Information from the Problem Statement
 Input:
 - N: An integer representing the upper limit up to which prime numbers are to be printed.
-Expected Output:
-- A sequence of prime numbers less than or equal to N.
 Return Type:
 - Void, as we are expected to print the prime numbers directly.
 Constraints:
