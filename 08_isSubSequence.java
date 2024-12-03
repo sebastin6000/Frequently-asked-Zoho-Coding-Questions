@@ -36,12 +36,13 @@ The task is to implement a method `isSubSequence()` that takes two strings as in
 What is being asked?
 We need to determine whether all characters of A appear in B in the same order, although not necessarily consecutively.
 
+- Expected Output: A boolean value (1 for true, 0 for false) indicating if A is a subsequence of B.
+
 */
 
 /* 
 Extracting Information from the Problem Statement:
 - Input data type: Two strings, A and B.
-- Expected Output: A boolean value (1 for true, 0 for false) indicating if A is a subsequence of B.
 - Output return data type: A boolean indicating if A is a subsequence of B.
 - Constraints:
   - Both A and B can have lengths up to 10^4, so we need an efficient solution.
