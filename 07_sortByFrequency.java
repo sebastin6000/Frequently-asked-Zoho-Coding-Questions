@@ -360,3 +360,89 @@ This ensures that numbers with higher frequencies are placed earlier in the list
 the smaller numbers come first.
 
 */
+/* 
+
+Code Breakdown:
+```java
+for (Map.Entry<Integer, Integer> entry : list) {
+    // Print the element entry.getValue() times
+    for (int i = 0; i < entry.getValue(); i++) {
+        System.out.print(entry.getKey() + " ");
+    }
+}
+```
+This code block is responsible for printing the sorted array based on the frequency 
+and element values after the list of `Map.Entry<Integer, Integer>` objects has been sorted. Let me explain the logic step by step:
+
+Explanation:
+1. Outer `for` Loop:  
+   ```java
+   for (Map.Entry<Integer, Integer> entry : list)
+   ```
+   - This loop iterates over the sorted list of entries (`list`), where each entry is a `Map.Entry<Integer, Integer>`. 
+   - The `entry` object represents a key-value pair where:
+     - `entry.getKey()` is the element from the array.
+     - `entry.getValue()` is the frequency (the number of times that element appeared in the array).
+   
+   For example, if the list looks like this (after sorting):
+   ```java
+   [{5=3}, {4=2}, {6=1}]
+   ```
+   - The loop will iterate through the three entries `{5=3}`, `{4=2}`, and `{6=1}` in this order.
+
+2. Inner `for` Loop:
+   ```java
+   for (int i = 0; i < entry.getValue(); i++) {
+       System.out.print(entry.getKey() + " ");
+   }
+   ```
+   - For each `entry`, the inner loop prints the key (`entry.getKey()`) a number of times equal to its frequency (`entry.getValue()`).
+   - `entry.getValue()` is the frequency of the current element, 
+      so the inner loop runs that many times and prints the element (`entry.getKey()`).
+   
+   Let's break it down further:
+   - If `entry.getValue()` is 3 (i.e., the frequency of the element is 3), 
+     the inner loop will execute 3 times and print the key (the element) three times.
+   - If `entry.getValue()` is 2 (i.e., the frequency is 2), the loop will print the key two times, and so on.
+
+Example Walkthrough:
+Consider the sorted list:
+
+```java
+[{5=3}, {4=2}, {6=1}]
+```
+
+1. First iteration: The first entry is `{5=3}`:
+   - `entry.getKey()` is 5 (the element), and `entry.getValue()` is 3 (its frequency).
+   - The inner loop will run 3 times, printing the element `5` three times:
+     ```
+     5 5 5
+     ```
+
+2. Second iteration: The second entry is `{4=2}`:
+   - `entry.getKey()` is 4, and `entry.getValue()` is 2.
+   - The inner loop will run 2 times, printing the element `4` two times:
+     ```
+     4 4
+     ```
+
+3. Third iteration: The third entry is `{6=1}`:
+   - `entry.getKey()` is 6, and `entry.getValue()` is 1.
+   - The inner loop will run 1 time, printing the element `6` once:
+     ```
+     6
+     ```
+
+Output:
+After all iterations, the final printed result will be:
+
+```
+5 5 5 4 4 6
+```
+
+Summary:
+- The outer loop iterates over the sorted list of elements and their frequencies.
+- The inner loop prints each element (`entry.getKey()`) as many times as its frequency (`entry.getValue()`).
+- This results in printing the elements in descending order of frequency, 
+  and if two elements have the same frequency, they are printed in ascending order of the element's value.
+*/
