@@ -55,10 +55,8 @@ The time complexity of the solution should be O(N), where N is the length of str
 Thinking Solution for the Problem Statement:
 To solve this problem, we need to:
 1. Traverse string B and try to match characters of string A in order.
-2. Use two pointers: one to iterate over string A and another to iterate over string B.
-3. If we find a character of A in B, move the pointer for A. If the pointer for A reaches the end of string A, we know A is a subsequence of B.
-4. If we finish traversing string B without fully matching string A, return false.
-
+2. If all characters of A are matched in order within B, return true.
+3. If the end of B is reached and A is not fully matched, return false.
 */
 
 /* 
