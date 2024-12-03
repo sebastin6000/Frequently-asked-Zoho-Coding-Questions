@@ -22,20 +22,22 @@ Understanding the Problem Statement:
 What is being asked?
 - The goal is to identify and print the prime numbers in the given range [a, b].
 
+Expected Output:
+   - A list of prime numbers in the range [a, b].
+
 */
 
  /* 
 Extracting Information from the Problem Statement:
 1. Input data type:
    - Two integers `a` and `b` representing the interval.
-2. Expected Output:
-   - A list of prime numbers in the range [a, b].
-3. Output return type:
+
+2. Output return type:
    - A list of integers representing the prime numbers within the given range.
-4. Explanation of Time complexity expectations:
+3. Explanation of Time complexity expectations:
    - The primality check for a single number takes O(sqrt(N)) time.
    - We will need to check all numbers from `a` to `b`, so the overall time complexity will be O((b - a) * sqrt(b)).
-5. Explanation of given Constraints:
+4. Explanation of given Constraints:
    - There are no explicit constraints, but based on typical prime number problems, 
      we assume that the range `a` to `b` is reasonably sized (not exceeding 10^6 or so).
 */
