@@ -37,7 +37,9 @@ Input:
 Return Type:
 - Void, as we are expected to print the prime numbers directly.
 Constraints:
-1 <= N <= 10^4
+1 <= N <= 10^4 
+10 to the power of 4, or 10^4, is 10,000: 
+
 Time Complexity:
 - We need to find all prime numbers up to N. The expected time complexity should be efficient for large values of N (up to 10^4).
 */
