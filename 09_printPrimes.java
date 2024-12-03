@@ -159,12 +159,112 @@ For N = 10:
 
 /* 
 Section-12: Complete Code Walkthrough with Example Input
-Input: N = 10
-1. The `isPrime[]` array is initialized with all values set to `true`, except `isPrime[0]` and `isPrime[1]`.
-2. We start with i = 2 and mark its multiples (4, 6, 8, 10) as `false`.
-3. Then we move to i = 3 and mark its multiples (6, 9) as `false`.
-4. We continue until i reaches sqrt(10).
-5. The second loop prints the prime numbers: 2 3 5 7.
+The given Java code uses the **Sieve of Eratosthenes** algorithm to find and print all prime numbers from 1 to N. 
+Let’s walk through the steps and explain what happens in each iteration when the function `printPrimes(10)` is called, which is the example input you provided.
+
+### Function: `printPrimes(int N)`
+### Initial Setup:
+
+1. **Create the boolean array `isPrime[]`:**
+   - This array will track whether a number is prime or not.
+   - `isPrime[i]` is `true` if `i` is prime, `false` if `i` is not prime.
+   - For `N = 10`, the array `isPrime` will have a size of 11 (since it goes from 0 to 10).
+
+   **Initialization:**
+   ```java
+   boolean[] isPrime = new boolean[11];
+   for (int i = 0; i <= N; i++) {
+       isPrime[i] = true;
+   }
+   ```
+   After this step, `isPrime[]` will look like this:
+   ```
+   [true, true, true, true, true, true, true, true, true, true, true]
+   ```
+   
+2. **Mark 0 and 1 as not prime:**
+   - `isPrime[0] = false; // 0 is not prime`
+   - `isPrime[1] = false; // 1 is not prime`
+
+   The array now becomes:
+   ```
+   [false, false, true, true, true, true, true, true, true, true, true]
+   ```
+
+### Sieve of Eratosthenes:
+
+3. **Start iterating from `i = 2` to `i * i <= N`** (in this case, up to `sqrt(10) ≈ 3`).
+   The outer loop will go from `i = 2` to `i = 3`, as `i * i <= 10`.
+
+---
+### **First Iteration (i = 2):**
+
+4. **Check if `isPrime[2]` is true:**
+   - Since `isPrime[2]` is `true` (it’s still assumed to be prime), we mark all multiples of 2 (starting from 2^2 = 4) as non-prime.
+   
+   **Inner loop** (for multiples of 2):
+   - `j = 4`: Set `isPrime[4] = false` (because 4 is a multiple of 2).
+   - `j = 6`: Set `isPrime[6] = false` (because 6 is a multiple of 2).
+   - `j = 8`: Set `isPrime[8] = false` (because 8 is a multiple of 2).
+   - `j = 10`: Set `isPrime[10] = false` (because 10 is a multiple of 2).
+
+   After this iteration, the array `isPrime[]` looks like this:
+   ```
+   [false, false, true, true, false, true, false, true, false, true, false]
+   ```
+
+---
+
+### **Second Iteration (i = 3):**
+
+5. **Check if `isPrime[3]` is true:**
+   - Since `isPrime[3]` is `true` (it’s still assumed to be prime), we mark all multiples of 3 (starting from 3^2 = 9) as non-prime.
+   
+   **Inner loop** (for multiples of 3):
+   - `j = 9`: Set `isPrime[9] = false` (because 9 is a multiple of 3).
+
+   After this iteration, the array `isPrime[]` looks like this:
+   ```
+   [false, false, true, true, false, true, false, true, false, false, false]
+   ```
+
+---
+
+### **End of the Outer Loop:**
+
+At this point, the outer loop completes because `i * i` exceeds 10 for `i = 4` and beyond.
+
+### Step 3: Print the primes
+
+6. **Print the prime numbers:**
+   - We iterate through the `isPrime[]` array and print the indices where `isPrime[i]` is `true`.
+   
+   The prime numbers (indices where `isPrime[i]` is `true`) are:
+   - `i = 2`
+   - `i = 3`
+   - `i = 5`
+   - `i = 7`
+
+   These numbers are printed out as `2 3 5 7`.
+
+### Final Output:
+
+The output of `printPrimes(10)` will be:
+```
+2 3 5 7
+```
+
+### Summary of Each Iteration:
+
+- **Initialization:**
+  - The array `isPrime[]` is initially filled with `true`, except for `isPrime[0]` and `isPrime[1]` which are `false`.
+  
+- **Sieve of Eratosthenes:**
+  - For `i = 2`, all multiples of 2 (4, 6, 8, 10) are marked as non-prime.
+  - For `i = 3`, the multiple of 3 (9) is marked as non-prime.
+  
+- **Printing:**
+  - After marking non-primes, we print all the indices that are still `true` in the `isPrime[]` array (which correspond to prime numbers).
 */
 
 /*
