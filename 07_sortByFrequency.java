@@ -269,3 +269,94 @@ This list of entries can then be sorted based on the specified criteria (first b
 and in case of a tie, by element value in ascending order).
 
 */
+/* 
+This block of code is sorting the list of `Map.Entry<Integer, Integer>` objects. 
+Let’s go through it step by step to explain what it's doing.
+
+ Code Breakdown:
+Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+    public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+        // First compare by frequency in descending order
+        if (o2.getValue().equals(o1.getValue())) {
+            // If frequencies are the same, compare by element value in ascending order
+            return Integer.compare(o1.getKey(), o2.getKey());
+        }
+        // Otherwise, compare by frequency in descending order
+        return Integer.compare(o2.getValue(), o1.getValue());
+    }
+});
+
+
+ Explanation:
+1. `Collections.sort(list, ...)`:
+   - `Collections.sort(list)` is a static method that sorts the list you provide (`list` in this case) in ascending order.
+      However, because we want custom sorting (based on frequency and element value), 
+      we provide a Comparator to specify the sorting logic.
+
+2. Comparator:
+   - The `Comparator<Map.Entry<Integer, Integer>>` is used to compare pairs of `Map.Entry<Integer, Integer>`. 
+      Each `Map.Entry` contains two pieces of information:
+     - Key: The number from the array (like 5, 4, 6).
+     - Value: The frequency of that number in the array.
+
+3. `compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2)`:
+   - The `compare` method is defined to compare two `Map.Entry` objects (denoted `o1` and `o2`).
+   - `o1.getKey()` gives the number (element), and `o1.getValue()` gives its frequency (the same goes for `o2`).
+
+4. Sorting Logic:
+   - First, we check if the frequencies (`getValue()`) of the two entries are the same:
+   
+     if (o2.getValue().equals(o1.getValue())) { 
+     - If the frequencies are equal, then we sort the entries by their key (the element itself) in ascending order:
+    
+       return Integer.compare(o1.getKey(), o2.getKey());
+       - This means that if two elements have the same frequency, the smaller number will come before the larger number in the list.
+   
+   - If the frequencies are not equal, we compare them based on frequency in descending order:
+     
+     return Integer.compare(o2.getValue(), o1.getValue());
+     
+     - This means that the entry with the higher frequency will come before the one with the lower frequency in the sorted list. 
+     - `Integer.compare(o2.getValue(), o1.getValue())` is used to ensure a descending order,
+        because `o2.getValue()` is compared to `o1.getValue()`. 
+        If the first value (`o2.getValue()`) is greater than the second (`o1.getValue()`), 
+        it will return a positive value, indicating that `o2` should come before `o1`.
+
+ Example:
+
+Suppose we have the following `list` of entries (key-value pairs):
+[{5=3}, {4=2}, {6=1}]
+
+The sorting process would go as follows:
+- Compare `{5=3}` and `{4=2}`:
+  - The frequencies are different (3 vs. 2), so `{5=3}` comes first because 3 > 2.
+  
+- Compare `{5=3}` and `{6=1}`:
+  - Again, the frequencies are different (3 vs. 1), so `{5=3}` stays before `{6=1}`.
+  
+- Now compare `{4=2}` and `{6=1}`:
+  - The frequencies are different (2 vs. 1), so `{4=2}` comes before `{6=1}`.
+
+The sorted list is:
+[{5=3}, {4=2}, {6=1}]
+
+If two entries have the same frequency, for example:
+[{5=2}, {4=2}, {6=1}]
+
+The sorting process would go as follows:
+- `{5=2}` and `{4=2}` have the same frequency (2), so we compare their keys.
+  - `Integer.compare(o1.getKey(), o2.getKey())` compares 5 and 4, and since 4 < 5, `{4=2}` will come before `{5=2}`.
+
+The sorted list becomes:
+[{4=2}, {5=2}, {6=1}]
+
+
+ Summary:
+The comparator sorts the entries:
+- First by frequency: Higher frequencies come first (in descending order).
+- Then by value: If frequencies are equal, the numbers are sorted in ascending order.
+
+This ensures that numbers with higher frequencies are placed earlier in the list, and if there’s a tie in frequency,
+the smaller numbers come first.
+
+*/
