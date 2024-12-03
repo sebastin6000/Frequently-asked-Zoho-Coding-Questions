@@ -89,17 +89,28 @@ Code Requirement to Complete the Subtasks:
 
 /* Java Code According to Conversational Subtasks: */
 
+/* 
+Explanation of Approach:
+1. We initialize two pointers: `i` for string A and `j` for string B.
+2. We iterate through string B and try to match each character of A in B.
+3. If characters match, we move the pointer `i` for A forward.
+4. If pointer `i` reaches the end of A, that means all characters of A have been found in B in the same order.
+5. If we complete the iteration over B and haven't matched all of A, return false.
+*/
+
 public class SubsequenceCheck {
+    // Main method for testing
+    public static void main(String[] args) {
+        // Test Case 1
+        String A1 = "AXY";
+        String B1 = "YADXCP";
+        System.out.println(isSubSequence(A1, B1));  // Output: 0 (A is not a subsequence of B)
 
-    /* 
-    Explanation of Approach:
-    1. We initialize two pointers: `i` for string A and `j` for string B.
-    2. We iterate through string B and try to match each character of A in B.
-    3. If characters match, we move the pointer `i` for A forward.
-    4. If pointer `i` reaches the end of A, that means all characters of A have been found in B in the same order.
-    5. If we complete the iteration over B and haven't matched all of A, return false.
-
-    */
+        // Test Case 2
+        String A2 = "gksrek";
+        String B2 = "geeksforgeeks";
+        System.out.println(isSubSequence(A2, B2));  // Output: 1 (A is a subsequence of B)
+    }
 
     // Function to check if A is a subsequence of B
     public static int isSubSequence(String A, String B) {
@@ -122,28 +133,6 @@ public class SubsequenceCheck {
         
         // If we reached the end of B and haven't matched all characters of A, return 0
         return 0;
-    }
-
-    /* 
-    Explanation of Default Method Used in Code:
-    - The `isSubSequence()` method takes two strings as parameters.
-    - It uses two pointers, one for string A and one for string B.
-    - It traverses through string B, trying to match the characters of A in order.
-    - If all characters of A are found in B, it returns 1, otherwise, it returns 0.
-
-    */
-
-    // Main method for testing
-    public static void main(String[] args) {
-        // Test Case 1
-        String A1 = "AXY";
-        String B1 = "YADXCP";
-        System.out.println(isSubSequence(A1, B1));  // Output: 0 (A is not a subsequence of B)
-
-        // Test Case 2
-        String A2 = "gksrek";
-        String B2 = "geeksforgeeks";
-        System.out.println(isSubSequence(A2, B2));  // Output: 1 (A is a subsequence of B)
     }
 }
 
