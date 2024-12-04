@@ -83,46 +83,54 @@ Subtasks of Conversional Solution into Code:
 3. Once the traversal is complete, all positions from `index` to the end of the array should be set to zero.
 
 */
-
-public class PushZerosToEnd {
-
-    /* 
-    Function to move all zeros to the right end of the array while maintaining the order of non-zero elements.
-    This is done in-place by iterating through the array once and shifting elements accordingly.
-    */
-    public static void pushZerosToEnd(int[] arr) {
+public class PushZerosToEnd
+{
+    public static void pushZerosToEnd(int[] arr)
+    {
         int n = arr.length;
-        int index = 0;  // Pointer to track the next non-zero position
-        
+        int index = 0; // Pointer to track the next non-zero position
+
         // Traverse the array
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++)
+        {
             // If the current element is non-zero, move it to the 'index' position
-            if (arr[i] != 0) {
+            if (arr[i] != 0)
+            {
                 arr[index] = arr[i];
-                if (index != i) {  // Only increment index if it is moved
-                    arr[i] = 0;  // Set the current position to zero
+                if (index != i) 
+                { // Only increment index if it is moved
+                    arr[i] = 0; // Set the current position to zero
                 }
-                index++;  // Increment the position for the next non-zero element
+                index++; // Increment the position for the next non-zero element
             }
         }
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         // Test case 1
-        int[] arr1 = {1, 2, 0, 4, 3, 0, 5, 0};
+        int[] arr1 = {1,2,0,4,3,0,5,0};
+        
         pushZerosToEnd(arr1);
-        System.out.println("After pushing zeros to the end: " + java.util.Arrays.toString(arr1)); 
+        System.out.println("After pushing zeros to the end: " + java.util.Arrays.toString(arr1));
         // Expected output: [1, 2, 4, 3, 5, 0, 0, 0]
 
         // Test case 2
-        int[] arr2 = {10, 20, 30};
+        int[] arr2 = {
+            10,
+            20,
+            30
+        };
         pushZerosToEnd(arr2);
-        System.out.println("After pushing zeros to the end: " + java.util.Arrays.toString(arr2)); 
+        System.out.println("After pushing zeros to the end: " + java.util.Arrays.toString(arr2));
         // Expected output: [10, 20, 30]
 
         // Test case 3
-        int[] arr3 = {0, 0};
+        int[] arr3 = {
+            0,
+            0
+        };
         pushZerosToEnd(arr3);
-        System.out.println("After pushing zeros to the end: " + java.util.Arrays.toString(arr3)); 
+        System.out.println("After pushing zeros to the end: " + java.util.Arrays.toString(arr3));
         // Expected output: [0, 0]
     }
 }
